@@ -32,3 +32,33 @@ FUNCTION            defaultExceptionHandler
 wfi                                             /* wait for an interrupt, in order to save power */
 b                   defaultExceptionHandler     /* go round loop */
 ENDFUNC             defaultExceptionHandler
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+	.arch armv8-a
+	.file	"start.c"
+	.text
+	.align	2
+	.global	reset_handler
+	.type	reset_handler, %function
+
+reset_handler:
+	stp	x29, x30, [sp, -16]!
+	add	x29, sp, 0
+	adrp x0, stacktop
+	mov sp, x0
+	bl	rust_main
+	nop
+	ldp	x29, x30, [sp], 16
+	ret
+	.size	reset_handler, .-reset_handler
+	.global	isr_vectors
+	.section	.isr_vector,"aw",@progbits
+	.align	3
+	.type	isr_vectors, %object
+	.size	isr_vectors, 16
+
+isr_vectors:
+	.xword	0
+	.xword	reset_handler
+	.ident	"GCC: (Ubuntu/Linaro 5.4.0-6ubuntu1~16.04.9) 5.4.0 20160609"
+	.section	.note.GNU-stack,"",@progbits

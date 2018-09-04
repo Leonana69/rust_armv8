@@ -1,16 +1,14 @@
-MEMORY
-{
-  FLASH (rx) : ORIGIN = 0x40000000, LENGTH = 128K
-}
+OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
+OUTPUT_ARCH(aarch64)
+ENTRY(_boot_core)
 
 SECTIONS
 {
-	. = 0x10000000;
+	. = 0x60000000;
 	.text :
 	{
-	*(.text)
-	KEEP(*(isr_vector))  
-	} > FLASH
+	*(.text) 
+	}
 	.rodata :
     {
         *(.rodata .rodata.*)
@@ -19,12 +17,12 @@ SECTIONS
     {
         *(.data .data.*)
     }
-    .bss ALIGN(8):
+    .bss ALIGN(2):
     {
         __bss_start = .;
         *(.bss .bss.*)
         *(COMMON)
-	__bss_end = .;
+	   __bss_end = .;
     }
 	. = . + 0x10000;
 	stacktop = .;

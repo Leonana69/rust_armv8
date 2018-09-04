@@ -1,16 +1,21 @@
+.section ".text.boot"
 
-.section            isr_vector                  /* Put everything in a section called "isr_vector" from now on... */
-.align              2                           /* Make sure the output goes on an address divisible by 4 (that's 1 << 2) */
-/* Address:   Exception Vector Description: */
-; .long               0x0                           /* 0x00000000 The initial stack pointer (defined by the linker-script) */
-; .long               _start               /* 0x00000004 The startup-code, the code that runs on power-on or RESET */
+.global _boot_core
+
+_boot_core:
+    // read cpu id, stop slave cores
+    mrs     x1, mpidr_el1
+    and     x1, x1, #3
+    cbz     x1, 2f
+    // cpu id > 0, stop
+1:  wfe
+    b       1b
+2:  // cpu id == 0
+    // set stack before our code
+    ldr     x1, =stacktop
+    mov     sp, x1
 
 
-.text
-.align
-_start:
-adrp x0, stacktop
-mov sp, x0
-b rust_main
-b .
-
+    // jump to Rust code, should not return
+    bl      reset
+    b       1b
