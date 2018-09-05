@@ -25,5 +25,5 @@ SECTIONS
 	   __bss_end = .;
     }
 	. = . + 0x10000;
-	stacktop = .;
+	stack_top = .;
 }

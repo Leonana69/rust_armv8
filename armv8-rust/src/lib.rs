@@ -2,6 +2,7 @@
 #![feature(panic_handler)]
 #![feature(panic_implementation)]
 #![feature(lang_items)]
+#![feature(asm)]
 #![no_main]
 
 // #[cfg(target_arch = "arm")]
@@ -20,7 +21,7 @@ mod reg;
 
 #[no_mangle]
 pub extern "C" fn rust_main() -> !{
-	puts!("leonana\n");
+	puts!("chen\n");
     printu64!(0x13456);
     
     // let mut frame_allocator = memory::area_frame_allocator::new(
@@ -31,7 +32,7 @@ pub extern "C" fn rust_main() -> !{
 
 #[no_mangle]
 pub unsafe extern "C" fn reset() -> ! {
-    // asm!("nop");
+    // asm!("MSR HCR_EL2, XZR");
     // extern "C" {
         
     //     static mut __bss_start: u64;

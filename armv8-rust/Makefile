@@ -61,4 +61,3 @@ dqemu: $(TARGET)
 
 clean:
 	rm -f *.o *.bin *.elf *.list DAC* -r target
-# ./bin/rust-gdb "kernel.elf" -ex "target remote :1234"
