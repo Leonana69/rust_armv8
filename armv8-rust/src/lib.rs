@@ -5,14 +5,6 @@
 #![feature(asm)]
 #![no_main]
 
-// #[cfg(target_arch = "arm")]
-// #[path = "arm.rs"]
-// mod platform;
-// pub use self::platform::*;
-// extern crate volatile;
-// #[macro_use]
-// extern crate lazy_static;
-// extern crate spin;
 extern crate rlibc;
 #[macro_use]
 mod print;
@@ -21,31 +13,13 @@ mod reg;
 
 #[no_mangle]
 pub extern "C" fn rust_main() -> !{
-	puts!("chen\n");
-    printu64!(0x13456);
-    
-    // let mut frame_allocator = memory::area_frame_allocator::new(
-    // kernel_start as usize, kernel_end as usize, multiboot_start,
-    // multiboot_end, memory_map_tag.memory_areas());
+	puts!("Hello world!\n");
+    printu64!(0x123456);
     loop {}
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn reset() -> ! {
-    // asm!("MSR HCR_EL2, XZR");
-    // extern "C" {
-        
-    //     static mut __bss_start: u64;
-    //     static mut __bss_end: u64;
-    // }
-
-    // Zeroes the .bss
-    // r0::zero_bss(&mut __bss_start, &mut __bss_end);
-
-    // extern "Rust" {
-    //     fn main() -> !;
-    // }
-
     rust_main();
 }
 
