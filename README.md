@@ -1,7 +1,7 @@
 # rust_armv8_hello 
 Realize a bare metal system for arm with print module.
 
-# Setup Rust
+## Setup Rust
 You can go this [page](https://www.rust-lang.org/en-US/install.html) or just run:  
 ```
 curl https://sh.rustup.rs -sSf | sh
@@ -20,23 +20,35 @@ cargo install xargo
 rustup component add rust-src
 ```
 
-# GCC Toolchain
+## GCC Toolchain
 I use the aarch64-none-elf-gcc toolchain for cross compiling. You can download [here](https://github.com/arter97/aarch64-none-elf-6.1) or just clone my whole project (they are in bin and libexec). Then change the path in the Makefile:
 ```
 CROSS_COMPILE ?= path_to_the_toolchain/bin/aarch64-none-elf-
 ```
 
-# QEMU
+## QEMU
 Install the qemu:
 ```
 sudo apt-get install qemu
 ```
-## Run the Bare Metal System
+# Run the Bare Metal System
 ```
 make qemu
 ```
+You should see the output:
+```
+Press Ctrl-A and then X to exit QEMU
 
-# Using GDB
+qemu-system-aarch64	-M virt -cpu cortex-a57	\
+					-smp 1 -m 128 \
+					-nographic \
+					-kernel hello.elf
+Hello world!
+0x123456
+```
+
+
+## Using GDB
 If you want to debug the system, you can use the aarch64-none-elf-gdb in the toolchain. Qemu implements a gdb connector using a TCP connection. To do so, you can run the qemu with options *-s* and *-S*.
 ```
  -s: shorthand for -gdb tcp::1234  
