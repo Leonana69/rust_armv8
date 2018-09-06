@@ -6,24 +6,32 @@
 #![no_main]
 
 extern crate rlibc;
+
 #[macro_use]
 mod print;
+
 mod reg;
 
-
+// system main
 #[no_mangle]
-pub extern "C" fn rust_main() -> !{
+pub extern "C" fn rust_main() -> ! {
 	puts!("Hello world!\n");
     printu64!(0x123456);
     loop {}
 }
 
+// system reset entry
 #[no_mangle]
 pub unsafe extern "C" fn reset() -> ! {
+    // initialization
+    // ...
+    // main
     rust_main();
 }
 
 #[lang = "eh_personality"] extern fn eh_personality() {}
+
+// panic
 use core::panic::PanicInfo;
 #[panic_handler]
 #[no_mangle]

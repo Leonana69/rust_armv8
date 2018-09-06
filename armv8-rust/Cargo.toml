@@ -1,11 +1,10 @@
 [package]
 name = "hello"
 version = "0.1.0"
-authors = ["leochan"]
+authors = ["guojun.chen@pku.edu.cn"]
 
 [lib]
 crate-type = ["staticlib"]
 
 [dependencies]
 rlibc = "1.0"
-r0 = "0.2.2"

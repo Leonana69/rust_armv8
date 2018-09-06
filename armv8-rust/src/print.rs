@@ -3,16 +3,19 @@
 
 use reg;
 
+// print char
+pub fn putchar(c: char) {
+	unsafe { *(reg::UART_BASE as *mut u32) = c as u32; };
+}
+
+// print string
 pub fn puts(s: &str) {
 	for c in s.as_bytes() {
     	unsafe { *(reg::UART_BASE as *mut u32) = *c as u32; };
     }
 }
 
-pub fn putchar(c: char) {
-	unsafe { *(reg::UART_BASE as *mut u32) = c as u32; };
-}
-
+// print u32 type
 pub fn putu32(u: u32) {
 	if u == 0 {
 		putchar('0');
@@ -29,15 +32,16 @@ pub fn putu32(u: u32) {
 			_ => (),
 		}
 		let up = p as u8 as char;
+		// ignore pre-0
 		if flag || p != 48 {
 			flag = true;
 			putchar(up);
 		}
-
 		b = b << 4;
 	}
 }
 
+// print u64 type
 pub fn putu64(u: u64) {
 	if u == 0 {
 		putchar('0');
@@ -62,6 +66,7 @@ pub fn putu64(u: u64) {
 	}
 }
 
+// macros for convenience
 macro_rules! puts {
 	($($arg: tt)*) => (print::puts($($arg)*))
 }
@@ -79,7 +84,6 @@ macro_rules! println {
 	() => (puts!("\n"));
     ($fmt:expr) => (puts!(concat!($fmt, "\n")));
 }
-
 
 macro_rules! printu32 {
 	() => (puts!("\n"));

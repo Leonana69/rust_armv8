@@ -1,5 +1,7 @@
 OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
 OUTPUT_ARCH(aarch64)
+
+// specify the entry function
 ENTRY(_boot_core)
 
 SECTIONS
@@ -7,7 +9,7 @@ SECTIONS
 	. = 0x60000000;
 	.text :
 	{
-	*(.text) 
+        *(.text) 
 	}
 	.rodata :
     {
