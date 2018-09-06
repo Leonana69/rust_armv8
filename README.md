@@ -18,4 +18,8 @@ If you want to debug the system, you can use the aarch64-none-elf-gdb in the too
 For convenience, you can just type:
 > make dqemu
 
-Then
+Now you are running the qemu without output, the command freezes the system before executing any code and waits for a connection on the TCP port 1234. Open another terminal and run aarch64-none-elf-gdb and enter:
+```
+target remote localhost:1234
+file hello.elf
+```
