@@ -1,12 +1,11 @@
 OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
 OUTPUT_ARCH(aarch64)
 
-// specify the entry function
 ENTRY(_boot_core)
 
 SECTIONS
 {
-	. = 0x60000000;
+	. = 0x40000000;
 	.text :
 	{
         *(.text) 

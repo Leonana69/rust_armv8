@@ -11,7 +11,6 @@ AS := $(CROSS_COMPILE)as
 LD := $(CROSS_COMPILE)ld
 
 rust_target = aarch64-unknown-none
-# rust_target = aarch64-unknown-linux-gnu
 rust_os := ./target/$(rust_target)/debug/libhello.a
 linker_script = hello.ld
 assembly_object_files = startup.o
@@ -32,9 +31,6 @@ xargo:
 	xargo build --target=$(rust_target)
 
 gdb:
-	# LD_LIBRARY_PATH=bin::LD_LIBRARY_PATH:/usr/local/lib
-	
-	# export PATH=bin:${PATH}:/home/leochan/linaro-64/bin \
 	LD_LIBRARY_PATH=/usr/local/lib aarch64-linux-gnu-gdb "$(FILE)" -ex "target remote localhost:1234"
 
 %.o: %.S
@@ -45,7 +41,7 @@ qemu: $(TARGET)
 	@echo "Press Ctrl-A and then X to exit QEMU"
 	@echo
 	qemu-system-aarch64	-M virt -cpu cortex-a57	\
-						-smp 4 -m 4096 \
+						-smp 1 -m 128 \
 						-nographic \
 						-kernel hello.elf
 
@@ -54,7 +50,7 @@ dqemu: $(TARGET)
 	@echo "Press Ctrl-A and then X to exit QEMU"
 	@echo
 	qemu-system-aarch64	-M virt -cpu cortex-a57	\
-						-smp 4 -m 4096 \
+						-smp 1 -m 128 \
 						-nographic \
 						-s -S \
 						-kernel hello.elf
