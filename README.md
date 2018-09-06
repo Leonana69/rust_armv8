@@ -14,6 +14,7 @@ Install the qemu.
 If you want to debug the system, you can use the aarch64-none-elf-gdb in the toolchain. Qemu implements a gdb connector using a TCP connection. To do so, you can run the qemu with options *-s* and *-S*.
 > -s: shorthand for -gdb tcp::1234  
 > -S: freeze the CPU at startup, you can connect your gdb at this time  
+
 For convenience, you can just type:
 > make dqemu
 
