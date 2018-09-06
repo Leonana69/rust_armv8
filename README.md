@@ -1,7 +1,8 @@
 # rust_armv8_hello 
-Realize some print for char, string, u32 and u64.  
+Realize a bare metal system for arm with print module.
 
-# Toolchain
-I use the aarch64-none-elf-6.1
-https://github.com/arter97/aarch64-none-elf-6.1
-> run
+# GCC Toolchain
+I use the aarch64-none-elf-gcc toolchain for cross compiling. You can download it here:  
+> https://github.com/arter97/aarch64-none-elf-6.1
+Then change the path in the Makefile:
+> CROSS_COMPILE ?= path_to_the_toolchain/bin/aarch64-none-elf-
