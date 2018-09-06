@@ -6,20 +6,35 @@ You can go this [page](https://www.rust-lang.org/en-US/install.html) or just run
 ```
 curl https://sh.rustup.rs -sSf | sh
 ```
-First install with default options, this allows you to start with normal rust programming (remember to add *$HOME/.cargo/bin* to your *$PATH*). Then, type:
+First install with default options (you can also directly install the nightly version), this allows you to start with normal rust programming (remember to add *$HOME/.cargo/bin* to your *$PATH*). Then, type:
 ```
 rustup toolchain install nightly
 ```
-to install the nightly version of rust. 
+to install the nightly version of rust. The nightly version of rust allows us to use some features which are essential to write the system. Then switch your default rust toolchain to the nightly version:
+```
+rustup default nightly-x86_64-unknown-linux-gnu
+```
+Install the xargo and add rust-src for building the core:
+```
+cargo install xargo
+rustup component add rust-src
+```
 
 # GCC Toolchain
-I use the aarch64-none-elf-gcc toolchain for cross compiling. You can download [here](https://github.com/arter97/aarch64-none-elf-6.1).
-
-Then change the path in the Makefile:
-> CROSS_COMPILE ?= path_to_the_toolchain/bin/aarch64-none-elf-
+I use the aarch64-none-elf-gcc toolchain for cross compiling. You can download [here](https://github.com/arter97/aarch64-none-elf-6.1) or just clone my whole project (they are in bin and libexec). Then change the path in the Makefile:
+```
+CROSS_COMPILE ?= path_to_the_toolchain/bin/aarch64-none-elf-
+```
 
 # QEMU
-Install the qemu.
+Install the qemu:
+```
+sudo apt-get install qemu
+```
+## Run the Bare Metal System
+```
+make qemu
+```
 
 # Using GDB
 If you want to debug the system, you can use the aarch64-none-elf-gdb in the toolchain. Qemu implements a gdb connector using a TCP connection. To do so, you can run the qemu with options *-s* and *-S*.
