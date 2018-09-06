@@ -11,4 +11,8 @@ Then change the path in the Makefile:
 Install the qemu.
 
 # Using GDB
-If you want to debug the system, you can use the aarch64-none-elf-gdb in the toolchain. Qemu implements a gdb connector using a TCP connection. To do so, you can run the qemu with options *-s* and *-S*.
+If you want to debug the system, you can use the aarch64-none-elf-gdb in the toolchain. Qemu implements a gdb connector using a TCP connection. To do so, you can run the qemu with options *-s* and *-S*. (or you can just run with *make dqemu*)
+> -s: shorthand for -gdb tcp::1234
+> -S: freeze the CPU at startup, you can connect your gdb at this time
+
+Then
