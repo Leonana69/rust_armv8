@@ -54,7 +54,6 @@ Hello world!
 0x123456
 ```
 
-
 ## Using GDB
 If you want to debug the system, you can use the aarch64-none-elf-gdb in the toolchain. Qemu implements a gdb connector using a TCP connection. To do so, you can run the qemu with options *-s* and *-S*.
 ```

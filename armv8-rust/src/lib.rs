@@ -31,7 +31,7 @@ pub unsafe extern "C" fn reset() -> ! {
 
 #[lang = "eh_personality"] extern fn eh_personality() {}
 
-// panic
+// panic handler
 use core::panic::PanicInfo;
 #[panic_handler]
 #[no_mangle]
