@@ -1,13 +1,15 @@
 # rust_armv8_hello 
-Realize a bare metal system for arm with print module.  
-I mainly followed thest tutorials:
+This is a bare metal system for arm with print module, it's built on Ubuntu 16.04.
+I mainly followed these tutorials:
 ```
-https://balau82.wordpress.com/2010/02/28/hello-world-for-bare-metal-arm-using-qemu/
 https://os.phil-opp.com/first-edition/
+https://balau82.wordpress.com/2010/02/28/hello-world-for-bare-metal-arm-using-qemu/
+https://balau82.wordpress.com/2010/11/30/emulating-arm-pl011-serial-ports/
 ```
 
+
 ## Setup Rust
-You can go this [page](https://www.rust-lang.org/en-US/install.html) or just run:  
+You can go this [page](https://www.rust-lang.org/en-US/install.html) or just type on your command:  
 ```
 curl https://sh.rustup.rs -sSf | sh
 ```
