@@ -2,7 +2,7 @@
 #![feature(panic_handler)]
 #![feature(panic_implementation)]
 #![feature(lang_items)]
-#![feature(asm)]
+#![feature(asm)] // for insert assembly code
 #![no_main]
 
 extern crate rlibc;
