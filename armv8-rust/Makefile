@@ -1,8 +1,6 @@
 .PHONY: clean
 CROSS_COMPILE ?= ./bin/aarch64-none-elf-
 
-# PATH for aarch64-linux-gnu-gdb
-PATH := $(PATH):/home/leochan/linaro-64/bin
 SHELL := env PATH=$(PATH) /bin/bash
 
 
@@ -31,7 +29,7 @@ xargo:
 	xargo build --target=$(rust_target)
 
 gdb:
-	LD_LIBRARY_PATH=/usr/local/lib aarch64-linux-gnu-gdb "$(FILE)" -ex "target remote localhost:1234"
+	LD_LIBRARY_PATH=/usr/local/lib $(CROSS_COMPILE)gdb "$(FILE)" -ex "target remote localhost:1234"
 
 %.o: %.S
 	$(AS) -c $^ -o $@
