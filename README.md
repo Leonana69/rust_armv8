@@ -1,5 +1,10 @@
 # rust_armv8_hello 
-Realize a bare metal system for arm with print module.
+Realize a bare metal system for arm with print module.  
+I mainly followed thest tutorials:
+```
+https://balau82.wordpress.com/2010/02/28/hello-world-for-bare-metal-arm-using-qemu/
+https://os.phil-opp.com/first-edition/
+```
 
 ## Setup Rust
 You can go this [page](https://www.rust-lang.org/en-US/install.html) or just run:  
@@ -63,8 +68,7 @@ Now you are running the qemu without output, the command freezes the system befo
 target remote localhost:1234
 file hello.elf
 ```
-
-if you have problem like this:
-
-go [here](https://www.mpfr.org/mpfr-current/) to download the GNU MPFR 4.0.1 package and install it.  
-if you still get above problem after install MPFR, you should check your LD_LIBRARY_PATH,
+or just:
+```
+make gdb
+```
