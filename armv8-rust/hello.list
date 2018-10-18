@@ -15,7 +15,7 @@ Disassembly of section .text.boot:
     4000001c:	9100003f 	mov	sp, x1
     40000020:	9400000e 	bl	40000058 <reset>
     40000024:	17fffffa 	b	4000000c <_boot_core+0xc>
-    40000028:	400115a8 	.word	0x400115a8
+    40000028:	40011558 	.word	0x40011558
     4000002c:	00000000 	.word	0x00000000
 
 Disassembly of section .text.rust_main:
@@ -28,16 +28,16 @@ mod reg;
 #[no_mangle]
 pub extern "C" fn rust_main() -> ! {
     40000030:	f81f0ffe 	str	x30, [sp,#-16]!
-    40000034:	b0000008 	adrp	x8, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    40000038:	910dc108 	add	x8, x8, #0x370
+    40000034:	b0000008 	adrp	x8, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    40000038:	910c8108 	add	x8, x8, #0x320
     4000003c:	d28001a1 	mov	x1, #0xd                   	// #13
 	puts!("Hello world!\n");
     40000040:	aa0803e0 	mov	x0, x8
-    40000044:	94000046 	bl	4000015c <_ZN5hello5print4puts17h4544cab99e3da57dE>
+    40000044:	94000046 	bl	4000015c <_ZN5hello5print4puts17h36a3c43c0c2c3033E>
     40000048:	d2868ac0 	mov	x0, #0x3456                	// #13398
     4000004c:	f2a00240 	movk	x0, #0x12, lsl #16
     printu64!(0x123456);
-    40000050:	94000128 	bl	400004f0 <_ZN5hello5print6putu6417h479a5817af139033E>
+    40000050:	94000128 	bl	400004f0 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE>
     loop {}
     40000054:	14000000 	b	40000054 <rust_main+0x24>
 
@@ -56,7 +56,7 @@ Disassembly of section .text.rust_begin_unwind:
 
 000000004000005c <rust_begin_unwind>:
 
-// panic
+// panic handler
 use core::panic::PanicInfo;
 #[panic_handler]
 #[no_mangle]
@@ -64,12 +64,12 @@ pub extern fn panic(_info: &PanicInfo) -> ! {
     4000005c:	d10183ff 	sub	sp, sp, #0x60
     40000060:	f9002bfe 	str	x30, [sp,#80]
     40000064:	d2800008 	mov	x8, #0x0                   	// #0
-    40000068:	b0000009 	adrp	x9, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    4000006c:	910df529 	add	x9, x9, #0x37d
-    40000070:	b000000a 	adrp	x10, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    40000074:	910e1d4a 	add	x10, x10, #0x387
-    40000078:	b000000b 	adrp	x11, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    4000007c:	910e416b 	add	x11, x11, #0x390
+    40000068:	b0000009 	adrp	x9, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    4000006c:	910cb529 	add	x9, x9, #0x32d
+    40000070:	b000000a 	adrp	x10, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    40000074:	910cdd4a 	add	x10, x10, #0x337
+    40000078:	b000000b 	adrp	x11, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    4000007c:	910d016b 	add	x11, x11, #0x340
     40000080:	f9001fe0 	str	x0, [sp,#56]
 	if let Some(location) = _info.location() {
     40000084:	f9401fe0 	ldr	x0, [sp,#56]
@@ -77,7 +77,7 @@ pub extern fn panic(_info: &PanicInfo) -> ! {
     4000008c:	f90017e8 	str	x8, [sp,#40]
     40000090:	f90013e9 	str	x9, [sp,#32]
     40000094:	f9000fea 	str	x10, [sp,#24]
-    40000098:	940003a8 	bl	40000f38 <_ZN4core5panic9PanicInfo8location17h4c1b658b38aad499E>
+    40000098:	940002c0 	bl	40000b98 <_ZN4core5panic9PanicInfo8location17h69f9e8d1458b8738E>
     4000009c:	f90023e0 	str	x0, [sp,#64]
     400000a0:	b24003e8 	orr	x8, xzr, #0x1
     400000a4:	d2800009 	mov	x9, #0x0                   	// #0
@@ -96,7 +96,7 @@ pub extern fn panic(_info: &PanicInfo) -> ! {
     400000d8:	f90027e8 	str	x8, [sp,#72]
 		print!("\nPanic in ");
     400000dc:	f94013e0 	ldr	x0, [sp,#32]
-    400000e0:	9400001f 	bl	4000015c <_ZN5hello5print4puts17h4544cab99e3da57dE>
+    400000e0:	9400001f 	bl	4000015c <_ZN5hello5print4puts17h36a3c43c0c2c3033E>
     400000e4:	14000002 	b	400000ec <rust_begin_unwind+0x90>
 	    print!(location.file());
 	    print!(" at line ");
@@ -112,27 +112,27 @@ pub extern fn panic(_info: &PanicInfo) -> ! {
 		print!("\nPanic in ");
 	    print!(location.file());
     400000ec:	f94027e0 	ldr	x0, [sp,#72]
-    400000f0:	94000394 	bl	40000f40 <_ZN4core5panic8Location4file17h9a23ef094ce17451E>
+    400000f0:	940002ac 	bl	40000ba0 <_ZN4core5panic8Location4file17hc5b45e14dd74666dE>
     400000f4:	f9000be0 	str	x0, [sp,#16]
     400000f8:	f90007e1 	str	x1, [sp,#8]
     400000fc:	f9400be0 	ldr	x0, [sp,#16]
     40000100:	f94007e1 	ldr	x1, [sp,#8]
-    40000104:	94000016 	bl	4000015c <_ZN5hello5print4puts17h4544cab99e3da57dE>
+    40000104:	94000016 	bl	4000015c <_ZN5hello5print4puts17h36a3c43c0c2c3033E>
     40000108:	d2800121 	mov	x1, #0x9                   	// #9
 	    print!(" at line ");
     4000010c:	f9400fe0 	ldr	x0, [sp,#24]
-    40000110:	94000013 	bl	4000015c <_ZN5hello5print4puts17h4544cab99e3da57dE>
+    40000110:	94000013 	bl	4000015c <_ZN5hello5print4puts17h36a3c43c0c2c3033E>
 	    printu32!(location.line());
     40000114:	f94027e0 	ldr	x0, [sp,#72]
-    40000118:	9400038d 	bl	40000f4c <_ZN4core5panic8Location4line17hf705a02864908b14E>
+    40000118:	940002a5 	bl	40000bac <_ZN4core5panic8Location4line17h348708e3e93e2759E>
     4000011c:	b90007e0 	str	w0, [sp,#4]
     40000120:	b94007e0 	ldr	w0, [sp,#4]
-    40000124:	94000057 	bl	40000280 <_ZN5hello5print6putu3217h10ade433026b86e7E>
+    40000124:	94000057 	bl	40000280 <_ZN5hello5print6putu3217hb832fba323999688E>
     40000128:	d2800001 	mov	x1, #0x0                   	// #0
 	    print!("");
     4000012c:	f9401be0 	ldr	x0, [sp,#48]
-    40000130:	9400000b 	bl	4000015c <_ZN5hello5print4puts17h4544cab99e3da57dE>
-// panic
+    40000130:	9400000b 	bl	4000015c <_ZN5hello5print4puts17h36a3c43c0c2c3033E>
+// panic handler
 use core::panic::PanicInfo;
 #[panic_handler]
 #[no_mangle]
@@ -147,9 +147,9 @@ pub extern fn panic(_info: &PanicInfo) -> ! {
     loop {}
     40000138:	14000000 	b	40000138 <rust_begin_unwind+0xdc>
 
-Disassembly of section .text._ZN5hello5print7putchar17h59592ec22c921d3fE:
+Disassembly of section .text._ZN5hello5print7putchar17he470f54818bf9e60E:
 
-000000004000013c <_ZN5hello5print7putchar17h59592ec22c921d3fE>:
+000000004000013c <_ZN5hello5print7putchar17he470f54818bf9e60E>:
 #![allow(unused_macros)]
 
 use reg;
@@ -167,9 +167,9 @@ pub fn putchar(c: char) {
     40000154:	910043ff 	add	sp, sp, #0x10
     40000158:	d65f03c0 	ret
 
-Disassembly of section .text._ZN5hello5print4puts17h4544cab99e3da57dE:
+Disassembly of section .text._ZN5hello5print4puts17h36a3c43c0c2c3033E:
 
-000000004000015c <_ZN5hello5print4puts17h4544cab99e3da57dE>:
+000000004000015c <_ZN5hello5print4puts17h36a3c43c0c2c3033E>:
 
 // print string
 pub fn puts(s: &str) {
@@ -207,7 +207,7 @@ pub fn puts(s: &str) {
     400001bc:	f94013e0 	ldr	x0, [sp,#32]
     400001c0:	f9400fe1 	ldr	x1, [sp,#24]
     400001c4:	f9000be8 	str	x8, [sp,#16]
-    400001c8:	94000205 	bl	400009dc <_ZN4core5slice89_$LT$impl$u20$core..iter..traits..IntoIterator$u20$for$u20$$RF$$u27$a$u20$$u5b$T$u5d$$GT$9into_iter17h415ea0d785ecea3eE>
+    400001c8:	940001fd 	bl	400009bc <_ZN4core5slice89_$LT$impl$u20$core..iter..traits..IntoIterator$u20$for$u20$$RF$$u27$a$u20$$u5b$T$u5d$$GT$9into_iter17h760a32e668aa5f86E>
     400001cc:	f9002be0 	str	x0, [sp,#80]
     400001d0:	f9400be8 	ldr	x8, [sp,#16]
     400001d4:	f9000501 	str	x1, [x8,#8]
@@ -218,7 +218,7 @@ pub fn puts(s: &str) {
     400001e8:	f900012a 	str	x10, [x9]
     400001ec:	f9000528 	str	x8, [x9,#8]
     400001f0:	910183e0 	add	x0, sp, #0x60
-    400001f4:	9400020b 	bl	40000a20 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E>
+    400001f4:	94000201 	bl	400009f8 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE>
     400001f8:	f9003fe0 	str	x0, [sp,#120]
     400001fc:	b24003e8 	orr	x8, xzr, #0x1
     40000200:	d2800009 	mov	x9, #0x0                   	// #0
@@ -229,15 +229,15 @@ pub fn puts(s: &str) {
     40000214:	7200019f 	tst	w12, #0x1
     40000218:	9a881128 	csel	x8, x9, x8, ne
     4000021c:	f90007e8 	str	x8, [sp,#8]
-    40000220:	b4000128 	cbz	x8, 40000244 <_ZN5hello5print4puts17h4544cab99e3da57dE+0xe8>
-    40000224:	14000001 	b	40000228 <_ZN5hello5print4puts17h4544cab99e3da57dE+0xcc>
+    40000220:	b4000128 	cbz	x8, 40000244 <_ZN5hello5print4puts17h36a3c43c0c2c3033E+0xe8>
+    40000224:	14000001 	b	40000228 <_ZN5hello5print4puts17h36a3c43c0c2c3033E+0xcc>
     40000228:	b24003e8 	orr	x8, xzr, #0x1
     4000022c:	f94007e9 	ldr	x9, [sp,#8]
     40000230:	eb09011f 	cmp	x8, x9
     40000234:	1a9f17ea 	cset	w10, eq
-    40000238:	370000ca 	tbnz	w10, #0, 40000250 <_ZN5hello5print4puts17h4544cab99e3da57dE+0xf4>
-    4000023c:	14000001 	b	40000240 <_ZN5hello5print4puts17h4544cab99e3da57dE+0xe4>
-    40000240:	14000004 	b	40000250 <_ZN5hello5print4puts17h4544cab99e3da57dE+0xf4>
+    40000238:	370000ca 	tbnz	w10, #0, 40000250 <_ZN5hello5print4puts17h36a3c43c0c2c3033E+0xf4>
+    4000023c:	14000001 	b	40000240 <_ZN5hello5print4puts17h36a3c43c0c2c3033E+0xe4>
+    40000240:	14000004 	b	40000250 <_ZN5hello5print4puts17h36a3c43c0c2c3033E+0xf4>
     	unsafe { *(reg::UART_BASE as *mut u32) = *c as u32; };
     }
 }
@@ -268,11 +268,11 @@ pub fn puts(s: &str) {
 // print string
 pub fn puts(s: &str) {
 	for c in s.as_bytes() {
-    4000027c:	17ffffdd 	b	400001f0 <_ZN5hello5print4puts17h4544cab99e3da57dE+0x94>
+    4000027c:	17ffffdd 	b	400001f0 <_ZN5hello5print4puts17h36a3c43c0c2c3033E+0x94>
 
-Disassembly of section .text._ZN5hello5print6putu3217h10ade433026b86e7E:
+Disassembly of section .text._ZN5hello5print6putu3217hb832fba323999688E:
 
-0000000040000280 <_ZN5hello5print6putu3217h10ade433026b86e7E>:
+0000000040000280 <_ZN5hello5print6putu3217hb832fba323999688E>:
     	unsafe { *(reg::UART_BASE as *mut u32) = *c as u32; };
     }
 }
@@ -284,28 +284,28 @@ pub fn putu32(u: u32) {
     40000288:	b9003fe0 	str	w0, [sp,#60]
 	if u == 0 {
     4000028c:	b9403fe0 	ldr	w0, [sp,#60]
-    40000290:	350000a0 	cbnz	w0, 400002a4 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x24>
-    40000294:	14000001 	b	40000298 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x18>
+    40000290:	350000a0 	cbnz	w0, 400002a4 <_ZN5hello5print6putu3217hb832fba323999688E+0x24>
+    40000294:	14000001 	b	40000298 <_ZN5hello5print6putu3217hb832fba323999688E+0x18>
     40000298:	321c07e0 	orr	w0, wzr, #0x30
 		putchar('0');
-    4000029c:	97ffffa8 	bl	4000013c <_ZN5hello5print7putchar17h59592ec22c921d3fE>
-    400002a0:	14000007 	b	400002bc <_ZN5hello5print6putu3217h10ade433026b86e7E+0x3c>
+    4000029c:	97ffffa8 	bl	4000013c <_ZN5hello5print7putchar17he470f54818bf9e60E>
+    400002a0:	14000007 	b	400002bc <_ZN5hello5print6putu3217hb832fba323999688E+0x3c>
 		return;
 	}
 	puts("0x");
-    400002a4:	b0000000 	adrp	x0, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    400002a8:	910e4000 	add	x0, x0, #0x390
+    400002a4:	b0000000 	adrp	x0, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    400002a8:	910d0000 	add	x0, x0, #0x340
     400002ac:	321f03e8 	orr	w8, wzr, #0x2
     400002b0:	2a0803e1 	mov	w1, w8
-    400002b4:	97ffffaa 	bl	4000015c <_ZN5hello5print4puts17h4544cab99e3da57dE>
-    400002b8:	14000005 	b	400002cc <_ZN5hello5print6putu3217h10ade433026b86e7E+0x4c>
+    400002b4:	97ffffaa 	bl	4000015c <_ZN5hello5print4puts17h36a3c43c0c2c3033E>
+    400002b8:	14000005 	b	400002cc <_ZN5hello5print6putu3217hb832fba323999688E+0x4c>
 
 // print u32 type
 pub fn putu32(u: u32) {
 	if u == 0 {
 		putchar('0');
 		return;
-    400002bc:	14000001 	b	400002c0 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x40>
+    400002bc:	14000001 	b	400002c0 <_ZN5hello5print6putu3217hb832fba323999688E+0x40>
 			flag = true;
 			putchar(up);
 		}
@@ -332,38 +332,38 @@ pub fn putu32(u: u32) {
     400002e4:	b9005fe8 	str	w8, [sp,#92]
     400002e8:	b9405be0 	ldr	w0, [sp,#88]
     400002ec:	b9405fe1 	ldr	w1, [sp,#92]
-    400002f0:	9400015f 	bl	4000086c <_ZN54_$LT$I$u20$as$u20$core..iter..traits..IntoIterator$GT$9into_iter17hecddb01faac0d7dcE>
+    400002f0:	9400015f 	bl	4000086c <_ZN54_$LT$I$u20$as$u20$core..iter..traits..IntoIterator$GT$9into_iter17ha7d53baa78f1f025E>
     400002f4:	b90057e1 	str	w1, [sp,#84]
     400002f8:	b90053e0 	str	w0, [sp,#80]
-    400002fc:	14000001 	b	40000300 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x80>
+    400002fc:	14000001 	b	40000300 <_ZN5hello5print6putu3217hb832fba323999688E+0x80>
     40000300:	b94053e8 	ldr	w8, [sp,#80]
     40000304:	b94057e9 	ldr	w9, [sp,#84]
     40000308:	b90063e8 	str	w8, [sp,#96]
     4000030c:	b90067e9 	str	w9, [sp,#100]
-    40000310:	14000001 	b	40000314 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x94>
+    40000310:	14000001 	b	40000314 <_ZN5hello5print6putu3217hb832fba323999688E+0x94>
     40000314:	910183e0 	add	x0, sp, #0x60
-    40000318:	94000112 	bl	40000760 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E>
+    40000318:	94000112 	bl	40000760 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E>
     4000031c:	b90077e1 	str	w1, [sp,#116]
     40000320:	b90073e0 	str	w0, [sp,#112]
-    40000324:	14000001 	b	40000328 <_ZN5hello5print6putu3217h10ade433026b86e7E+0xa8>
+    40000324:	14000001 	b	40000328 <_ZN5hello5print6putu3217hb832fba323999688E+0xa8>
     40000328:	b94073e8 	ldr	w8, [sp,#112]
     4000032c:	2a0803e9 	mov	w9, w8
     40000330:	2a0903e8 	mov	w8, w9
     40000334:	f9001be9 	str	x9, [sp,#48]
-    40000338:	340000e8 	cbz	w8, 40000354 <_ZN5hello5print6putu3217h10ade433026b86e7E+0xd4>
-    4000033c:	14000001 	b	40000340 <_ZN5hello5print6putu3217h10ade433026b86e7E+0xc0>
+    40000338:	340000e8 	cbz	w8, 40000354 <_ZN5hello5print6putu3217hb832fba323999688E+0xd4>
+    4000033c:	14000001 	b	40000340 <_ZN5hello5print6putu3217hb832fba323999688E+0xc0>
     40000340:	f9401be8 	ldr	x8, [sp,#48]
     40000344:	f1000509 	subs	x9, x8, #0x1
     40000348:	f90017e9 	str	x9, [sp,#40]
-    4000034c:	54000080 	b.eq	4000035c <_ZN5hello5print6putu3217h10ade433026b86e7E+0xdc>
-    40000350:	14000002 	b	40000358 <_ZN5hello5print6putu3217h10ade433026b86e7E+0xd8>
+    4000034c:	54000080 	b.eq	4000035c <_ZN5hello5print6putu3217hb832fba323999688E+0xdc>
+    40000350:	14000002 	b	40000358 <_ZN5hello5print6putu3217hb832fba323999688E+0xd8>
 			flag = true;
 			putchar(up);
 		}
 		b = b << 4;
 	}
 }
-    40000354:	17ffffdb 	b	400002c0 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x40>
+    40000354:	17ffffdb 	b	400002c0 <_ZN5hello5print6putu3217hb832fba323999688E+0x40>
     40000358:	d4200020 	brk	#0x1
 		return;
 	}
@@ -381,7 +381,7 @@ pub fn putu32(u: u32) {
     40000374:	b94047e8 	ldr	w8, [sp,#68]
     40000378:	531c7d08 	lsr	w8, w8, #28
     4000037c:	b90027e8 	str	w8, [sp,#36]
-    40000380:	14000001 	b	40000384 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x104>
+    40000380:	14000001 	b	40000384 <_ZN5hello5print6putu3217hb832fba323999688E+0x104>
     40000384:	b94027e8 	ldr	w8, [sp,#36]
     40000388:	12000d09 	and	w9, w8, #0xf
     4000038c:	b90087e9 	str	w9, [sp,#132]
@@ -390,26 +390,26 @@ pub fn putu32(u: u32) {
     40000390:	b94087e9 	ldr	w9, [sp,#132]
     40000394:	71000129 	subs	w9, w9, #0x0
     40000398:	b90023e9 	str	w9, [sp,#32]
-    4000039c:	54000262 	b.cs	400003e8 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x168>
-    400003a0:	1400000d 	b	400003d4 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x154>
+    4000039c:	54000262 	b.cs	400003e8 <_ZN5hello5print6putu3217hb832fba323999688E+0x168>
+    400003a0:	1400000d 	b	400003d4 <_ZN5hello5print6putu3217hb832fba323999688E+0x154>
     400003a4:	b94087e8 	ldr	w8, [sp,#132]
     400003a8:	3100c108 	adds	w8, w8, #0x30
     400003ac:	1a9f37e9 	cset	w9, cs
     400003b0:	b9001fe8 	str	w8, [sp,#28]
-    400003b4:	37000869 	tbnz	w9, #0, 400004c0 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x240>
-    400003b8:	1400001b 	b	40000424 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x1a4>
+    400003b4:	37000869 	tbnz	w9, #0, 400004c0 <_ZN5hello5print6putu3217hb832fba323999688E+0x240>
+    400003b8:	1400001b 	b	40000424 <_ZN5hello5print6putu3217hb832fba323999688E+0x1a4>
 			10...16 => p = p + 97 - 10,
     400003bc:	b94087e8 	ldr	w8, [sp,#132]
     400003c0:	31018508 	adds	w8, w8, #0x61
     400003c4:	1a9f37e9 	cset	w9, cs
     400003c8:	b9001be8 	str	w8, [sp,#24]
-    400003cc:	37000829 	tbnz	w9, #0, 400004d0 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x250>
-    400003d0:	14000018 	b	40000430 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x1b0>
+    400003cc:	37000829 	tbnz	w9, #0, 400004d0 <_ZN5hello5print6putu3217hb832fba323999688E+0x250>
+    400003d0:	14000018 	b	40000430 <_ZN5hello5print6putu3217hb832fba323999688E+0x1b0>
     400003d4:	b94087e8 	ldr	w8, [sp,#132]
     400003d8:	71002508 	subs	w8, w8, #0x9
     400003dc:	b90017e8 	str	w8, [sp,#20]
-    400003e0:	540000e8 	b.hi	400003fc <_ZN5hello5print6putu3217h10ade433026b86e7E+0x17c>
-    400003e4:	1400000b 	b	40000410 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x190>
+    400003e0:	540000e8 	b.hi	400003fc <_ZN5hello5print6putu3217hb832fba323999688E+0x17c>
+    400003e4:	1400000b 	b	40000410 <_ZN5hello5print6putu3217hb832fba323999688E+0x190>
 	let mut flag = false;
 	let mut b = u;
 	for _i in 0..8 {
@@ -419,14 +419,14 @@ pub fn putu32(u: u32) {
     400003e8:	b94087e8 	ldr	w8, [sp,#132]
     400003ec:	71002908 	subs	w8, w8, #0xa
     400003f0:	b90013e8 	str	w8, [sp,#16]
-    400003f4:	54fffd83 	b.cc	400003a4 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x124>
-    400003f8:	17fffff7 	b	400003d4 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x154>
+    400003f4:	54fffd83 	b.cc	400003a4 <_ZN5hello5print6putu3217hb832fba323999688E+0x124>
+    400003f8:	17fffff7 	b	400003d4 <_ZN5hello5print6putu3217hb832fba323999688E+0x154>
 			10...16 => p = p + 97 - 10,
     400003fc:	b94087e8 	ldr	w8, [sp,#132]
     40000400:	71004508 	subs	w8, w8, #0x11
     40000404:	b9000fe8 	str	w8, [sp,#12]
-    40000408:	54fffda3 	b.cc	400003bc <_ZN5hello5print6putu3217h10ade433026b86e7E+0x13c>
-    4000040c:	14000001 	b	40000410 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x190>
+    40000408:	54fffda3 	b.cc	400003bc <_ZN5hello5print6putu3217hb832fba323999688E+0x13c>
+    4000040c:	14000001 	b	40000410 <_ZN5hello5print6putu3217hb832fba323999688E+0x190>
 			_ => (),
 		}
 		let up = p as u8 as char;
@@ -435,8 +435,8 @@ pub fn putu32(u: u32) {
 		// ignore pre-0
 		if flag || p != 48 {
     40000418:	394103e8 	ldrb	w8, [sp,#64]
-    4000041c:	370001c8 	tbnz	w8, #0, 40000454 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x1d4>
-    40000420:	14000013 	b	4000046c <_ZN5hello5print6putu3217h10ade433026b86e7E+0x1ec>
+    4000041c:	370001c8 	tbnz	w8, #0, 40000454 <_ZN5hello5print6putu3217hb832fba323999688E+0x1d4>
+    40000420:	14000013 	b	4000046c <_ZN5hello5print6putu3217hb832fba323999688E+0x1ec>
 	let mut flag = false;
 	let mut b = u;
 	for _i in 0..8 {
@@ -451,15 +451,15 @@ pub fn putu32(u: u32) {
 	for _i in 0..8 {
 		let mut p = (b>>28) & 0xf;
 		match p {
-    4000042c:	17fffff9 	b	40000410 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x190>
+    4000042c:	17fffff9 	b	40000410 <_ZN5hello5print6putu3217hb832fba323999688E+0x190>
 			0...9 => p = p + 48,
 			10...16 => p = p + 97 - 10,
     40000430:	b9401be8 	ldr	w8, [sp,#24]
     40000434:	71002909 	subs	w9, w8, #0xa
     40000438:	1a9f27ea 	cset	w10, cc
     4000043c:	b9000be9 	str	w9, [sp,#8]
-    40000440:	3700050a 	tbnz	w10, #0, 400004e0 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x260>
-    40000444:	14000001 	b	40000448 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x1c8>
+    40000440:	3700050a 	tbnz	w10, #0, 400004e0 <_ZN5hello5print6putu3217hb832fba323999688E+0x260>
+    40000444:	14000001 	b	40000448 <_ZN5hello5print6putu3217hb832fba323999688E+0x1c8>
     40000448:	b9400be8 	ldr	w8, [sp,#8]
     4000044c:	b90087e8 	str	w8, [sp,#132]
 	puts("0x");
@@ -468,7 +468,7 @@ pub fn putu32(u: u32) {
 	for _i in 0..8 {
 		let mut p = (b>>28) & 0xf;
 		match p {
-    40000450:	17fffff0 	b	40000410 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x190>
+    40000450:	17fffff0 	b	40000410 <_ZN5hello5print6putu3217hb832fba323999688E+0x190>
     40000454:	320003e8 	orr	w8, wzr, #0x1
 			10...16 => p = p + 97 - 10,
 			_ => (),
@@ -477,32 +477,32 @@ pub fn putu32(u: u32) {
 		// ignore pre-0
 		if flag || p != 48 {
     40000458:	390233e8 	strb	w8, [sp,#140]
-    4000045c:	14000009 	b	40000480 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x200>
+    4000045c:	14000009 	b	40000480 <_ZN5hello5print6putu3217hb832fba323999688E+0x200>
     40000460:	2a1f03e8 	mov	w8, wzr
     40000464:	390233e8 	strb	w8, [sp,#140]
-    40000468:	14000006 	b	40000480 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x200>
+    40000468:	14000006 	b	40000480 <_ZN5hello5print6putu3217hb832fba323999688E+0x200>
     4000046c:	b94087e8 	ldr	w8, [sp,#132]
     40000470:	7100c108 	subs	w8, w8, #0x30
     40000474:	b90007e8 	str	w8, [sp,#4]
-    40000478:	54fffee1 	b.ne	40000454 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x1d4>
-    4000047c:	17fffff9 	b	40000460 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x1e0>
+    40000478:	54fffee1 	b.ne	40000454 <_ZN5hello5print6putu3217hb832fba323999688E+0x1d4>
+    4000047c:	17fffff9 	b	40000460 <_ZN5hello5print6putu3217hb832fba323999688E+0x1e0>
     40000480:	394233e8 	ldrb	w8, [sp,#140]
-    40000484:	36000108 	tbz	w8, #0, 400004a4 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x224>
-    40000488:	14000001 	b	4000048c <_ZN5hello5print6putu3217h10ade433026b86e7E+0x20c>
+    40000484:	36000108 	tbz	w8, #0, 400004a4 <_ZN5hello5print6putu3217hb832fba323999688E+0x224>
+    40000488:	14000001 	b	4000048c <_ZN5hello5print6putu3217hb832fba323999688E+0x20c>
     4000048c:	320003e8 	orr	w8, wzr, #0x1
 			flag = true;
     40000490:	390103e8 	strb	w8, [sp,#64]
 			putchar(up);
     40000494:	b9408be0 	ldr	w0, [sp,#136]
-    40000498:	97ffff29 	bl	4000013c <_ZN5hello5print7putchar17h59592ec22c921d3fE>
-    4000049c:	14000001 	b	400004a0 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x220>
+    40000498:	97ffff29 	bl	4000013c <_ZN5hello5print7putchar17he470f54818bf9e60E>
+    4000049c:	14000001 	b	400004a0 <_ZN5hello5print6putu3217hb832fba323999688E+0x220>
 			10...16 => p = p + 97 - 10,
 			_ => (),
 		}
 		let up = p as u8 as char;
 		// ignore pre-0
 		if flag || p != 48 {
-    400004a0:	14000001 	b	400004a4 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x224>
+    400004a0:	14000001 	b	400004a4 <_ZN5hello5print6putu3217hb832fba323999688E+0x224>
 			flag = true;
 			putchar(up);
 		}
@@ -510,7 +510,7 @@ pub fn putu32(u: u32) {
     400004a4:	b94047e8 	ldr	w8, [sp,#68]
     400004a8:	531c6d08 	lsl	w8, w8, #4
     400004ac:	b90003e8 	str	w8, [sp]
-    400004b0:	14000001 	b	400004b4 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x234>
+    400004b0:	14000001 	b	400004b4 <_ZN5hello5print6putu3217hb832fba323999688E+0x234>
     400004b4:	b94003e8 	ldr	w8, [sp]
     400004b8:	b90047e8 	str	w8, [sp,#68]
 		return;
@@ -519,27 +519,27 @@ pub fn putu32(u: u32) {
 	let mut flag = false;
 	let mut b = u;
 	for _i in 0..8 {
-    400004bc:	17ffff96 	b	40000314 <_ZN5hello5print6putu3217h10ade433026b86e7E+0x94>
+    400004bc:	17ffff96 	b	40000314 <_ZN5hello5print6putu3217hb832fba323999688E+0x94>
 		let mut p = (b>>28) & 0xf;
 		match p {
 			0...9 => p = p + 48,
-    400004c0:	b0000000 	adrp	x0, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    400004c4:	910f0000 	add	x0, x0, #0x3c0
-    400004c8:	94000278 	bl	40000ea8 <_ZN4core9panicking5panic17h300a3572c8bcb886E>
+    400004c0:	b0000000 	adrp	x0, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    400004c4:	910dc000 	add	x0, x0, #0x370
+    400004c8:	940001bb 	bl	40000bb4 <_ZN4core9panicking5panic17he9fd3190c8a8f402E>
     400004cc:	d4200020 	brk	#0x1
 			10...16 => p = p + 97 - 10,
-    400004d0:	b0000000 	adrp	x0, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    400004d4:	910fa000 	add	x0, x0, #0x3e8
-    400004d8:	94000274 	bl	40000ea8 <_ZN4core9panicking5panic17h300a3572c8bcb886E>
+    400004d0:	b0000000 	adrp	x0, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    400004d4:	910e6000 	add	x0, x0, #0x398
+    400004d8:	940001b7 	bl	40000bb4 <_ZN4core9panicking5panic17he9fd3190c8a8f402E>
     400004dc:	d4200020 	brk	#0x1
-    400004e0:	b0000000 	adrp	x0, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    400004e4:	9110e000 	add	x0, x0, #0x438
-    400004e8:	94000270 	bl	40000ea8 <_ZN4core9panicking5panic17h300a3572c8bcb886E>
+    400004e0:	b0000000 	adrp	x0, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    400004e4:	910fa000 	add	x0, x0, #0x3e8
+    400004e8:	940001b3 	bl	40000bb4 <_ZN4core9panicking5panic17he9fd3190c8a8f402E>
     400004ec:	d4200020 	brk	#0x1
 
-Disassembly of section .text._ZN5hello5print6putu6417h479a5817af139033E:
+Disassembly of section .text._ZN5hello5print6putu6417hdc3fad30f7beed3fE:
 
-00000000400004f0 <_ZN5hello5print6putu6417h479a5817af139033E>:
+00000000400004f0 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE>:
 		b = b << 4;
 	}
 }
@@ -551,28 +551,28 @@ pub fn putu64(u: u64) {
     400004f8:	f90033e0 	str	x0, [sp,#96]
 	if u == 0 {
     400004fc:	f94033e0 	ldr	x0, [sp,#96]
-    40000500:	b50000a0 	cbnz	x0, 40000514 <_ZN5hello5print6putu6417h479a5817af139033E+0x24>
-    40000504:	14000001 	b	40000508 <_ZN5hello5print6putu6417h479a5817af139033E+0x18>
+    40000500:	b50000a0 	cbnz	x0, 40000514 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x24>
+    40000504:	14000001 	b	40000508 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x18>
     40000508:	321c07e0 	orr	w0, wzr, #0x30
 		putchar('0');
-    4000050c:	97ffff0c 	bl	4000013c <_ZN5hello5print7putchar17h59592ec22c921d3fE>
-    40000510:	14000007 	b	4000052c <_ZN5hello5print6putu6417h479a5817af139033E+0x3c>
+    4000050c:	97ffff0c 	bl	4000013c <_ZN5hello5print7putchar17he470f54818bf9e60E>
+    40000510:	14000007 	b	4000052c <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x3c>
 		return;
 	}
 	puts("0x");
-    40000514:	b0000000 	adrp	x0, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    40000518:	910e4000 	add	x0, x0, #0x390
+    40000514:	b0000000 	adrp	x0, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    40000518:	910d0000 	add	x0, x0, #0x340
     4000051c:	321f03e8 	orr	w8, wzr, #0x2
     40000520:	2a0803e1 	mov	w1, w8
-    40000524:	97ffff0e 	bl	4000015c <_ZN5hello5print4puts17h4544cab99e3da57dE>
-    40000528:	14000005 	b	4000053c <_ZN5hello5print6putu6417h479a5817af139033E+0x4c>
+    40000524:	97ffff0e 	bl	4000015c <_ZN5hello5print4puts17h36a3c43c0c2c3033E>
+    40000528:	14000005 	b	4000053c <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x4c>
 
 // print u64 type
 pub fn putu64(u: u64) {
 	if u == 0 {
 		putchar('0');
 		return;
-    4000052c:	14000001 	b	40000530 <_ZN5hello5print6putu6417h479a5817af139033E+0x40>
+    4000052c:	14000001 	b	40000530 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x40>
 			flag = true;
 			putchar(up);
 		}
@@ -599,38 +599,38 @@ pub fn putu64(u: u64) {
     40000554:	b9008fe8 	str	w8, [sp,#140]
     40000558:	b9408be0 	ldr	w0, [sp,#136]
     4000055c:	b9408fe1 	ldr	w1, [sp,#140]
-    40000560:	940000c3 	bl	4000086c <_ZN54_$LT$I$u20$as$u20$core..iter..traits..IntoIterator$GT$9into_iter17hecddb01faac0d7dcE>
+    40000560:	940000c3 	bl	4000086c <_ZN54_$LT$I$u20$as$u20$core..iter..traits..IntoIterator$GT$9into_iter17ha7d53baa78f1f025E>
     40000564:	b90087e1 	str	w1, [sp,#132]
     40000568:	b90083e0 	str	w0, [sp,#128]
-    4000056c:	14000001 	b	40000570 <_ZN5hello5print6putu6417h479a5817af139033E+0x80>
+    4000056c:	14000001 	b	40000570 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x80>
     40000570:	b94083e8 	ldr	w8, [sp,#128]
     40000574:	b94087e9 	ldr	w9, [sp,#132]
     40000578:	b90093e8 	str	w8, [sp,#144]
     4000057c:	b90097e9 	str	w9, [sp,#148]
-    40000580:	14000001 	b	40000584 <_ZN5hello5print6putu6417h479a5817af139033E+0x94>
+    40000580:	14000001 	b	40000584 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x94>
     40000584:	910243e0 	add	x0, sp, #0x90
-    40000588:	94000076 	bl	40000760 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E>
+    40000588:	94000076 	bl	40000760 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E>
     4000058c:	b900a7e1 	str	w1, [sp,#164]
     40000590:	b900a3e0 	str	w0, [sp,#160]
-    40000594:	14000001 	b	40000598 <_ZN5hello5print6putu6417h479a5817af139033E+0xa8>
+    40000594:	14000001 	b	40000598 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0xa8>
     40000598:	b940a3e8 	ldr	w8, [sp,#160]
     4000059c:	2a0803e9 	mov	w9, w8
     400005a0:	2a0903e8 	mov	w8, w9
     400005a4:	f9002fe9 	str	x9, [sp,#88]
-    400005a8:	340000e8 	cbz	w8, 400005c4 <_ZN5hello5print6putu6417h479a5817af139033E+0xd4>
-    400005ac:	14000001 	b	400005b0 <_ZN5hello5print6putu6417h479a5817af139033E+0xc0>
+    400005a8:	340000e8 	cbz	w8, 400005c4 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0xd4>
+    400005ac:	14000001 	b	400005b0 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0xc0>
     400005b0:	f9402fe8 	ldr	x8, [sp,#88]
     400005b4:	f1000509 	subs	x9, x8, #0x1
     400005b8:	f9002be9 	str	x9, [sp,#80]
-    400005bc:	54000080 	b.eq	400005cc <_ZN5hello5print6putu6417h479a5817af139033E+0xdc>
-    400005c0:	14000002 	b	400005c8 <_ZN5hello5print6putu6417h479a5817af139033E+0xd8>
+    400005bc:	54000080 	b.eq	400005cc <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0xdc>
+    400005c0:	14000002 	b	400005c8 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0xd8>
 			flag = true;
 			putchar(up);
 		}
 		b = b << 4;
 	}
 }
-    400005c4:	17ffffdb 	b	40000530 <_ZN5hello5print6putu6417h479a5817af139033E+0x40>
+    400005c4:	17ffffdb 	b	40000530 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x40>
     400005c8:	d4200020 	brk	#0x1
 		return;
 	}
@@ -648,7 +648,7 @@ pub fn putu64(u: u64) {
     400005e4:	f9403be9 	ldr	x9, [sp,#112]
     400005e8:	d37cfd29 	lsr	x9, x9, #60
     400005ec:	f90027e9 	str	x9, [sp,#72]
-    400005f0:	14000001 	b	400005f4 <_ZN5hello5print6putu6417h479a5817af139033E+0x104>
+    400005f0:	14000001 	b	400005f4 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x104>
     400005f4:	f94027e8 	ldr	x8, [sp,#72]
     400005f8:	92400d09 	and	x9, x8, #0xf
     400005fc:	f9005be9 	str	x9, [sp,#176]
@@ -657,26 +657,26 @@ pub fn putu64(u: u64) {
     40000600:	f9405be9 	ldr	x9, [sp,#176]
     40000604:	f1000129 	subs	x9, x9, #0x0
     40000608:	f90023e9 	str	x9, [sp,#64]
-    4000060c:	54000262 	b.cs	40000658 <_ZN5hello5print6putu6417h479a5817af139033E+0x168>
-    40000610:	1400000d 	b	40000644 <_ZN5hello5print6putu6417h479a5817af139033E+0x154>
+    4000060c:	54000262 	b.cs	40000658 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x168>
+    40000610:	1400000d 	b	40000644 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x154>
     40000614:	f9405be8 	ldr	x8, [sp,#176]
     40000618:	b100c108 	adds	x8, x8, #0x30
     4000061c:	1a9f37e9 	cset	w9, cs
     40000620:	f9001fe8 	str	x8, [sp,#56]
-    40000624:	37000869 	tbnz	w9, #0, 40000730 <_ZN5hello5print6putu6417h479a5817af139033E+0x240>
-    40000628:	1400001b 	b	40000694 <_ZN5hello5print6putu6417h479a5817af139033E+0x1a4>
+    40000624:	37000869 	tbnz	w9, #0, 40000730 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x240>
+    40000628:	1400001b 	b	40000694 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x1a4>
 			10...16 => p = p + 97 - 10,
     4000062c:	f9405be8 	ldr	x8, [sp,#176]
     40000630:	b1018508 	adds	x8, x8, #0x61
     40000634:	1a9f37e9 	cset	w9, cs
     40000638:	f9001be8 	str	x8, [sp,#48]
-    4000063c:	37000829 	tbnz	w9, #0, 40000740 <_ZN5hello5print6putu6417h479a5817af139033E+0x250>
-    40000640:	14000018 	b	400006a0 <_ZN5hello5print6putu6417h479a5817af139033E+0x1b0>
+    4000063c:	37000829 	tbnz	w9, #0, 40000740 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x250>
+    40000640:	14000018 	b	400006a0 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x1b0>
     40000644:	f9405be8 	ldr	x8, [sp,#176]
     40000648:	f1002508 	subs	x8, x8, #0x9
     4000064c:	f90017e8 	str	x8, [sp,#40]
-    40000650:	540000e8 	b.hi	4000066c <_ZN5hello5print6putu6417h479a5817af139033E+0x17c>
-    40000654:	1400000b 	b	40000680 <_ZN5hello5print6putu6417h479a5817af139033E+0x190>
+    40000650:	540000e8 	b.hi	4000066c <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x17c>
+    40000654:	1400000b 	b	40000680 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x190>
 	let mut flag = false;
 	let mut b = u;
 	for _i in 0..16 {
@@ -686,14 +686,14 @@ pub fn putu64(u: u64) {
     40000658:	f9405be8 	ldr	x8, [sp,#176]
     4000065c:	f1002908 	subs	x8, x8, #0xa
     40000660:	f90013e8 	str	x8, [sp,#32]
-    40000664:	54fffd83 	b.cc	40000614 <_ZN5hello5print6putu6417h479a5817af139033E+0x124>
-    40000668:	17fffff7 	b	40000644 <_ZN5hello5print6putu6417h479a5817af139033E+0x154>
+    40000664:	54fffd83 	b.cc	40000614 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x124>
+    40000668:	17fffff7 	b	40000644 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x154>
 			10...16 => p = p + 97 - 10,
     4000066c:	f9405be8 	ldr	x8, [sp,#176]
     40000670:	f1004508 	subs	x8, x8, #0x11
     40000674:	f9000fe8 	str	x8, [sp,#24]
-    40000678:	54fffda3 	b.cc	4000062c <_ZN5hello5print6putu6417h479a5817af139033E+0x13c>
-    4000067c:	14000001 	b	40000680 <_ZN5hello5print6putu6417h479a5817af139033E+0x190>
+    40000678:	54fffda3 	b.cc	4000062c <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x13c>
+    4000067c:	14000001 	b	40000680 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x190>
 			_ => (),
 		}
 		let up = p as u8 as char;
@@ -701,8 +701,8 @@ pub fn putu64(u: u64) {
     40000684:	b900bbe8 	str	w8, [sp,#184]
 		if flag || p != 48 {
     40000688:	3941b3e8 	ldrb	w8, [sp,#108]
-    4000068c:	370001c8 	tbnz	w8, #0, 400006c4 <_ZN5hello5print6putu6417h479a5817af139033E+0x1d4>
-    40000690:	14000013 	b	400006dc <_ZN5hello5print6putu6417h479a5817af139033E+0x1ec>
+    4000068c:	370001c8 	tbnz	w8, #0, 400006c4 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x1d4>
+    40000690:	14000013 	b	400006dc <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x1ec>
 	let mut flag = false;
 	let mut b = u;
 	for _i in 0..16 {
@@ -717,15 +717,15 @@ pub fn putu64(u: u64) {
 	for _i in 0..16 {
 		let mut p = (b>>60) & 0xf;
 		match p {
-    4000069c:	17fffff9 	b	40000680 <_ZN5hello5print6putu6417h479a5817af139033E+0x190>
+    4000069c:	17fffff9 	b	40000680 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x190>
 			0...9 => p = p + 48,
 			10...16 => p = p + 97 - 10,
     400006a0:	f9401be8 	ldr	x8, [sp,#48]
     400006a4:	f1002909 	subs	x9, x8, #0xa
     400006a8:	1a9f27ea 	cset	w10, cc
     400006ac:	f9000be9 	str	x9, [sp,#16]
-    400006b0:	3700050a 	tbnz	w10, #0, 40000750 <_ZN5hello5print6putu6417h479a5817af139033E+0x260>
-    400006b4:	14000001 	b	400006b8 <_ZN5hello5print6putu6417h479a5817af139033E+0x1c8>
+    400006b0:	3700050a 	tbnz	w10, #0, 40000750 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x260>
+    400006b4:	14000001 	b	400006b8 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x1c8>
     400006b8:	f9400be8 	ldr	x8, [sp,#16]
     400006bc:	f9005be8 	str	x8, [sp,#176]
 	puts("0x");
@@ -734,7 +734,7 @@ pub fn putu64(u: u64) {
 	for _i in 0..16 {
 		let mut p = (b>>60) & 0xf;
 		match p {
-    400006c0:	17fffff0 	b	40000680 <_ZN5hello5print6putu6417h479a5817af139033E+0x190>
+    400006c0:	17fffff0 	b	40000680 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x190>
     400006c4:	320003e8 	orr	w8, wzr, #0x1
 			0...9 => p = p + 48,
 			10...16 => p = p + 97 - 10,
@@ -743,32 +743,32 @@ pub fn putu64(u: u64) {
 		let up = p as u8 as char;
 		if flag || p != 48 {
     400006c8:	3902f3e8 	strb	w8, [sp,#188]
-    400006cc:	14000009 	b	400006f0 <_ZN5hello5print6putu6417h479a5817af139033E+0x200>
+    400006cc:	14000009 	b	400006f0 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x200>
     400006d0:	2a1f03e8 	mov	w8, wzr
     400006d4:	3902f3e8 	strb	w8, [sp,#188]
-    400006d8:	14000006 	b	400006f0 <_ZN5hello5print6putu6417h479a5817af139033E+0x200>
+    400006d8:	14000006 	b	400006f0 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x200>
     400006dc:	f9405be8 	ldr	x8, [sp,#176]
     400006e0:	f100c108 	subs	x8, x8, #0x30
     400006e4:	f90007e8 	str	x8, [sp,#8]
-    400006e8:	54fffee1 	b.ne	400006c4 <_ZN5hello5print6putu6417h479a5817af139033E+0x1d4>
-    400006ec:	17fffff9 	b	400006d0 <_ZN5hello5print6putu6417h479a5817af139033E+0x1e0>
+    400006e8:	54fffee1 	b.ne	400006c4 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x1d4>
+    400006ec:	17fffff9 	b	400006d0 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x1e0>
     400006f0:	3942f3e8 	ldrb	w8, [sp,#188]
-    400006f4:	36000108 	tbz	w8, #0, 40000714 <_ZN5hello5print6putu6417h479a5817af139033E+0x224>
-    400006f8:	14000001 	b	400006fc <_ZN5hello5print6putu6417h479a5817af139033E+0x20c>
+    400006f4:	36000108 	tbz	w8, #0, 40000714 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x224>
+    400006f8:	14000001 	b	400006fc <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x20c>
     400006fc:	320003e8 	orr	w8, wzr, #0x1
 			flag = true;
     40000700:	3901b3e8 	strb	w8, [sp,#108]
 			putchar(up);
     40000704:	b940bbe0 	ldr	w0, [sp,#184]
-    40000708:	97fffe8d 	bl	4000013c <_ZN5hello5print7putchar17h59592ec22c921d3fE>
-    4000070c:	14000001 	b	40000710 <_ZN5hello5print6putu6417h479a5817af139033E+0x220>
+    40000708:	97fffe8d 	bl	4000013c <_ZN5hello5print7putchar17he470f54818bf9e60E>
+    4000070c:	14000001 	b	40000710 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x220>
 			0...9 => p = p + 48,
 			10...16 => p = p + 97 - 10,
 			_ => (),
 		}
 		let up = p as u8 as char;
 		if flag || p != 48 {
-    40000710:	14000001 	b	40000714 <_ZN5hello5print6putu6417h479a5817af139033E+0x224>
+    40000710:	14000001 	b	40000714 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x224>
 			flag = true;
 			putchar(up);
 		}
@@ -776,7 +776,7 @@ pub fn putu64(u: u64) {
     40000714:	f9403be8 	ldr	x8, [sp,#112]
     40000718:	d37ced08 	lsl	x8, x8, #4
     4000071c:	f90003e8 	str	x8, [sp]
-    40000720:	14000001 	b	40000724 <_ZN5hello5print6putu6417h479a5817af139033E+0x234>
+    40000720:	14000001 	b	40000724 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x234>
     40000724:	f94003e8 	ldr	x8, [sp]
     40000728:	f9003be8 	str	x8, [sp,#112]
 		return;
@@ -785,27 +785,27 @@ pub fn putu64(u: u64) {
 	let mut flag = false;
 	let mut b = u;
 	for _i in 0..16 {
-    4000072c:	17ffff96 	b	40000584 <_ZN5hello5print6putu6417h479a5817af139033E+0x94>
+    4000072c:	17ffff96 	b	40000584 <_ZN5hello5print6putu6417hdc3fad30f7beed3fE+0x94>
 		let mut p = (b>>60) & 0xf;
 		match p {
 			0...9 => p = p + 48,
-    40000730:	b0000000 	adrp	x0, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    40000734:	91118000 	add	x0, x0, #0x460
-    40000738:	940001dc 	bl	40000ea8 <_ZN4core9panicking5panic17h300a3572c8bcb886E>
+    40000730:	b0000000 	adrp	x0, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    40000734:	91104000 	add	x0, x0, #0x410
+    40000738:	9400011f 	bl	40000bb4 <_ZN4core9panicking5panic17he9fd3190c8a8f402E>
     4000073c:	d4200020 	brk	#0x1
 			10...16 => p = p + 97 - 10,
-    40000740:	b0000000 	adrp	x0, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    40000744:	91122000 	add	x0, x0, #0x488
-    40000748:	940001d8 	bl	40000ea8 <_ZN4core9panicking5panic17h300a3572c8bcb886E>
+    40000740:	b0000000 	adrp	x0, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    40000744:	9110e000 	add	x0, x0, #0x438
+    40000748:	9400011b 	bl	40000bb4 <_ZN4core9panicking5panic17he9fd3190c8a8f402E>
     4000074c:	d4200020 	brk	#0x1
-    40000750:	b0000000 	adrp	x0, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    40000754:	9112c000 	add	x0, x0, #0x4b0
-    40000758:	940001d4 	bl	40000ea8 <_ZN4core9panicking5panic17h300a3572c8bcb886E>
+    40000750:	b0000000 	adrp	x0, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    40000754:	91118000 	add	x0, x0, #0x460
+    40000758:	94000117 	bl	40000bb4 <_ZN4core9panicking5panic17he9fd3190c8a8f402E>
     4000075c:	d4200020 	brk	#0x1
 
-Disassembly of section .text._ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E:
+Disassembly of section .text._ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E:
 
-0000000040000760 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E>:
+0000000040000760 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E>:
 #[stable(feature = "rust1", since = "1.0.0")]
 impl<A: Step> Iterator for ops::Range<A> {
     type Item = A;
@@ -820,12 +820,12 @@ impl<A: Step> Iterator for ops::Range<A> {
     40000770:	3900f3e8 	strb	w8, [sp,#60]
     40000774:	f9400fe0 	ldr	x0, [sp,#24]
     40000778:	91001001 	add	x1, x0, #0x4
-    4000077c:	94000259 	bl	400010e0 <_ZN4core3cmp5impls55_$LT$impl$u20$core..cmp..PartialOrd$u20$for$u20$i32$GT$2lt17h09ddb00ca9aa21adE>
+    4000077c:	9400023c 	bl	4000106c <_ZN4core3cmp5impls55_$LT$impl$u20$core..cmp..PartialOrd$u20$for$u20$i32$GT$2lt17h7cd74ab96cf72f77E>
     40000780:	b90017e0 	str	w0, [sp,#20]
-    40000784:	14000001 	b	40000788 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0x28>
+    40000784:	14000001 	b	40000788 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0x28>
     40000788:	b94017e8 	ldr	w8, [sp,#20]
-    4000078c:	36000148 	tbz	w8, #0, 400007b4 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0x54>
-    40000790:	14000001 	b	40000794 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0x34>
+    4000078c:	36000148 	tbz	w8, #0, 400007b4 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0x54>
+    40000790:	14000001 	b	40000794 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0x34>
             // We check for overflow here, even though it can't actually
             // happen. Adding this check does however help llvm vectorize loops
             // for some ranges that don't get vectorized otherwise,
@@ -835,10 +835,10 @@ impl<A: Step> Iterator for ops::Range<A> {
     40000798:	320003e8 	orr	w8, wzr, #0x1
     4000079c:	3900f3e8 	strb	w8, [sp,#60]
     400007a0:	2a0803e1 	mov	w1, w8
-    400007a4:	940001ec 	bl	40000f54 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E>
+    400007a4:	940001dd 	bl	40000f18 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE>
     400007a8:	b9002fe1 	str	w1, [sp,#44]
     400007ac:	b9002be0 	str	w0, [sp,#40]
-    400007b0:	14000004 	b	400007c0 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0x60>
+    400007b0:	14000004 	b	400007c0 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0x60>
     400007b4:	2a1f03e8 	mov	w8, wzr
                 Some(n)
             } else {
@@ -853,7 +853,7 @@ impl<A: Step> Iterator for ops::Range<A> {
     #[inline]
     fn next(&mut self) -> Option<A> {
         if self.start < self.end {
-    400007bc:	1400001d 	b	40000830 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0xd0>
+    400007bc:	1400001d 	b	40000830 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0xd0>
     400007c0:	9100a3e8 	add	x8, sp, #0x28
             // We check for overflow here, even though it can't actually
             // happen. Adding this check does however help llvm vectorize loops
@@ -864,8 +864,8 @@ impl<A: Step> Iterator for ops::Range<A> {
     400007c8:	b9402be9 	ldr	w9, [sp,#40]
     400007cc:	71000529 	subs	w9, w9, #0x1
     400007d0:	b90013e9 	str	w9, [sp,#16]
-    400007d4:	54000141 	b.ne	400007fc <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0x9c>
-    400007d8:	14000001 	b	400007dc <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0x7c>
+    400007d4:	54000141 	b.ne	400007fc <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0x9c>
+    400007d8:	14000001 	b	400007dc <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0x7c>
     400007dc:	2a1f03e8 	mov	w8, wzr
     400007e0:	3900f3e8 	strb	w8, [sp,#60]
     400007e4:	b9402fe8 	ldr	w8, [sp,#44]
@@ -873,8 +873,8 @@ impl<A: Step> Iterator for ops::Range<A> {
                 mem::swap(&mut n, &mut self.start);
     400007ec:	f9400fe1 	ldr	x1, [sp,#24]
     400007f0:	9100e3e0 	add	x0, sp, #0x38
-    400007f4:	94000219 	bl	40001058 <_ZN4core3mem4swap17h0a2db027bd5abda8E>
-    400007f8:	14000004 	b	40000808 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0xa8>
+    400007f4:	940001a7 	bl	40000e90 <_ZN4core3mem4swap17h9185316bfbf50707E>
+    400007f8:	14000004 	b	40000808 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0xa8>
     400007fc:	2a1f03e8 	mov	w8, wzr
                 Some(n)
             } else {
@@ -886,7 +886,7 @@ impl<A: Step> Iterator for ops::Range<A> {
             // for some ranges that don't get vectorized otherwise,
             // and this won't actually result in an extra check in an optimized build.
             if let Some(mut n) = self.start.add_usize(1) {
-    40000804:	14000006 	b	4000081c <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0xbc>
+    40000804:	14000006 	b	4000081c <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0xbc>
                 mem::swap(&mut n, &mut self.start);
                 Some(n)
     40000808:	b9403be8 	ldr	w8, [sp,#56]
@@ -896,13 +896,13 @@ impl<A: Step> Iterator for ops::Range<A> {
             } else {
                 None
             }
-    40000818:	14000001 	b	4000081c <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0xbc>
+    40000818:	14000001 	b	4000081c <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0xbc>
         } else {
     4000081c:	b9402be8 	ldr	w8, [sp,#40]
     40000820:	71000508 	subs	w8, w8, #0x1
     40000824:	b9000fe8 	str	w8, [sp,#12]
-    40000828:	54000140 	b.eq	40000850 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0xf0>
-    4000082c:	1400000f 	b	40000868 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0x108>
+    40000828:	54000140 	b.eq	40000850 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0xf0>
+    4000082c:	1400000f 	b	40000868 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0x108>
             None
         }
     }
@@ -925,7 +925,7 @@ impl<A: Step> Iterator for ops::Range<A> {
     #[inline]
     fn next(&mut self) -> Option<A> {
         if self.start < self.end {
-    4000084c:	17fffff9 	b	40000830 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0xd0>
+    4000084c:	17fffff9 	b	40000830 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0xd0>
                 mem::swap(&mut n, &mut self.start);
                 Some(n)
             } else {
@@ -933,16 +933,16 @@ impl<A: Step> Iterator for ops::Range<A> {
             }
         } else {
     40000850:	3940f3e8 	ldrb	w8, [sp,#60]
-    40000854:	3607ff88 	tbz	w8, #0, 40000844 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0xe4>
-    40000858:	14000001 	b	4000085c <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0xfc>
+    40000854:	3607ff88 	tbz	w8, #0, 40000844 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0xe4>
+    40000858:	14000001 	b	4000085c <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0xfc>
     4000085c:	2a1f03e8 	mov	w8, wzr
     40000860:	3900f3e8 	strb	w8, [sp,#60]
-    40000864:	17fffff8 	b	40000844 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0xe4>
-    40000868:	17fffff7 	b	40000844 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h088d6b1fcfce6bc1E+0xe4>
+    40000864:	17fffff8 	b	40000844 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0xe4>
+    40000868:	17fffff7 	b	40000844 <_ZN4core4iter5range93_$LT$impl$u20$core..iter..iterator..Iterator$u20$for$u20$core..ops..range..Range$LT$A$GT$$GT$4next17h51c00fa6919b2814E+0xe4>
 
-Disassembly of section .text._ZN54_$LT$I$u20$as$u20$core..iter..traits..IntoIterator$GT$9into_iter17hecddb01faac0d7dcE:
+Disassembly of section .text._ZN54_$LT$I$u20$as$u20$core..iter..traits..IntoIterator$GT$9into_iter17ha7d53baa78f1f025E:
 
-000000004000086c <_ZN54_$LT$I$u20$as$u20$core..iter..traits..IntoIterator$GT$9into_iter17hecddb01faac0d7dcE>:
+000000004000086c <_ZN54_$LT$I$u20$as$u20$core..iter..traits..IntoIterator$GT$9into_iter17ha7d53baa78f1f025E>:
 #[stable(feature = "rust1", since = "1.0.0")]
 impl<I: Iterator> IntoIterator for I {
     type Item = I::Item;
@@ -957,1394 +957,1374 @@ impl<I: Iterator> IntoIterator for I {
     4000087c:	b9400100 	ldr	w0, [x8]
     40000880:	b9400fe1 	ldr	w1, [sp,#12]
     }
-    40000884:	2a0003e9 	mov	w9, w0
-    40000888:	b3407d28 	bfxil	x8, x9, #0, #32
-    4000088c:	2a0103e9 	mov	w9, w1
-    40000890:	b3607d28 	bfi	x8, x9, #32, #32
-    40000894:	d3407d09 	ubfx	x9, x8, #0, #32
-    40000898:	2a0903e0 	mov	w0, w9
-    4000089c:	d360fd08 	lsr	x8, x8, #32
-    400008a0:	2a0803e1 	mov	w1, w8
-    400008a4:	910043ff 	add	sp, sp, #0x10
-    400008a8:	d65f03c0 	ret
+    40000884:	910043ff 	add	sp, sp, #0x10
+    40000888:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$3len17h08b8426edacd8718E:
+Disassembly of section .text._ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$3len17h305d24b259ada127E:
 
-00000000400008ac <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$3len17h08b8426edacd8718E>:
+000000004000088c <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$3len17h305d24b259ada127E>:
     /// assert_eq!(a.len(), 3);
     /// ```
     #[stable(feature = "rust1", since = "1.0.0")]
     #[inline]
     #[rustc_const_unstable(feature = "const_slice_len")]
     pub const fn len(&self) -> usize {
-    400008ac:	d10083ff 	sub	sp, sp, #0x20
-    400008b0:	910043e8 	add	x8, sp, #0x10
-    400008b4:	910003e9 	mov	x9, sp
-    400008b8:	f9000120 	str	x0, [x9]
-    400008bc:	f90007e1 	str	x1, [sp,#8]
+    4000088c:	d10083ff 	sub	sp, sp, #0x20
+    40000890:	910043e8 	add	x8, sp, #0x10
+    40000894:	910003e9 	mov	x9, sp
+    40000898:	f9000120 	str	x0, [x9]
+    4000089c:	f90007e1 	str	x1, [sp,#8]
         unsafe {
             Repr { rust: self }.raw.len
-    400008c0:	f9400129 	ldr	x9, [x9]
-    400008c4:	f94007e0 	ldr	x0, [sp,#8]
-    400008c8:	f9000109 	str	x9, [x8]
-    400008cc:	f9000fe0 	str	x0, [sp,#24]
-    400008d0:	f9400fe0 	ldr	x0, [sp,#24]
+    400008a0:	f9400129 	ldr	x9, [x9]
+    400008a4:	f94007e0 	ldr	x0, [sp,#8]
+    400008a8:	f9000109 	str	x9, [x8]
+    400008ac:	f9000fe0 	str	x0, [sp,#24]
+    400008b0:	f9400fe0 	ldr	x0, [sp,#24]
         }
     }
-    400008d4:	910083ff 	add	sp, sp, #0x20
-    400008d8:	d65f03c0 	ret
+    400008b4:	910083ff 	add	sp, sp, #0x20
+    400008b8:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E:
+Disassembly of section .text._ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E:
 
-00000000400008dc <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E>:
+00000000400008bc <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E>:
     /// assert_eq!(iterator.next(), Some(&4));
     /// assert_eq!(iterator.next(), None);
     /// ```
     #[stable(feature = "rust1", since = "1.0.0")]
     #[inline]
     pub fn iter(&self) -> Iter<T> {
-    400008dc:	d10203ff 	sub	sp, sp, #0x80
-    400008e0:	f9003bfe 	str	x30, [sp,#112]
-    400008e4:	f9001fe0 	str	x0, [sp,#56]
-    400008e8:	f90023e1 	str	x1, [sp,#64]
+    400008bc:	d10203ff 	sub	sp, sp, #0x80
+    400008c0:	f9003bfe 	str	x30, [sp,#112]
+    400008c4:	f9001fe0 	str	x0, [sp,#56]
+    400008c8:	f90023e1 	str	x1, [sp,#64]
         unsafe {
             let ptr = self.as_ptr();
-    400008ec:	f9401fe0 	ldr	x0, [sp,#56]
-    400008f0:	f94023e1 	ldr	x1, [sp,#64]
-    400008f4:	94000033 	bl	400009c0 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$6as_ptr17hb6c3f6e17d60cbf4E>
-    400008f8:	f9002fe0 	str	x0, [sp,#88]
-    400008fc:	14000001 	b	40000900 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E+0x24>
+    400008cc:	f9401fe0 	ldr	x0, [sp,#56]
+    400008d0:	f94023e1 	ldr	x1, [sp,#64]
+    400008d4:	94000033 	bl	400009a0 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$6as_ptr17h3da971a6a8d2b72aE>
+    400008d8:	f9002fe0 	str	x0, [sp,#88]
+    400008dc:	14000001 	b	400008e0 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E+0x24>
             assume(!ptr.is_null());
-    40000900:	f9402fe0 	ldr	x0, [sp,#88]
-    40000904:	940000f7 	bl	40000ce0 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$7is_null17h518a31eb1e7aaf36E>
-    40000908:	b90037e0 	str	w0, [sp,#52]
-    4000090c:	14000001 	b	40000910 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E+0x34>
-    40000910:	14000001 	b	40000914 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E+0x38>
+    400008e0:	f9402fe0 	ldr	x0, [sp,#88]
+    400008e4:	94000139 	bl	40000dc8 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$7is_null17hc8d4562ae2ce44eaE>
+    400008e8:	b90037e0 	str	w0, [sp,#52]
+    400008ec:	14000001 	b	400008f0 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E+0x34>
+    400008f0:	14000001 	b	400008f4 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E+0x38>
 
             let end = if mem::size_of::<T>() == 0 {
-    40000914:	940001eb 	bl	400010c0 <_ZN4core3mem7size_of17hd2f02b67c09d74c8E>
-    40000918:	f90017e0 	str	x0, [sp,#40]
-    4000091c:	14000001 	b	40000920 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E+0x44>
-    40000920:	f94017e8 	ldr	x8, [sp,#40]
-    40000924:	b5000128 	cbnz	x8, 40000948 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E+0x6c>
-    40000928:	14000001 	b	4000092c <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E+0x50>
+    400008f4:	94000179 	bl	40000ed8 <_ZN4core3mem7size_of17ha24e2133dee5bbc4E>
+    400008f8:	f90017e0 	str	x0, [sp,#40]
+    400008fc:	14000001 	b	40000900 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E+0x44>
+    40000900:	f94017e8 	ldr	x8, [sp,#40]
+    40000904:	b5000128 	cbnz	x8, 40000928 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E+0x6c>
+    40000908:	14000001 	b	4000090c <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E+0x50>
                 (ptr as *const u8).wrapping_add(self.len()) as *const T
-    4000092c:	f9402fe8 	ldr	x8, [sp,#88]
-    40000930:	f9401fe0 	ldr	x0, [sp,#56]
-    40000934:	f94023e1 	ldr	x1, [sp,#64]
-    40000938:	f90013e8 	str	x8, [sp,#32]
-    4000093c:	97ffffdc 	bl	400008ac <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$3len17h08b8426edacd8718E>
-    40000940:	f9000fe0 	str	x0, [sp,#24]
-    40000944:	14000008 	b	40000964 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E+0x88>
+    4000090c:	f9402fe8 	ldr	x8, [sp,#88]
+    40000910:	f9401fe0 	ldr	x0, [sp,#56]
+    40000914:	f94023e1 	ldr	x1, [sp,#64]
+    40000918:	f90013e8 	str	x8, [sp,#32]
+    4000091c:	97ffffdc 	bl	4000088c <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$3len17h305d24b259ada127E>
+    40000920:	f9000fe0 	str	x0, [sp,#24]
+    40000924:	14000008 	b	40000944 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E+0x88>
             } else {
                 ptr.add(self.len())
-    40000948:	f9402fe8 	ldr	x8, [sp,#88]
-    4000094c:	f9401fe0 	ldr	x0, [sp,#56]
-    40000950:	f94023e1 	ldr	x1, [sp,#64]
-    40000954:	f9000be8 	str	x8, [sp,#16]
-    40000958:	97ffffd5 	bl	400008ac <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$3len17h08b8426edacd8718E>
-    4000095c:	f90007e0 	str	x0, [sp,#8]
-    40000960:	14000009 	b	40000984 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E+0xa8>
+    40000928:	f9402fe8 	ldr	x8, [sp,#88]
+    4000092c:	f9401fe0 	ldr	x0, [sp,#56]
+    40000930:	f94023e1 	ldr	x1, [sp,#64]
+    40000934:	f9000be8 	str	x8, [sp,#16]
+    40000938:	97ffffd5 	bl	4000088c <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$3len17h305d24b259ada127E>
+    4000093c:	f90007e0 	str	x0, [sp,#8]
+    40000940:	14000009 	b	40000964 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E+0xa8>
         unsafe {
             let ptr = self.as_ptr();
             assume(!ptr.is_null());
 
             let end = if mem::size_of::<T>() == 0 {
                 (ptr as *const u8).wrapping_add(self.len()) as *const T
-    40000964:	f94013e0 	ldr	x0, [sp,#32]
-    40000968:	f9400fe1 	ldr	x1, [sp,#24]
-    4000096c:	940000b9 	bl	40000c50 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$12wrapping_add17h19d29a2dd55e4f20E>
-    40000970:	f90003e0 	str	x0, [sp]
-    40000974:	14000001 	b	40000978 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E+0x9c>
-    40000978:	f94003e8 	ldr	x8, [sp]
-    4000097c:	f90033e8 	str	x8, [sp,#96]
+    40000944:	f94013e0 	ldr	x0, [sp,#32]
+    40000948:	f9400fe1 	ldr	x1, [sp,#24]
+    4000094c:	940000fb 	bl	40000d38 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$12wrapping_add17hbf9e517e69bc3c37E>
+    40000950:	f90003e0 	str	x0, [sp]
+    40000954:	14000001 	b	40000958 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E+0x9c>
+    40000958:	f94003e8 	ldr	x8, [sp]
+    4000095c:	f90033e8 	str	x8, [sp,#96]
     pub fn iter(&self) -> Iter<T> {
         unsafe {
             let ptr = self.as_ptr();
             assume(!ptr.is_null());
 
             let end = if mem::size_of::<T>() == 0 {
-    40000980:	14000007 	b	4000099c <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E+0xc0>
+    40000960:	14000007 	b	4000097c <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E+0xc0>
                 (ptr as *const u8).wrapping_add(self.len()) as *const T
             } else {
                 ptr.add(self.len())
-    40000984:	f9400be0 	ldr	x0, [sp,#16]
-    40000988:	f94007e1 	ldr	x1, [sp,#8]
-    4000098c:	940000c9 	bl	40000cb0 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$3add17h7aa8479d92384e79E>
-    40000990:	f90033e0 	str	x0, [sp,#96]
-    40000994:	14000001 	b	40000998 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E+0xbc>
+    40000964:	f9400be0 	ldr	x0, [sp,#16]
+    40000968:	f94007e1 	ldr	x1, [sp,#8]
+    4000096c:	9400010b 	bl	40000d98 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$3add17hd3dddbcef3a5c0dcE>
+    40000970:	f90033e0 	str	x0, [sp,#96]
+    40000974:	14000001 	b	40000978 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E+0xbc>
     pub fn iter(&self) -> Iter<T> {
         unsafe {
             let ptr = self.as_ptr();
             assume(!ptr.is_null());
 
             let end = if mem::size_of::<T>() == 0 {
-    40000998:	14000001 	b	4000099c <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E+0xc0>
+    40000978:	14000001 	b	4000097c <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E+0xc0>
             } else {
                 ptr.add(self.len())
             };
 
             Iter {
                 ptr,
-    4000099c:	f9402fe8 	ldr	x8, [sp,#88]
+    4000097c:	f9402fe8 	ldr	x8, [sp,#88]
                 end,
-    400009a0:	f94033e9 	ldr	x9, [sp,#96]
+    40000980:	f94033e9 	ldr	x9, [sp,#96]
                 (ptr as *const u8).wrapping_add(self.len()) as *const T
             } else {
                 ptr.add(self.len())
             };
 
             Iter {
-    400009a4:	f90027e8 	str	x8, [sp,#72]
-    400009a8:	f9002be9 	str	x9, [sp,#80]
+    40000984:	f90027e8 	str	x8, [sp,#72]
+    40000988:	f9002be9 	str	x9, [sp,#80]
                 ptr,
                 end,
                 _marker: marker::PhantomData
             }
         }
     }
-    400009ac:	f94027e0 	ldr	x0, [sp,#72]
-    400009b0:	f9402be1 	ldr	x1, [sp,#80]
-    400009b4:	f9403bfe 	ldr	x30, [sp,#112]
-    400009b8:	910203ff 	add	sp, sp, #0x80
-    400009bc:	d65f03c0 	ret
+    4000098c:	f94027e0 	ldr	x0, [sp,#72]
+    40000990:	f9402be1 	ldr	x1, [sp,#80]
+    40000994:	f9403bfe 	ldr	x30, [sp,#112]
+    40000998:	910203ff 	add	sp, sp, #0x80
+    4000099c:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$6as_ptr17hb6c3f6e17d60cbf4E:
+Disassembly of section .text._ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$6as_ptr17h3da971a6a8d2b72aE:
 
-00000000400009c0 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$6as_ptr17hb6c3f6e17d60cbf4E>:
+00000000400009a0 <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$6as_ptr17h3da971a6a8d2b72aE>:
     /// }
     /// ```
     #[stable(feature = "rust1", since = "1.0.0")]
     #[inline]
     #[rustc_const_unstable(feature = "const_slice_as_ptr")]
     pub const fn as_ptr(&self) -> *const T {
-    400009c0:	d10043ff 	sub	sp, sp, #0x10
-    400009c4:	910003e8 	mov	x8, sp
-    400009c8:	f9000100 	str	x0, [x8]
-    400009cc:	f90007e1 	str	x1, [sp,#8]
+    400009a0:	d10043ff 	sub	sp, sp, #0x10
+    400009a4:	910003e8 	mov	x8, sp
+    400009a8:	f9000100 	str	x0, [x8]
+    400009ac:	f90007e1 	str	x1, [sp,#8]
         self as *const [T] as *const T
-    400009d0:	f9400100 	ldr	x0, [x8]
+    400009b0:	f9400100 	ldr	x0, [x8]
     }
-    400009d4:	910043ff 	add	sp, sp, #0x10
-    400009d8:	d65f03c0 	ret
+    400009b4:	910043ff 	add	sp, sp, #0x10
+    400009b8:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core5slice89_$LT$impl$u20$core..iter..traits..IntoIterator$u20$for$u20$$RF$$u27$a$u20$$u5b$T$u5d$$GT$9into_iter17h415ea0d785ecea3eE:
+Disassembly of section .text._ZN4core5slice89_$LT$impl$u20$core..iter..traits..IntoIterator$u20$for$u20$$RF$$u27$a$u20$$u5b$T$u5d$$GT$9into_iter17h760a32e668aa5f86E:
 
-00000000400009dc <_ZN4core5slice89_$LT$impl$u20$core..iter..traits..IntoIterator$u20$for$u20$$RF$$u27$a$u20$$u5b$T$u5d$$GT$9into_iter17h415ea0d785ecea3eE>:
+00000000400009bc <_ZN4core5slice89_$LT$impl$u20$core..iter..traits..IntoIterator$u20$for$u20$$RF$$u27$a$u20$$u5b$T$u5d$$GT$9into_iter17h760a32e668aa5f86E>:
 #[stable(feature = "rust1", since = "1.0.0")]
 impl<'a, T> IntoIterator for &'a [T] {
     type Item = &'a T;
     type IntoIter = Iter<'a, T>;
 
     fn into_iter(self) -> Iter<'a, T> {
-    400009dc:	d100c3ff 	sub	sp, sp, #0x30
-    400009e0:	f90013fe 	str	x30, [sp,#32]
-    400009e4:	910043e8 	add	x8, sp, #0x10
-    400009e8:	f9000100 	str	x0, [x8]
-    400009ec:	f9000fe1 	str	x1, [sp,#24]
+    400009bc:	d100c3ff 	sub	sp, sp, #0x30
+    400009c0:	f90013fe 	str	x30, [sp,#32]
+    400009c4:	910043e8 	add	x8, sp, #0x10
+    400009c8:	f9000100 	str	x0, [x8]
+    400009cc:	f9000fe1 	str	x1, [sp,#24]
         self.iter()
-    400009f0:	f9400100 	ldr	x0, [x8]
-    400009f4:	f9400fe1 	ldr	x1, [sp,#24]
-    400009f8:	97ffffb9 	bl	400008dc <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17hf5af12042e3b5d84E>
-    400009fc:	f90007e0 	str	x0, [sp,#8]
-    40000a00:	f90003e1 	str	x1, [sp]
-    40000a04:	f94007e8 	ldr	x8, [sp,#8]
-    40000a08:	f94003e9 	ldr	x9, [sp]
+    400009d0:	f9400100 	ldr	x0, [x8]
+    400009d4:	f9400fe1 	ldr	x1, [sp,#24]
+    400009d8:	97ffffb9 	bl	400008bc <_ZN4core5slice29_$LT$impl$u20$$u5b$T$u5d$$GT$4iter17h926b9456181dbb27E>
+    400009dc:	f90007e0 	str	x0, [sp,#8]
+    400009e0:	f90003e1 	str	x1, [sp]
     }
-    40000a0c:	aa0803e0 	mov	x0, x8
-    40000a10:	aa0903e1 	mov	x1, x9
-    40000a14:	f94013fe 	ldr	x30, [sp,#32]
-    40000a18:	9100c3ff 	add	sp, sp, #0x30
-    40000a1c:	d65f03c0 	ret
+    400009e4:	f94007e0 	ldr	x0, [sp,#8]
+    400009e8:	f94003e1 	ldr	x1, [sp]
+    400009ec:	f94013fe 	ldr	x30, [sp,#32]
+    400009f0:	9100c3ff 	add	sp, sp, #0x30
+    400009f4:	d65f03c0 	ret
 
-Disassembly of section .text._ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E:
+Disassembly of section .text._ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE:
 
-0000000040000a20 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E>:
+00000000400009f8 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE>:
         #[stable(feature = "rust1", since = "1.0.0")]
         impl<'a, T> Iterator for $name<'a, T> {
             type Item = $elem;
 
             #[inline]
             fn next(&mut self) -> Option<$elem> {
-    40000a20:	d101c3ff 	sub	sp, sp, #0x70
-    40000a24:	f90033fe 	str	x30, [sp,#96]
-    40000a28:	f9001be0 	str	x0, [sp,#48]
+    400009f8:	d101c3ff 	sub	sp, sp, #0x70
+    400009fc:	f90033fe 	str	x30, [sp,#96]
+    40000a00:	f9001be0 	str	x0, [sp,#48]
                 // could be implemented with slices, but this avoids bounds checks
                 unsafe {
                     assume(!self.ptr.is_null());
-    40000a2c:	f9401be0 	ldr	x0, [sp,#48]
-    40000a30:	f9400000 	ldr	x0, [x0]
-    40000a34:	940000ab 	bl	40000ce0 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$7is_null17h518a31eb1e7aaf36E>
-    40000a38:	b9002fe0 	str	w0, [sp,#44]
-    40000a3c:	14000001 	b	40000a40 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x20>
-    40000a40:	14000001 	b	40000a44 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x24>
+    40000a04:	f9401be0 	ldr	x0, [sp,#48]
+    40000a08:	f9400000 	ldr	x0, [x0]
+    40000a0c:	940000ef 	bl	40000dc8 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$7is_null17hc8d4562ae2ce44eaE>
+    40000a10:	b9002fe0 	str	w0, [sp,#44]
+    40000a14:	14000001 	b	40000a18 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x20>
+    40000a18:	14000001 	b	40000a1c <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x24>
                     if mem::size_of::<T>() != 0 {
-    40000a44:	9400019f 	bl	400010c0 <_ZN4core3mem7size_of17hd2f02b67c09d74c8E>
-    40000a48:	f90013e0 	str	x0, [sp,#32]
-    40000a4c:	14000001 	b	40000a50 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x30>
-    40000a50:	f94013e8 	ldr	x8, [sp,#32]
-    40000a54:	b4000128 	cbz	x8, 40000a78 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x58>
-    40000a58:	14000001 	b	40000a5c <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x3c>
+    40000a1c:	9400012f 	bl	40000ed8 <_ZN4core3mem7size_of17ha24e2133dee5bbc4E>
+    40000a20:	f90013e0 	str	x0, [sp,#32]
+    40000a24:	14000001 	b	40000a28 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x30>
+    40000a28:	f94013e8 	ldr	x8, [sp,#32]
+    40000a2c:	b4000128 	cbz	x8, 40000a50 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x58>
+    40000a30:	14000001 	b	40000a34 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x3c>
                         assume(!self.end.is_null());
-    40000a5c:	f9401be8 	ldr	x8, [sp,#48]
-    40000a60:	f9400500 	ldr	x0, [x8,#8]
-    40000a64:	9400009f 	bl	40000ce0 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$7is_null17h518a31eb1e7aaf36E>
-    40000a68:	b9001fe0 	str	w0, [sp,#28]
-    40000a6c:	14000001 	b	40000a70 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x50>
-    40000a70:	14000001 	b	40000a74 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x54>
+    40000a34:	f9401be8 	ldr	x8, [sp,#48]
+    40000a38:	f9400500 	ldr	x0, [x8,#8]
+    40000a3c:	940000e3 	bl	40000dc8 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$7is_null17hc8d4562ae2ce44eaE>
+    40000a40:	b9001fe0 	str	w0, [sp,#28]
+    40000a44:	14000001 	b	40000a48 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x50>
+    40000a48:	14000001 	b	40000a4c <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x54>
             #[inline]
             fn next(&mut self) -> Option<$elem> {
                 // could be implemented with slices, but this avoids bounds checks
                 unsafe {
                     assume(!self.ptr.is_null());
                     if mem::size_of::<T>() != 0 {
-    40000a74:	14000001 	b	40000a78 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x58>
+    40000a4c:	14000001 	b	40000a50 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x58>
 
 // Inlining is_empty and len makes a huge performance difference
 macro_rules! is_empty {
     // The way we encode the length of a ZST iterator, this works both for ZST
     // and non-ZST.
     ($self: ident) => {$self.ptr == $self.end}
+    40000a50:	f9401be8 	ldr	x8, [sp,#48]
+    40000a54:	f9400109 	ldr	x9, [x8]
+    40000a58:	f9400508 	ldr	x8, [x8,#8]
+                unsafe {
+                    assume(!self.ptr.is_null());
+                    if mem::size_of::<T>() != 0 {
+                        assume(!self.end.is_null());
+                    }
+                    if is_empty!(self) {
+    40000a5c:	eb080128 	subs	x8, x9, x8
+    40000a60:	f9000be8 	str	x8, [sp,#16]
+    40000a64:	540000a1 	b.ne	40000a78 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x80>
+    40000a68:	14000001 	b	40000a6c <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x74>
+    40000a6c:	aa1f03e8 	mov	x8, xzr
+                        None
+    40000a70:	f9001fe8 	str	x8, [sp,#56]
+                unsafe {
+                    assume(!self.ptr.is_null());
+                    if mem::size_of::<T>() != 0 {
+                        assume(!self.end.is_null());
+                    }
+                    if is_empty!(self) {
+    40000a74:	14000027 	b	40000b10 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x118>
+                        None
+                    } else {
+                        Some(& $( $mut_ )* *self.post_inc_start(1))
     40000a78:	f9401be8 	ldr	x8, [sp,#48]
-    40000a7c:	f9400109 	ldr	x9, [x8]
-    40000a80:	f9400508 	ldr	x8, [x8,#8]
-                unsafe {
-                    assume(!self.ptr.is_null());
-                    if mem::size_of::<T>() != 0 {
-                        assume(!self.end.is_null());
-                    }
-                    if is_empty!(self) {
-    40000a84:	eb080128 	subs	x8, x9, x8
-    40000a88:	f9000be8 	str	x8, [sp,#16]
-    40000a8c:	540000a1 	b.ne	40000aa0 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x80>
-    40000a90:	14000001 	b	40000a94 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x74>
-    40000a94:	aa1f03e8 	mov	x8, xzr
-                        None
-    40000a98:	f9001fe8 	str	x8, [sp,#56]
-                unsafe {
-                    assume(!self.ptr.is_null());
-                    if mem::size_of::<T>() != 0 {
-                        assume(!self.end.is_null());
-                    }
-                    if is_empty!(self) {
-    40000a9c:	14000027 	b	40000b38 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x118>
-                        None
-                    } else {
-                        Some(& $( $mut_ )* *self.post_inc_start(1))
-    40000aa0:	f9401be8 	ldr	x8, [sp,#48]
-    40000aa4:	f90023e8 	str	x8, [sp,#64]
-    40000aa8:	320003e9 	orr	w9, wzr, #0x1
-    40000aac:	2a0903e8 	mov	w8, w9
-    40000ab0:	f90027e8 	str	x8, [sp,#72]
+    40000a7c:	f90023e8 	str	x8, [sp,#64]
+    40000a80:	320003e9 	orr	w9, wzr, #0x1
+    40000a84:	2a0903e8 	mov	w8, w9
+    40000a88:	f90027e8 	str	x8, [sp,#72]
             // Helper function for moving the start of the iterator forwards by `offset` elements,
             // returning the old start.
             // Unsafe because the offset must be in-bounds or one-past-the-end.
             #[inline(always)]
             unsafe fn post_inc_start(&mut self, offset: isize) -> * $raw_mut T {
                 if mem::size_of::<T>() == 0 {
-    40000ab4:	94000183 	bl	400010c0 <_ZN4core3mem7size_of17hd2f02b67c09d74c8E>
-    40000ab8:	b50001c0 	cbnz	x0, 40000af0 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0xd0>
-    40000abc:	14000001 	b	40000ac0 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0xa0>
+    40000a8c:	94000113 	bl	40000ed8 <_ZN4core3mem7size_of17ha24e2133dee5bbc4E>
+    40000a90:	b50001c0 	cbnz	x0, 40000ac8 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0xd0>
+    40000a94:	14000001 	b	40000a98 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0xa0>
                     // This is *reducing* the length.  `ptr` never changes with ZST.
                     self.end = (self.end as * $raw_mut u8).wrapping_offset(-offset) as * $raw_mut T;
-    40000ac0:	f94023e8 	ldr	x8, [sp,#64]
-    40000ac4:	f9400500 	ldr	x0, [x8,#8]
-    40000ac8:	f94027e8 	ldr	x8, [sp,#72]
-    40000acc:	aa1f03e9 	mov	x9, xzr
-    40000ad0:	eb080121 	subs	x1, x9, x8
-    40000ad4:	9400006b 	bl	40000c80 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$15wrapping_offset17h267f24cee7b0e238E>
-    40000ad8:	f94023e8 	ldr	x8, [sp,#64]
-    40000adc:	f9000500 	str	x0, [x8,#8]
+    40000a98:	f94023e8 	ldr	x8, [sp,#64]
+    40000a9c:	f9400500 	ldr	x0, [x8,#8]
+    40000aa0:	f94027e8 	ldr	x8, [sp,#72]
+    40000aa4:	aa1f03e9 	mov	x9, xzr
+    40000aa8:	eb080121 	subs	x1, x9, x8
+    40000aac:	940000af 	bl	40000d68 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$15wrapping_offset17h15e077054099cc85E>
+    40000ab0:	f94023e8 	ldr	x8, [sp,#64]
+    40000ab4:	f9000500 	str	x0, [x8,#8]
                     self.ptr
-    40000ae0:	f94023e8 	ldr	x8, [sp,#64]
-    40000ae4:	f9400108 	ldr	x8, [x8]
-    40000ae8:	f9002be8 	str	x8, [sp,#80]
+    40000ab8:	f94023e8 	ldr	x8, [sp,#64]
+    40000abc:	f9400108 	ldr	x8, [x8]
+    40000ac0:	f9002be8 	str	x8, [sp,#80]
             // Helper function for moving the start of the iterator forwards by `offset` elements,
             // returning the old start.
             // Unsafe because the offset must be in-bounds or one-past-the-end.
             #[inline(always)]
             unsafe fn post_inc_start(&mut self, offset: isize) -> * $raw_mut T {
                 if mem::size_of::<T>() == 0 {
-    40000aec:	1400000d 	b	40000b20 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x100>
+    40000ac4:	1400000d 	b	40000af8 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x100>
                     // This is *reducing* the length.  `ptr` never changes with ZST.
                     self.end = (self.end as * $raw_mut u8).wrapping_offset(-offset) as * $raw_mut T;
                     self.ptr
                 } else {
                     let old = self.ptr;
-    40000af0:	f94023e8 	ldr	x8, [sp,#64]
-    40000af4:	f9400108 	ldr	x8, [x8]
-    40000af8:	f9002fe8 	str	x8, [sp,#88]
+    40000ac8:	f94023e8 	ldr	x8, [sp,#64]
+    40000acc:	f9400108 	ldr	x8, [x8]
+    40000ad0:	f9002fe8 	str	x8, [sp,#88]
                     self.ptr = self.ptr.offset(offset);
-    40000afc:	f94023e8 	ldr	x8, [sp,#64]
-    40000b00:	f9400100 	ldr	x0, [x8]
-    40000b04:	f94027e1 	ldr	x1, [sp,#72]
-    40000b08:	940000db 	bl	40000e74 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$6offset17h0f7f98aedb1b2ca6E>
-    40000b0c:	f94023e8 	ldr	x8, [sp,#64]
-    40000b10:	f9000100 	str	x0, [x8]
+    40000ad4:	f94023e8 	ldr	x8, [sp,#64]
+    40000ad8:	f9400100 	ldr	x0, [x8]
+    40000adc:	f94027e1 	ldr	x1, [sp,#72]
+    40000ae0:	9400001c 	bl	40000b50 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$6offset17h113072f61500e1faE>
+    40000ae4:	f94023e8 	ldr	x8, [sp,#64]
+    40000ae8:	f9000100 	str	x0, [x8]
                     old
-    40000b14:	f9402fe8 	ldr	x8, [sp,#88]
-    40000b18:	f9002be8 	str	x8, [sp,#80]
+    40000aec:	f9402fe8 	ldr	x8, [sp,#88]
+    40000af0:	f9002be8 	str	x8, [sp,#80]
             // Helper function for moving the start of the iterator forwards by `offset` elements,
             // returning the old start.
             // Unsafe because the offset must be in-bounds or one-past-the-end.
             #[inline(always)]
             unsafe fn post_inc_start(&mut self, offset: isize) -> * $raw_mut T {
                 if mem::size_of::<T>() == 0 {
-    40000b1c:	14000001 	b	40000b20 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x100>
+    40000af4:	14000001 	b	40000af8 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x100>
                 } else {
                     let old = self.ptr;
                     self.ptr = self.ptr.offset(offset);
                     old
                 }
             }
-    40000b20:	f9402be8 	ldr	x8, [sp,#80]
+    40000af8:	f9402be8 	ldr	x8, [sp,#80]
                         assume(!self.end.is_null());
                     }
                     if is_empty!(self) {
                         None
                     } else {
                         Some(& $( $mut_ )* *self.post_inc_start(1))
-    40000b24:	f90007e8 	str	x8, [sp,#8]
-    40000b28:	14000001 	b	40000b2c <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x10c>
-    40000b2c:	f94007e8 	ldr	x8, [sp,#8]
-    40000b30:	f9001fe8 	str	x8, [sp,#56]
+    40000afc:	f90007e8 	str	x8, [sp,#8]
+    40000b00:	14000001 	b	40000b04 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x10c>
+    40000b04:	f94007e8 	ldr	x8, [sp,#8]
+    40000b08:	f9001fe8 	str	x8, [sp,#56]
                 unsafe {
                     assume(!self.ptr.is_null());
                     if mem::size_of::<T>() != 0 {
                         assume(!self.end.is_null());
                     }
                     if is_empty!(self) {
-    40000b34:	14000001 	b	40000b38 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17hfd88168c6978b9e6E+0x118>
+    40000b0c:	14000001 	b	40000b10 <_ZN91_$LT$core..slice..Iter$LT$$u27$a$C$$u20$T$GT$$u20$as$u20$core..iter..iterator..Iterator$GT$4next17h6f590669d13334ecE+0x118>
                         None
                     } else {
                         Some(& $( $mut_ )* *self.post_inc_start(1))
                     }
                 }
             }
-    40000b38:	f9401fe0 	ldr	x0, [sp,#56]
-    40000b3c:	f94033fe 	ldr	x30, [sp,#96]
-    40000b40:	9101c3ff 	add	sp, sp, #0x70
-    40000b44:	d65f03c0 	ret
+    40000b10:	f9401fe0 	ldr	x0, [sp,#56]
+    40000b14:	f94033fe 	ldr	x30, [sp,#96]
+    40000b18:	9101c3ff 	add	sp, sp, #0x70
+    40000b1c:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core3ptr19swap_nonoverlapping17h2143768a9497657dE:
+Disassembly of section .text._ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$6offset17h1a39274a9817b9abE:
 
-0000000040000b48 <_ZN4core3ptr19swap_nonoverlapping17h2143768a9497657dE>:
-/// assert_eq!(x, [7, 8, 3, 4]);
-/// assert_eq!(y, [1, 2, 9]);
-/// ```
-#[inline]
-#[stable(feature = "swap_nonoverlapping", since = "1.27.0")]
-pub unsafe fn swap_nonoverlapping<T>(x: *mut T, y: *mut T, count: usize) {
-    40000b48:	d10143ff 	sub	sp, sp, #0x50
-    40000b4c:	f90023fe 	str	x30, [sp,#64]
-    40000b50:	f9000be0 	str	x0, [sp,#16]
-    40000b54:	f9000fe1 	str	x1, [sp,#24]
-    40000b58:	f90013e2 	str	x2, [sp,#32]
-    let x = x as *mut u8;
-    40000b5c:	f9400be0 	ldr	x0, [sp,#16]
-    40000b60:	f90017e0 	str	x0, [sp,#40]
-    let y = y as *mut u8;
-    40000b64:	f9400fe0 	ldr	x0, [sp,#24]
-    40000b68:	f9001be0 	str	x0, [sp,#48]
-    let len = mem::size_of::<T>() * count;
-    40000b6c:	9400014d 	bl	400010a0 <_ZN4core3mem7size_of17h590906785a03b009E>
-    40000b70:	f90007e0 	str	x0, [sp,#8]
-    40000b74:	f94013e8 	ldr	x8, [sp,#32]
-    40000b78:	f94007e9 	ldr	x9, [sp,#8]
-    40000b7c:	9b087d28 	mul	x8, x9, x8
-    40000b80:	f9001fe8 	str	x8, [sp,#56]
-    swap_nonoverlapping_bytes(x, y, len)
-    40000b84:	f94017e0 	ldr	x0, [sp,#40]
-    40000b88:	f9401be1 	ldr	x1, [sp,#48]
-    40000b8c:	f9401fe2 	ldr	x2, [sp,#56]
-    40000b90:	94000171 	bl	40001154 <_ZN4core3ptr25swap_nonoverlapping_bytes17hbc495eadf31e03fbE>
-}
-    40000b94:	f94023fe 	ldr	x30, [sp,#64]
-    40000b98:	910143ff 	add	sp, sp, #0x50
-    40000b9c:	d65f03c0 	ret
-
-Disassembly of section .text._ZN4core3ptr23swap_nonoverlapping_one17hde17586a14fea257E:
-
-0000000040000ba0 <_ZN4core3ptr23swap_nonoverlapping_one17hde17586a14fea257E>:
-
-#[inline]
-pub(crate) unsafe fn swap_nonoverlapping_one<T>(x: *mut T, y: *mut T) {
-    40000ba0:	d100c3ff 	sub	sp, sp, #0x30
-    40000ba4:	f90013fe 	str	x30, [sp,#32]
-    40000ba8:	f90007e0 	str	x0, [sp,#8]
-    40000bac:	f9000be1 	str	x1, [sp,#16]
-    // For types smaller than the block optimization below,
-    // just swap directly to avoid pessimizing codegen.
-    if mem::size_of::<T>() < 32 {
-    40000bb0:	9400013c 	bl	400010a0 <_ZN4core3mem7size_of17h590906785a03b009E>
-    40000bb4:	f90003e0 	str	x0, [sp]
-    40000bb8:	b27b03e8 	orr	x8, xzr, #0x20
-    40000bbc:	f94003e9 	ldr	x9, [sp]
-    40000bc0:	eb08013f 	cmp	x9, x8
-    40000bc4:	1a9f27ea 	cset	w10, cc
-    40000bc8:	3700004a 	tbnz	w10, #0, 40000bd0 <_ZN4core3ptr23swap_nonoverlapping_one17hde17586a14fea257E+0x30>
-    40000bcc:	14000005 	b	40000be0 <_ZN4core3ptr23swap_nonoverlapping_one17hde17586a14fea257E+0x40>
-        let z = read(x);
-    40000bd0:	f94007e0 	ldr	x0, [sp,#8]
-    40000bd4:	94000058 	bl	40000d34 <_ZN4core3ptr4read17hc0f9b1458593749bE>
-    40000bd8:	b9001fe0 	str	w0, [sp,#28]
-    40000bdc:	14000006 	b	40000bf4 <_ZN4core3ptr23swap_nonoverlapping_one17hde17586a14fea257E+0x54>
-    40000be0:	b24003e2 	orr	x2, xzr, #0x1
-        copy_nonoverlapping(y, x, 1);
-        write(y, z);
-    } else {
-        swap_nonoverlapping(x, y, 1);
-    40000be4:	f94007e0 	ldr	x0, [sp,#8]
-    40000be8:	f9400be1 	ldr	x1, [sp,#16]
-    40000bec:	97ffffd7 	bl	40000b48 <_ZN4core3ptr19swap_nonoverlapping17h2143768a9497657dE>
-    40000bf0:	14000009 	b	40000c14 <_ZN4core3ptr23swap_nonoverlapping_one17hde17586a14fea257E+0x74>
-    40000bf4:	b27e03e2 	orr	x2, xzr, #0x4
-pub(crate) unsafe fn swap_nonoverlapping_one<T>(x: *mut T, y: *mut T) {
-    // For types smaller than the block optimization below,
-    // just swap directly to avoid pessimizing codegen.
-    if mem::size_of::<T>() < 32 {
-        let z = read(x);
-        copy_nonoverlapping(y, x, 1);
-    40000bf8:	f9400be1 	ldr	x1, [sp,#16]
-    40000bfc:	f94007e0 	ldr	x0, [sp,#8]
-    40000c00:	94000062 	bl	40000d88 <memcpy>
-        write(y, z);
-    40000c04:	f9400be0 	ldr	x0, [sp,#16]
-    40000c08:	b9401fe1 	ldr	w1, [sp,#28]
-    40000c0c:	94000057 	bl	40000d68 <_ZN4core3ptr5write17h3c895eaa1f0a636fE>
-
-#[inline]
-pub(crate) unsafe fn swap_nonoverlapping_one<T>(x: *mut T, y: *mut T) {
-    // For types smaller than the block optimization below,
-    // just swap directly to avoid pessimizing codegen.
-    if mem::size_of::<T>() < 32 {
-    40000c10:	14000001 	b	40000c14 <_ZN4core3ptr23swap_nonoverlapping_one17hde17586a14fea257E+0x74>
-        copy_nonoverlapping(y, x, 1);
-        write(y, z);
-    } else {
-        swap_nonoverlapping(x, y, 1);
-    }
-}
-    40000c14:	f94013fe 	ldr	x30, [sp,#32]
-    40000c18:	9100c3ff 	add	sp, sp, #0x30
-    40000c1c:	d65f03c0 	ret
-
-Disassembly of section .text._ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$3add17h86fa43dd889b519bE:
-
-0000000040000c20 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$3add17h86fa43dd889b519bE>:
-    ///     println!("{}", *ptr.add(2) as char);
-    /// }
-    /// ```
-    #[stable(feature = "pointer_methods", since = "1.26.0")]
-    #[inline]
-    pub unsafe fn add(self, count: usize) -> Self
-    40000c20:	d100c3ff 	sub	sp, sp, #0x30
-    40000c24:	f90013fe 	str	x30, [sp,#32]
-    40000c28:	f9000be0 	str	x0, [sp,#16]
-    40000c2c:	f9000fe1 	str	x1, [sp,#24]
-        where T: Sized,
-    {
-        self.offset(count as isize)
-    40000c30:	f9400be0 	ldr	x0, [sp,#16]
-    40000c34:	f9400fe1 	ldr	x1, [sp,#24]
-    40000c38:	94000083 	bl	40000e44 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$6offset17hac227e2550670266E>
-    40000c3c:	f90007e0 	str	x0, [sp,#8]
-    }
-    40000c40:	f94007e0 	ldr	x0, [sp,#8]
-    40000c44:	f94013fe 	ldr	x30, [sp,#32]
-    40000c48:	9100c3ff 	add	sp, sp, #0x30
-    40000c4c:	d65f03c0 	ret
-
-Disassembly of section .text._ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$12wrapping_add17h19d29a2dd55e4f20E:
-
-0000000040000c50 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$12wrapping_add17h19d29a2dd55e4f20E>:
-    ///     ptr = ptr.wrapping_add(step);
-    /// }
-    /// ```
-    #[stable(feature = "pointer_methods", since = "1.26.0")]
-    #[inline]
-    pub fn wrapping_add(self, count: usize) -> Self
-    40000c50:	d100c3ff 	sub	sp, sp, #0x30
-    40000c54:	f90013fe 	str	x30, [sp,#32]
-    40000c58:	f9000be0 	str	x0, [sp,#16]
-    40000c5c:	f9000fe1 	str	x1, [sp,#24]
-        where T: Sized,
-    {
-        self.wrapping_offset(count as isize)
-    40000c60:	f9400be0 	ldr	x0, [sp,#16]
-    40000c64:	f9400fe1 	ldr	x1, [sp,#24]
-    40000c68:	94000006 	bl	40000c80 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$15wrapping_offset17h267f24cee7b0e238E>
-    40000c6c:	f90007e0 	str	x0, [sp,#8]
-    }
-    40000c70:	f94007e0 	ldr	x0, [sp,#8]
-    40000c74:	f94013fe 	ldr	x30, [sp,#32]
-    40000c78:	9100c3ff 	add	sp, sp, #0x30
-    40000c7c:	d65f03c0 	ret
-
-Disassembly of section .text._ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$15wrapping_offset17h267f24cee7b0e238E:
-
-0000000040000c80 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$15wrapping_offset17h267f24cee7b0e238E>:
-    ///     ptr = ptr.wrapping_offset(step);
-    /// }
-    /// ```
-    #[stable(feature = "ptr_wrapping_offset", since = "1.16.0")]
-    #[inline]
-    pub fn wrapping_offset(self, count: isize) -> *const T where T: Sized {
-    40000c80:	d10083ff 	sub	sp, sp, #0x20
-    40000c84:	f90007e0 	str	x0, [sp,#8]
-    40000c88:	f9000be1 	str	x1, [sp,#16]
-        unsafe {
-            intrinsics::arith_offset(self, count)
-    40000c8c:	f94007e0 	ldr	x0, [sp,#8]
-    40000c90:	f9400be1 	ldr	x1, [sp,#16]
-    40000c94:	8b010000 	add	x0, x0, x1
-    40000c98:	f9000fe0 	str	x0, [sp,#24]
-    40000c9c:	f9400fe0 	ldr	x0, [sp,#24]
-    40000ca0:	f90003e0 	str	x0, [sp]
-        }
-    }
-    40000ca4:	f94003e0 	ldr	x0, [sp]
-    40000ca8:	910083ff 	add	sp, sp, #0x20
-    40000cac:	d65f03c0 	ret
-
-Disassembly of section .text._ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$3add17h7aa8479d92384e79E:
-
-0000000040000cb0 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$3add17h7aa8479d92384e79E>:
-    ///     println!("{}", *ptr.add(2) as char);
-    /// }
-    /// ```
-    #[stable(feature = "pointer_methods", since = "1.26.0")]
-    #[inline]
-    pub unsafe fn add(self, count: usize) -> Self
-    40000cb0:	d100c3ff 	sub	sp, sp, #0x30
-    40000cb4:	f90013fe 	str	x30, [sp,#32]
-    40000cb8:	f9000be0 	str	x0, [sp,#16]
-    40000cbc:	f9000fe1 	str	x1, [sp,#24]
-        where T: Sized,
-    {
-        self.offset(count as isize)
-    40000cc0:	f9400be0 	ldr	x0, [sp,#16]
-    40000cc4:	f9400fe1 	ldr	x1, [sp,#24]
-    40000cc8:	9400006b 	bl	40000e74 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$6offset17h0f7f98aedb1b2ca6E>
-    40000ccc:	f90007e0 	str	x0, [sp,#8]
-    }
-    40000cd0:	f94007e0 	ldr	x0, [sp,#8]
-    40000cd4:	f94013fe 	ldr	x30, [sp,#32]
-    40000cd8:	9100c3ff 	add	sp, sp, #0x30
-    40000cdc:	d65f03c0 	ret
-
-Disassembly of section .text._ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$7is_null17h518a31eb1e7aaf36E:
-
-0000000040000ce0 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$7is_null17h518a31eb1e7aaf36E>:
-    /// let ptr: *const u8 = s.as_ptr();
-    /// assert!(!ptr.is_null());
-    /// ```
-    #[stable(feature = "rust1", since = "1.0.0")]
-    #[inline]
-    pub fn is_null(self) -> bool {
-    40000ce0:	d100c3ff 	sub	sp, sp, #0x30
-    40000ce4:	f90013fe 	str	x30, [sp,#32]
-    40000ce8:	f9000fe0 	str	x0, [sp,#24]
-        // Compare via a cast to a thin pointer, so fat pointers are only
-        // considering their "data" part for null-ness.
-        (self as *const u8) == null()
-    40000cec:	f9400fe0 	ldr	x0, [sp,#24]
-    40000cf0:	f9000be0 	str	x0, [sp,#16]
-    40000cf4:	9400000d 	bl	40000d28 <_ZN4core3ptr4null17h8155970222e15acbE>
-    40000cf8:	f90007e0 	str	x0, [sp,#8]
-    40000cfc:	f9400be8 	ldr	x8, [sp,#16]
-    40000d00:	f94007e9 	ldr	x9, [sp,#8]
-    40000d04:	eb09011f 	cmp	x8, x9
-    40000d08:	1a9f17ea 	cset	w10, eq
-    40000d0c:	320003eb 	orr	w11, wzr, #0x1
-    40000d10:	0a0b014a 	and	w10, w10, w11
-    40000d14:	32001feb 	orr	w11, wzr, #0xff
-    40000d18:	0a0b0140 	and	w0, w10, w11
-    }
-    40000d1c:	f94013fe 	ldr	x30, [sp,#32]
-    40000d20:	9100c3ff 	add	sp, sp, #0x30
-    40000d24:	d65f03c0 	ret
-
-Disassembly of section .text._ZN4core3ptr4null17h8155970222e15acbE:
-
-0000000040000d28 <_ZN4core3ptr4null17h8155970222e15acbE>:
-/// let p: *const i32 = ptr::null();
-/// assert!(p.is_null());
-/// ```
-#[inline]
-#[stable(feature = "rust1", since = "1.0.0")]
-pub const fn null<T>() -> *const T { 0 as *const T }
-    40000d28:	d2800008 	mov	x8, #0x0                   	// #0
-    40000d2c:	aa0803e0 	mov	x0, x8
-    40000d30:	d65f03c0 	ret
-
-Disassembly of section .text._ZN4core3ptr4read17hc0f9b1458593749bE:
-
-0000000040000d34 <_ZN4core3ptr4read17hc0f9b1458593749bE>:
-///     assert_eq!(std::ptr::read(y), 12);
-/// }
-/// ```
-#[inline]
-#[stable(feature = "rust1", since = "1.0.0")]
-pub unsafe fn read<T>(src: *const T) -> T {
-    40000d34:	d10083ff 	sub	sp, sp, #0x20
-    40000d38:	f9000bfe 	str	x30, [sp,#16]
-    40000d3c:	f90003e0 	str	x0, [sp]
-    let mut tmp: T = mem::uninitialized();
-    40000d40:	940000c0 	bl	40001040 <_ZN4core3mem13uninitialized17hea63fcaabfaf9b7aE>
-    40000d44:	b9000fe0 	str	w0, [sp,#12]
-    40000d48:	910033e0 	add	x0, sp, #0xc
-    40000d4c:	b27e03e2 	orr	x2, xzr, #0x4
-    copy_nonoverlapping(src, &mut tmp, 1);
-    40000d50:	f94003e1 	ldr	x1, [sp]
-    40000d54:	9400000d 	bl	40000d88 <memcpy>
-    tmp
-    40000d58:	b9400fe0 	ldr	w0, [sp,#12]
-}
-    40000d5c:	f9400bfe 	ldr	x30, [sp,#16]
-    40000d60:	910083ff 	add	sp, sp, #0x20
-    40000d64:	d65f03c0 	ret
-
-Disassembly of section .text._ZN4core3ptr5write17h3c895eaa1f0a636fE:
-
-0000000040000d68 <_ZN4core3ptr5write17h3c895eaa1f0a636fE>:
-///     assert_eq!(std::ptr::read(y), 12);
-/// }
-/// ```
-#[inline]
-#[stable(feature = "rust1", since = "1.0.0")]
-pub unsafe fn write<T>(dst: *mut T, src: T) {
-    40000d68:	d10043ff 	sub	sp, sp, #0x10
-    40000d6c:	f90003e0 	str	x0, [sp]
-    40000d70:	b9000fe1 	str	w1, [sp,#12]
-    intrinsics::move_val_init(&mut *dst, src)
-    40000d74:	f94003e0 	ldr	x0, [sp]
-    40000d78:	b9400fe1 	ldr	w1, [sp,#12]
-    40000d7c:	b9000001 	str	w1, [x0]
-}
-    40000d80:	910043ff 	add	sp, sp, #0x10
-    40000d84:	d65f03c0 	ret
-
-Disassembly of section .text.memcpy:
-
-0000000040000d88 <memcpy>:
-// This library defines the builtin functions, so it would be a shame for
-// LLVM to optimize these function calls to themselves!
-#![no_builtins]
-
-#[no_mangle]
-pub unsafe extern fn memcpy(dest: *mut u8, src: *const u8,
-    40000d88:	d10183ff 	sub	sp, sp, #0x60
-    40000d8c:	f9002bfe 	str	x30, [sp,#80]
-    40000d90:	f9001be0 	str	x0, [sp,#48]
-    40000d94:	f9001fe1 	str	x1, [sp,#56]
-    40000d98:	f90023e2 	str	x2, [sp,#64]
-    40000d9c:	aa1f03e0 	mov	x0, xzr
-                            n: usize) -> *mut u8 {
-    let mut i = 0;
-    40000da0:	f90027e0 	str	x0, [sp,#72]
-    while i < n {
-    40000da4:	14000001 	b	40000da8 <memcpy+0x20>
-    40000da8:	f94027e8 	ldr	x8, [sp,#72]
-    40000dac:	f94023e9 	ldr	x9, [sp,#64]
-    40000db0:	eb090108 	subs	x8, x8, x9
-    40000db4:	f90017e8 	str	x8, [sp,#40]
-    40000db8:	540000c3 	b.cc	40000dd0 <memcpy+0x48>
-    40000dbc:	14000001 	b	40000dc0 <memcpy+0x38>
-        *dest.offset(i as isize) = *src.offset(i as isize);
-        i += 1;
-    }
-    return dest;
-    40000dc0:	f9401be0 	ldr	x0, [sp,#48]
-}
-    40000dc4:	f9402bfe 	ldr	x30, [sp,#80]
-    40000dc8:	910183ff 	add	sp, sp, #0x60
-    40000dcc:	d65f03c0 	ret
-#[no_mangle]
-pub unsafe extern fn memcpy(dest: *mut u8, src: *const u8,
-                            n: usize) -> *mut u8 {
-    let mut i = 0;
-    while i < n {
-        *dest.offset(i as isize) = *src.offset(i as isize);
-    40000dd0:	f9401fe0 	ldr	x0, [sp,#56]
-    40000dd4:	f94027e1 	ldr	x1, [sp,#72]
-    40000dd8:	94000027 	bl	40000e74 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$6offset17h0f7f98aedb1b2ca6E>
-    40000ddc:	f90013e0 	str	x0, [sp,#32]
-    40000de0:	14000001 	b	40000de4 <memcpy+0x5c>
-    40000de4:	f94013e8 	ldr	x8, [sp,#32]
-    40000de8:	39400109 	ldrb	w9, [x8]
-    40000dec:	f9401be0 	ldr	x0, [sp,#48]
-    40000df0:	f94027e1 	ldr	x1, [sp,#72]
-    40000df4:	b9001fe9 	str	w9, [sp,#28]
-    40000df8:	94000013 	bl	40000e44 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$6offset17hac227e2550670266E>
-    40000dfc:	f9000be0 	str	x0, [sp,#16]
-    40000e00:	14000001 	b	40000e04 <memcpy+0x7c>
-    40000e04:	b9401fe8 	ldr	w8, [sp,#28]
-    40000e08:	f9400be9 	ldr	x9, [sp,#16]
-    40000e0c:	39000128 	strb	w8, [x9]
-        i += 1;
-    40000e10:	f94027ea 	ldr	x10, [sp,#72]
-    40000e14:	b100054a 	adds	x10, x10, #0x1
-    40000e18:	1a9f37eb 	cset	w11, cs
-    40000e1c:	f90007ea 	str	x10, [sp,#8]
-    40000e20:	370000ab 	tbnz	w11, #0, 40000e34 <memcpy+0xac>
-    40000e24:	14000001 	b	40000e28 <memcpy+0xa0>
-    40000e28:	f94007e8 	ldr	x8, [sp,#8]
-    40000e2c:	f90027e8 	str	x8, [sp,#72]
-
-#[no_mangle]
-pub unsafe extern fn memcpy(dest: *mut u8, src: *const u8,
-                            n: usize) -> *mut u8 {
-    let mut i = 0;
-    while i < n {
-    40000e30:	17ffffde 	b	40000da8 <memcpy+0x20>
-        *dest.offset(i as isize) = *src.offset(i as isize);
-        i += 1;
-    40000e34:	b0000000 	adrp	x0, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    40000e38:	91158000 	add	x0, x0, #0x560
-    40000e3c:	9400001b 	bl	40000ea8 <_ZN4core9panicking5panic17h300a3572c8bcb886E>
-    40000e40:	d4200020 	brk	#0x1
-
-Disassembly of section .text._ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$6offset17hac227e2550670266E:
-
-0000000040000e44 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$6offset17hac227e2550670266E>:
+0000000040000b20 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$6offset17h1a39274a9817b9abE>:
     ///     println!("{}", *ptr.offset(2));
     /// }
     /// ```
     #[stable(feature = "rust1", since = "1.0.0")]
     #[inline]
     pub unsafe fn offset(self, count: isize) -> *mut T where T: Sized {
-    40000e44:	d10083ff 	sub	sp, sp, #0x20
-    40000e48:	f90007e0 	str	x0, [sp,#8]
-    40000e4c:	f9000be1 	str	x1, [sp,#16]
+    40000b20:	d10083ff 	sub	sp, sp, #0x20
+    40000b24:	f90007e0 	str	x0, [sp,#8]
+    40000b28:	f9000be1 	str	x1, [sp,#16]
         intrinsics::offset(self, count) as *mut T
-    40000e50:	f94007e0 	ldr	x0, [sp,#8]
-    40000e54:	f9400be1 	ldr	x1, [sp,#16]
-    40000e58:	8b010000 	add	x0, x0, x1
-    40000e5c:	f9000fe0 	str	x0, [sp,#24]
-    40000e60:	f9400fe0 	ldr	x0, [sp,#24]
-    40000e64:	f90003e0 	str	x0, [sp]
+    40000b2c:	f94007e0 	ldr	x0, [sp,#8]
+    40000b30:	f9400be1 	ldr	x1, [sp,#16]
+    40000b34:	8b010000 	add	x0, x0, x1
+    40000b38:	f9000fe0 	str	x0, [sp,#24]
+    40000b3c:	f9400fe0 	ldr	x0, [sp,#24]
+    40000b40:	f90003e0 	str	x0, [sp]
     }
-    40000e68:	f94003e0 	ldr	x0, [sp]
-    40000e6c:	910083ff 	add	sp, sp, #0x20
-    40000e70:	d65f03c0 	ret
+    40000b44:	f94003e0 	ldr	x0, [sp]
+    40000b48:	910083ff 	add	sp, sp, #0x20
+    40000b4c:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$6offset17h0f7f98aedb1b2ca6E:
+Disassembly of section .text._ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$6offset17h113072f61500e1faE:
 
-0000000040000e74 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$6offset17h0f7f98aedb1b2ca6E>:
+0000000040000b50 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$6offset17h113072f61500e1faE>:
     ///     println!("{}", *ptr.offset(2) as char);
     /// }
     /// ```
     #[stable(feature = "rust1", since = "1.0.0")]
     #[inline]
     pub unsafe fn offset(self, count: isize) -> *const T where T: Sized {
-    40000e74:	d10083ff 	sub	sp, sp, #0x20
-    40000e78:	f90007e0 	str	x0, [sp,#8]
-    40000e7c:	f9000be1 	str	x1, [sp,#16]
+    40000b50:	d10083ff 	sub	sp, sp, #0x20
+    40000b54:	f90007e0 	str	x0, [sp,#8]
+    40000b58:	f9000be1 	str	x1, [sp,#16]
         intrinsics::offset(self, count)
-    40000e80:	f94007e0 	ldr	x0, [sp,#8]
-    40000e84:	f9400be1 	ldr	x1, [sp,#16]
-    40000e88:	8b010000 	add	x0, x0, x1
-    40000e8c:	f9000fe0 	str	x0, [sp,#24]
-    40000e90:	f9400fe0 	ldr	x0, [sp,#24]
-    40000e94:	f90003e0 	str	x0, [sp]
+    40000b5c:	f94007e0 	ldr	x0, [sp,#8]
+    40000b60:	f9400be1 	ldr	x1, [sp,#16]
+    40000b64:	8b010000 	add	x0, x0, x1
+    40000b68:	f9000fe0 	str	x0, [sp,#24]
+    40000b6c:	f9400fe0 	ldr	x0, [sp,#24]
+    40000b70:	f90003e0 	str	x0, [sp]
     }
-    40000e98:	f94003e0 	ldr	x0, [sp]
-    40000e9c:	910083ff 	add	sp, sp, #0x20
-    40000ea0:	d65f03c0 	ret
+    40000b74:	f94003e0 	ldr	x0, [sp]
+    40000b78:	910083ff 	add	sp, sp, #0x20
+    40000b7c:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core3ptr13drop_in_place17h141909216138235bE:
+Disassembly of section .text._ZN4core3ptr13drop_in_place17h0d56df8b49563a58E:
 
-0000000040000ea4 <_ZN4core3ptr13drop_in_place17h141909216138235bE>:
-    40000ea4:	d65f03c0 	ret
+0000000040000b80 <_ZN4core3ptr13drop_in_place17h0d56df8b49563a58E>:
+    40000b80:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core9panicking5panic17h300a3572c8bcb886E:
+Disassembly of section .text._ZN36_$LT$T$u20$as$u20$core..any..Any$GT$11get_type_id17h533b75d7fda85ed5E:
 
-0000000040000ea8 <_ZN4core9panicking5panic17h300a3572c8bcb886E>:
-    40000ea8:	d10183ff 	sub	sp, sp, #0x60
-    40000eac:	9100e3e8 	add	x8, sp, #0x38
-    40000eb0:	320003e9 	orr	w9, wzr, #0x1
-    40000eb4:	a900a7e8 	stp	x8, x9, [sp,#8]
-    40000eb8:	b0000008 	adrp	x8, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    40000ebc:	91162108 	add	x8, x8, #0x588
-    40000ec0:	a902ffe8 	stp	x8, xzr, [sp,#40]
-    40000ec4:	a9402408 	ldp	x8, x9, [x0]
-    40000ec8:	3dc00400 	ldr	q0, [x0,#16]
-    40000ecc:	f940100a 	ldr	x10, [x0,#32]
-    40000ed0:	910023e0 	add	x0, sp, #0x8
-    40000ed4:	910123e1 	add	x1, sp, #0x48
-    40000ed8:	a901ffff 	stp	xzr, xzr, [sp,#24]
-    40000edc:	a903a7e8 	stp	x8, x9, [sp,#56]
-    40000ee0:	3c8483e0 	stur	q0, [sp,#72]
-    40000ee4:	f9002fea 	str	x10, [sp,#88]
-    40000ee8:	94000002 	bl	40000ef0 <_ZN4core9panicking9panic_fmt17h1a8330b0711d8c3eE>
-    40000eec:	d4200020 	brk	#0x1
+0000000040000b84 <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$11get_type_id17h533b75d7fda85ed5E>:
+    40000b84:	d28e26c0 	mov	x0, #0x7136                	// #28982
+    40000b88:	f2a28b20 	movk	x0, #0x1459, lsl #16
+    40000b8c:	f2dbf880 	movk	x0, #0xdfc4, lsl #32
+    40000b90:	f2fba860 	movk	x0, #0xdd43, lsl #48
+    40000b94:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core9panicking9panic_fmt17h1a8330b0711d8c3eE:
+Disassembly of section .text._ZN4core5panic9PanicInfo8location17h69f9e8d1458b8738E:
 
-0000000040000ef0 <_ZN4core9panicking9panic_fmt17h1a8330b0711d8c3eE>:
-    40000ef0:	3dc00020 	ldr	q0, [x1]
-    40000ef4:	f9400828 	ldr	x8, [x1,#16]
-    40000ef8:	b0000009 	adrp	x9, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    40000efc:	b000000a 	adrp	x10, 40001000 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xac>
-    40000f00:	91162129 	add	x9, x9, #0x588
-    40000f04:	9116214a 	add	x10, x10, #0x588
-    40000f08:	a9bd2be9 	stp	x9, x10, [sp,#-48]!
-    40000f0c:	f9000be0 	str	x0, [sp,#16]
-    40000f10:	910003e0 	mov	x0, sp
-    40000f14:	3c8183e0 	stur	q0, [sp,#24]
-    40000f18:	f90017e8 	str	x8, [sp,#40]
-    40000f1c:	97fffc50 	bl	4000005c <rust_begin_unwind>
-    40000f20:	d4200020 	brk	#0x1
+0000000040000b98 <_ZN4core5panic9PanicInfo8location17h69f9e8d1458b8738E>:
+    40000b98:	91006000 	add	x0, x0, #0x18
+    40000b9c:	d65f03c0 	ret
 
-Disassembly of section .text._ZN36_$LT$T$u20$as$u20$core..any..Any$GT$11get_type_id17h3e67882ee5988c41E:
+Disassembly of section .text._ZN4core5panic8Location4file17hc5b45e14dd74666dE:
 
-0000000040000f24 <_ZN36_$LT$T$u20$as$u20$core..any..Any$GT$11get_type_id17h3e67882ee5988c41E>:
-    40000f24:	d2964300 	mov	x0, #0xb218                	// #45592
-    40000f28:	f2a90b40 	movk	x0, #0x485a, lsl #16
-    40000f2c:	f2c39d80 	movk	x0, #0x1cec, lsl #32
-    40000f30:	f2e5a480 	movk	x0, #0x2d24, lsl #48
-    40000f34:	d65f03c0 	ret
+0000000040000ba0 <_ZN4core5panic8Location4file17hc5b45e14dd74666dE>:
+    40000ba0:	a9400408 	ldp	x8, x1, [x0]
+    40000ba4:	aa0803e0 	mov	x0, x8
+    40000ba8:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core5panic9PanicInfo8location17h4c1b658b38aad499E:
+Disassembly of section .text._ZN4core5panic8Location4line17h348708e3e93e2759E:
 
-0000000040000f38 <_ZN4core5panic9PanicInfo8location17h4c1b658b38aad499E>:
-    40000f38:	91006000 	add	x0, x0, #0x18
-    40000f3c:	d65f03c0 	ret
+0000000040000bac <_ZN4core5panic8Location4line17h348708e3e93e2759E>:
+    40000bac:	b9401000 	ldr	w0, [x0,#16]
+    40000bb0:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core5panic8Location4file17h9a23ef094ce17451E:
+Disassembly of section .text._ZN4core9panicking5panic17he9fd3190c8a8f402E:
 
-0000000040000f40 <_ZN4core5panic8Location4file17h9a23ef094ce17451E>:
-    40000f40:	a9400408 	ldp	x8, x1, [x0]
-    40000f44:	aa0803e0 	mov	x0, x8
-    40000f48:	d65f03c0 	ret
+0000000040000bb4 <_ZN4core9panicking5panic17he9fd3190c8a8f402E>:
+    40000bb4:	d10183ff 	sub	sp, sp, #0x60
+    40000bb8:	9100e3e8 	add	x8, sp, #0x38
+    40000bbc:	320003e9 	orr	w9, wzr, #0x1
+    40000bc0:	a900a7e8 	stp	x8, x9, [sp,#8]
+    40000bc4:	b0000008 	adrp	x8, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    40000bc8:	91122108 	add	x8, x8, #0x488
+    40000bcc:	a902ffe8 	stp	x8, xzr, [sp,#40]
+    40000bd0:	a9402408 	ldp	x8, x9, [x0]
+    40000bd4:	3dc00400 	ldr	q0, [x0,#16]
+    40000bd8:	f940100a 	ldr	x10, [x0,#32]
+    40000bdc:	910023e0 	add	x0, sp, #0x8
+    40000be0:	910123e1 	add	x1, sp, #0x48
+    40000be4:	a901ffff 	stp	xzr, xzr, [sp,#24]
+    40000be8:	a903a7e8 	stp	x8, x9, [sp,#56]
+    40000bec:	3c8483e0 	stur	q0, [sp,#72]
+    40000bf0:	f9002fea 	str	x10, [sp,#88]
+    40000bf4:	94000002 	bl	40000bfc <_ZN4core9panicking9panic_fmt17h8fc9181f621667f9E>
+    40000bf8:	d4200020 	brk	#0x1
 
-Disassembly of section .text._ZN4core5panic8Location4line17hf705a02864908b14E:
+Disassembly of section .text._ZN4core9panicking9panic_fmt17h8fc9181f621667f9E:
 
-0000000040000f4c <_ZN4core5panic8Location4line17hf705a02864908b14E>:
-    40000f4c:	b9401000 	ldr	w0, [x0,#16]
-    40000f50:	d65f03c0 	ret
+0000000040000bfc <_ZN4core9panicking9panic_fmt17h8fc9181f621667f9E>:
+    40000bfc:	3dc00020 	ldr	q0, [x1]
+    40000c00:	f9400828 	ldr	x8, [x1,#16]
+    40000c04:	b0000009 	adrp	x9, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    40000c08:	b000000a 	adrp	x10, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    40000c0c:	91122129 	add	x9, x9, #0x488
+    40000c10:	9112214a 	add	x10, x10, #0x488
+    40000c14:	a9bd2be9 	stp	x9, x10, [sp,#-48]!
+    40000c18:	f9000be0 	str	x0, [sp,#16]
+    40000c1c:	910003e0 	mov	x0, sp
+    40000c20:	3c8183e0 	stur	q0, [sp,#24]
+    40000c24:	f90017e8 	str	x8, [sp,#40]
+    40000c28:	97fffd0d 	bl	4000005c <rust_begin_unwind>
+    40000c2c:	d4200020 	brk	#0x1
 
-Disassembly of section .text._ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E:
+Disassembly of section .text._ZN4core3ptr19swap_nonoverlapping17ha6f97d960aa8d3c8E:
 
-0000000040000f54 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E>:
-                }
-            }
+0000000040000c30 <_ZN4core3ptr19swap_nonoverlapping17ha6f97d960aa8d3c8E>:
+/// assert_eq!(x, [7, 8, 3, 4]);
+/// assert_eq!(y, [1, 2, 9]);
+/// ```
+#[inline]
+#[stable(feature = "swap_nonoverlapping", since = "1.27.0")]
+pub unsafe fn swap_nonoverlapping<T>(x: *mut T, y: *mut T, count: usize) {
+    40000c30:	d10143ff 	sub	sp, sp, #0x50
+    40000c34:	f90023fe 	str	x30, [sp,#64]
+    40000c38:	f9000be0 	str	x0, [sp,#16]
+    40000c3c:	f9000fe1 	str	x1, [sp,#24]
+    40000c40:	f90013e2 	str	x2, [sp,#32]
+    let x = x as *mut u8;
+    40000c44:	f9400be0 	ldr	x0, [sp,#16]
+    40000c48:	f90017e0 	str	x0, [sp,#40]
+    let y = y as *mut u8;
+    40000c4c:	f9400fe0 	ldr	x0, [sp,#24]
+    40000c50:	f9001be0 	str	x0, [sp,#48]
+    let len = mem::size_of::<T>() * count;
+    40000c54:	94000099 	bl	40000eb8 <_ZN4core3mem7size_of17h2b93d951b49e55a1E>
+    40000c58:	f90007e0 	str	x0, [sp,#8]
+    40000c5c:	f94013e8 	ldr	x8, [sp,#32]
+    40000c60:	f94007e9 	ldr	x9, [sp,#8]
+    40000c64:	9b087d28 	mul	x8, x9, x8
+    40000c68:	f9001fe8 	str	x8, [sp,#56]
+    swap_nonoverlapping_bytes(x, y, len)
+    40000c6c:	f94017e0 	ldr	x0, [sp,#40]
+    40000c70:	f9401be1 	ldr	x1, [sp,#48]
+    40000c74:	f9401fe2 	ldr	x2, [sp,#56]
+    40000c78:	9400010c 	bl	400010a8 <_ZN4core3ptr25swap_nonoverlapping_bytes17h64386b7282bda614E>
+}
+    40000c7c:	f94023fe 	ldr	x30, [sp,#64]
+    40000c80:	910143ff 	add	sp, sp, #0x50
+    40000c84:	d65f03c0 	ret
 
-            #[inline]
-            #[allow(unreachable_patterns)]
-            fn add_usize(&self, n: usize) -> Option<Self> {
-    40000f54:	d10183ff 	sub	sp, sp, #0x60
-    40000f58:	f9002bfe 	str	x30, [sp,#80]
-    40000f5c:	f90013e0 	str	x0, [sp,#32]
-    40000f60:	f90017e1 	str	x1, [sp,#40]
-                match <$unsigned>::try_from(n) {
-    40000f64:	f94017e0 	ldr	x0, [sp,#40]
-    40000f68:	940000da 	bl	400012d0 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h0649dca47dd7138dE>
-    40000f6c:	b9003fe1 	str	w1, [sp,#60]
-    40000f70:	b9003be0 	str	w0, [sp,#56]
-    40000f74:	14000001 	b	40000f78 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0x24>
-    40000f78:	9100e3e8 	add	x8, sp, #0x38
-    40000f7c:	f90023e8 	str	x8, [sp,#64]
-                    Ok(n_as_unsigned) => {
-    40000f80:	b9403be9 	ldr	w9, [sp,#56]
-    40000f84:	2a0903e8 	mov	w8, w9
-    40000f88:	2a0803e9 	mov	w9, w8
-    40000f8c:	f9000fe8 	str	x8, [sp,#24]
-    40000f90:	340000e9 	cbz	w9, 40000fac <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0x58>
-    40000f94:	14000001 	b	40000f98 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0x44>
-    40000f98:	f9400fe8 	ldr	x8, [sp,#24]
-    40000f9c:	f1000509 	subs	x9, x8, #0x1
-    40000fa0:	f9000be9 	str	x9, [sp,#16]
-    40000fa4:	54000140 	b.eq	40000fcc <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0x78>
-    40000fa8:	1400000c 	b	40000fd8 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0x84>
-    40000fac:	b9403fe8 	ldr	w8, [sp,#60]
-    40000fb0:	b9004be8 	str	w8, [sp,#72]
-                        // Wrapping in unsigned space handles cases like
-                        // `-120_i8.add_usize(200) == Some(80_i8)`,
-                        // even though 200_usize is out of range for i8.
-                        let wrapped = (*self as $unsigned).wrapping_add(n_as_unsigned) as $t;
-    40000fb4:	f94013e9 	ldr	x9, [sp,#32]
-    40000fb8:	b9400120 	ldr	w0, [x9]
-    40000fbc:	b9404be1 	ldr	w1, [sp,#72]
-    40000fc0:	94000057 	bl	4000111c <_ZN4core3num21_$LT$impl$u20$u32$GT$12wrapping_add17h107285191464429cE>
-    40000fc4:	b9000fe0 	str	w0, [sp,#12]
-    40000fc8:	1400000a 	b	40000ff0 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0x9c>
-    40000fcc:	2a1f03e8 	mov	w8, wzr
-                            Some(wrapped)
-                        } else {
-                            None  // Addition overflowed
-                        }
-                    }
-                    Err(_) => None,
-    40000fd0:	b90033e8 	str	w8, [sp,#48]
-            }
+Disassembly of section .text._ZN4core3ptr23swap_nonoverlapping_one17hce78bb912f5466f3E:
 
-            #[inline]
-            #[allow(unreachable_patterns)]
-            fn add_usize(&self, n: usize) -> Option<Self> {
-                match <$unsigned>::try_from(n) {
-    40000fd4:	14000002 	b	40000fdc <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0x88>
-                            None  // Addition overflowed
-                        }
-                    }
-                    Err(_) => None,
-                }
-            }
-    40000fd8:	d4200020 	brk	#0x1
-    40000fdc:	b94033e0 	ldr	w0, [sp,#48]
-    40000fe0:	b94037e1 	ldr	w1, [sp,#52]
-    40000fe4:	f9402bfe 	ldr	x30, [sp,#80]
-    40000fe8:	910183ff 	add	sp, sp, #0x60
-    40000fec:	d65f03c0 	ret
-                match <$unsigned>::try_from(n) {
-                    Ok(n_as_unsigned) => {
-                        // Wrapping in unsigned space handles cases like
-                        // `-120_i8.add_usize(200) == Some(80_i8)`,
-                        // even though 200_usize is out of range for i8.
-                        let wrapped = (*self as $unsigned).wrapping_add(n_as_unsigned) as $t;
-    40000ff0:	b9400fe8 	ldr	w8, [sp,#12]
-    40000ff4:	b9004fe8 	str	w8, [sp,#76]
-                        if wrapped >= *self {
-    40000ff8:	b9404fe9 	ldr	w9, [sp,#76]
-    40000ffc:	f94013ea 	ldr	x10, [sp,#32]
-    40001000:	b940014b 	ldr	w11, [x10]
-    40001004:	6b0b0129 	subs	w9, w9, w11
-    40001008:	b9000be9 	str	w9, [sp,#8]
-    4000100c:	540000eb 	b.lt	40001028 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xd4>
-    40001010:	14000001 	b	40001014 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xc0>
-                            Some(wrapped)
-    40001014:	b9404fe8 	ldr	w8, [sp,#76]
-    40001018:	b90037e8 	str	w8, [sp,#52]
-    4000101c:	320003e8 	orr	w8, wzr, #0x1
-    40001020:	b90033e8 	str	w8, [sp,#48]
-                    Ok(n_as_unsigned) => {
-                        // Wrapping in unsigned space handles cases like
-                        // `-120_i8.add_usize(200) == Some(80_i8)`,
-                        // even though 200_usize is out of range for i8.
-                        let wrapped = (*self as $unsigned).wrapping_add(n_as_unsigned) as $t;
-                        if wrapped >= *self {
-    40001024:	14000004 	b	40001034 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xe0>
-    40001028:	2a1f03e8 	mov	w8, wzr
-                            Some(wrapped)
-                        } else {
-                            None  // Addition overflowed
-    4000102c:	b90033e8 	str	w8, [sp,#48]
-                    Ok(n_as_unsigned) => {
-                        // Wrapping in unsigned space handles cases like
-                        // `-120_i8.add_usize(200) == Some(80_i8)`,
-                        // even though 200_usize is out of range for i8.
-                        let wrapped = (*self as $unsigned).wrapping_add(n_as_unsigned) as $t;
-                        if wrapped >= *self {
-    40001030:	14000001 	b	40001034 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0xe0>
-            }
+0000000040000c88 <_ZN4core3ptr23swap_nonoverlapping_one17hce78bb912f5466f3E>:
 
-            #[inline]
-            #[allow(unreachable_patterns)]
-            fn add_usize(&self, n: usize) -> Option<Self> {
-                match <$unsigned>::try_from(n) {
-    40001034:	17ffffea 	b	40000fdc <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h436427b6e8b78889E+0x88>
+#[inline]
+pub(crate) unsafe fn swap_nonoverlapping_one<T>(x: *mut T, y: *mut T) {
+    40000c88:	d100c3ff 	sub	sp, sp, #0x30
+    40000c8c:	f90013fe 	str	x30, [sp,#32]
+    40000c90:	f90007e0 	str	x0, [sp,#8]
+    40000c94:	f9000be1 	str	x1, [sp,#16]
+    // For types smaller than the block optimization below,
+    // just swap directly to avoid pessimizing codegen.
+    if mem::size_of::<T>() < 32 {
+    40000c98:	94000088 	bl	40000eb8 <_ZN4core3mem7size_of17h2b93d951b49e55a1E>
+    40000c9c:	f90003e0 	str	x0, [sp]
+    40000ca0:	b27b03e8 	orr	x8, xzr, #0x20
+    40000ca4:	f94003e9 	ldr	x9, [sp]
+    40000ca8:	eb08013f 	cmp	x9, x8
+    40000cac:	1a9f27ea 	cset	w10, cc
+    40000cb0:	3700004a 	tbnz	w10, #0, 40000cb8 <_ZN4core3ptr23swap_nonoverlapping_one17hce78bb912f5466f3E+0x30>
+    40000cb4:	14000005 	b	40000cc8 <_ZN4core3ptr23swap_nonoverlapping_one17hce78bb912f5466f3E+0x40>
+        let z = read(x);
+    40000cb8:	f94007e0 	ldr	x0, [sp,#8]
+    40000cbc:	94000058 	bl	40000e1c <_ZN4core3ptr4read17h76ed0d04d31b29d9E>
+    40000cc0:	b9001fe0 	str	w0, [sp,#28]
+    40000cc4:	14000006 	b	40000cdc <_ZN4core3ptr23swap_nonoverlapping_one17hce78bb912f5466f3E+0x54>
+    40000cc8:	b24003e2 	orr	x2, xzr, #0x1
+        copy_nonoverlapping(y, x, 1);
+        write(y, z);
+    } else {
+        swap_nonoverlapping(x, y, 1);
+    40000ccc:	f94007e0 	ldr	x0, [sp,#8]
+    40000cd0:	f9400be1 	ldr	x1, [sp,#16]
+    40000cd4:	97ffffd7 	bl	40000c30 <_ZN4core3ptr19swap_nonoverlapping17ha6f97d960aa8d3c8E>
+    40000cd8:	14000009 	b	40000cfc <_ZN4core3ptr23swap_nonoverlapping_one17hce78bb912f5466f3E+0x74>
+    40000cdc:	b27e03e2 	orr	x2, xzr, #0x4
+pub(crate) unsafe fn swap_nonoverlapping_one<T>(x: *mut T, y: *mut T) {
+    // For types smaller than the block optimization below,
+    // just swap directly to avoid pessimizing codegen.
+    if mem::size_of::<T>() < 32 {
+        let z = read(x);
+        copy_nonoverlapping(y, x, 1);
+    40000ce0:	f9400be1 	ldr	x1, [sp,#16]
+    40000ce4:	f94007e0 	ldr	x0, [sp,#8]
+    40000ce8:	9400015d 	bl	4000125c <memcpy>
+        write(y, z);
+    40000cec:	f9400be0 	ldr	x0, [sp,#16]
+    40000cf0:	b9401fe1 	ldr	w1, [sp,#28]
+    40000cf4:	94000057 	bl	40000e50 <_ZN4core3ptr5write17hba6cf8f98636b740E>
 
-Disassembly of section .text._ZN4core3mem13uninitialized17h84b1ed56322b8e6aE:
+#[inline]
+pub(crate) unsafe fn swap_nonoverlapping_one<T>(x: *mut T, y: *mut T) {
+    // For types smaller than the block optimization below,
+    // just swap directly to avoid pessimizing codegen.
+    if mem::size_of::<T>() < 32 {
+    40000cf8:	14000001 	b	40000cfc <_ZN4core3ptr23swap_nonoverlapping_one17hce78bb912f5466f3E+0x74>
+        copy_nonoverlapping(y, x, 1);
+        write(y, z);
+    } else {
+        swap_nonoverlapping(x, y, 1);
+    }
+}
+    40000cfc:	f94013fe 	ldr	x30, [sp,#32]
+    40000d00:	9100c3ff 	add	sp, sp, #0x30
+    40000d04:	d65f03c0 	ret
 
-0000000040001038 <_ZN4core3mem13uninitialized17h84b1ed56322b8e6aE>:
+Disassembly of section .text._ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$3add17h110a2c24ab862f04E:
+
+0000000040000d08 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$3add17h110a2c24ab862f04E>:
+    ///     println!("{}", *ptr.add(2) as char);
+    /// }
+    /// ```
+    #[stable(feature = "pointer_methods", since = "1.26.0")]
+    #[inline]
+    pub unsafe fn add(self, count: usize) -> Self
+    40000d08:	d100c3ff 	sub	sp, sp, #0x30
+    40000d0c:	f90013fe 	str	x30, [sp,#32]
+    40000d10:	f9000be0 	str	x0, [sp,#16]
+    40000d14:	f9000fe1 	str	x1, [sp,#24]
+        where T: Sized,
+    {
+        self.offset(count as isize)
+    40000d18:	f9400be0 	ldr	x0, [sp,#16]
+    40000d1c:	f9400fe1 	ldr	x1, [sp,#24]
+    40000d20:	97ffff80 	bl	40000b20 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$6offset17h1a39274a9817b9abE>
+    40000d24:	f90007e0 	str	x0, [sp,#8]
+    }
+    40000d28:	f94007e0 	ldr	x0, [sp,#8]
+    40000d2c:	f94013fe 	ldr	x30, [sp,#32]
+    40000d30:	9100c3ff 	add	sp, sp, #0x30
+    40000d34:	d65f03c0 	ret
+
+Disassembly of section .text._ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$12wrapping_add17hbf9e517e69bc3c37E:
+
+0000000040000d38 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$12wrapping_add17hbf9e517e69bc3c37E>:
+    ///     ptr = ptr.wrapping_add(step);
+    /// }
+    /// ```
+    #[stable(feature = "pointer_methods", since = "1.26.0")]
+    #[inline]
+    pub fn wrapping_add(self, count: usize) -> Self
+    40000d38:	d100c3ff 	sub	sp, sp, #0x30
+    40000d3c:	f90013fe 	str	x30, [sp,#32]
+    40000d40:	f9000be0 	str	x0, [sp,#16]
+    40000d44:	f9000fe1 	str	x1, [sp,#24]
+        where T: Sized,
+    {
+        self.wrapping_offset(count as isize)
+    40000d48:	f9400be0 	ldr	x0, [sp,#16]
+    40000d4c:	f9400fe1 	ldr	x1, [sp,#24]
+    40000d50:	94000006 	bl	40000d68 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$15wrapping_offset17h15e077054099cc85E>
+    40000d54:	f90007e0 	str	x0, [sp,#8]
+    }
+    40000d58:	f94007e0 	ldr	x0, [sp,#8]
+    40000d5c:	f94013fe 	ldr	x30, [sp,#32]
+    40000d60:	9100c3ff 	add	sp, sp, #0x30
+    40000d64:	d65f03c0 	ret
+
+Disassembly of section .text._ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$15wrapping_offset17h15e077054099cc85E:
+
+0000000040000d68 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$15wrapping_offset17h15e077054099cc85E>:
+    ///     ptr = ptr.wrapping_offset(step);
+    /// }
+    /// ```
+    #[stable(feature = "ptr_wrapping_offset", since = "1.16.0")]
+    #[inline]
+    pub fn wrapping_offset(self, count: isize) -> *const T where T: Sized {
+    40000d68:	d10083ff 	sub	sp, sp, #0x20
+    40000d6c:	f90007e0 	str	x0, [sp,#8]
+    40000d70:	f9000be1 	str	x1, [sp,#16]
+        unsafe {
+            intrinsics::arith_offset(self, count)
+    40000d74:	f94007e0 	ldr	x0, [sp,#8]
+    40000d78:	f9400be1 	ldr	x1, [sp,#16]
+    40000d7c:	8b010000 	add	x0, x0, x1
+    40000d80:	f9000fe0 	str	x0, [sp,#24]
+    40000d84:	f9400fe0 	ldr	x0, [sp,#24]
+    40000d88:	f90003e0 	str	x0, [sp]
+        }
+    }
+    40000d8c:	f94003e0 	ldr	x0, [sp]
+    40000d90:	910083ff 	add	sp, sp, #0x20
+    40000d94:	d65f03c0 	ret
+
+Disassembly of section .text._ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$3add17hd3dddbcef3a5c0dcE:
+
+0000000040000d98 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$3add17hd3dddbcef3a5c0dcE>:
+    ///     println!("{}", *ptr.add(2) as char);
+    /// }
+    /// ```
+    #[stable(feature = "pointer_methods", since = "1.26.0")]
+    #[inline]
+    pub unsafe fn add(self, count: usize) -> Self
+    40000d98:	d100c3ff 	sub	sp, sp, #0x30
+    40000d9c:	f90013fe 	str	x30, [sp,#32]
+    40000da0:	f9000be0 	str	x0, [sp,#16]
+    40000da4:	f9000fe1 	str	x1, [sp,#24]
+        where T: Sized,
+    {
+        self.offset(count as isize)
+    40000da8:	f9400be0 	ldr	x0, [sp,#16]
+    40000dac:	f9400fe1 	ldr	x1, [sp,#24]
+    40000db0:	97ffff68 	bl	40000b50 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$6offset17h113072f61500e1faE>
+    40000db4:	f90007e0 	str	x0, [sp,#8]
+    }
+    40000db8:	f94007e0 	ldr	x0, [sp,#8]
+    40000dbc:	f94013fe 	ldr	x30, [sp,#32]
+    40000dc0:	9100c3ff 	add	sp, sp, #0x30
+    40000dc4:	d65f03c0 	ret
+
+Disassembly of section .text._ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$7is_null17hc8d4562ae2ce44eaE:
+
+0000000040000dc8 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$7is_null17hc8d4562ae2ce44eaE>:
+    /// let ptr: *const u8 = s.as_ptr();
+    /// assert!(!ptr.is_null());
+    /// ```
+    #[stable(feature = "rust1", since = "1.0.0")]
+    #[inline]
+    pub fn is_null(self) -> bool {
+    40000dc8:	d100c3ff 	sub	sp, sp, #0x30
+    40000dcc:	f90013fe 	str	x30, [sp,#32]
+    40000dd0:	f9000fe0 	str	x0, [sp,#24]
+        // Compare via a cast to a thin pointer, so fat pointers are only
+        // considering their "data" part for null-ness.
+        (self as *const u8) == null()
+    40000dd4:	f9400fe0 	ldr	x0, [sp,#24]
+    40000dd8:	f9000be0 	str	x0, [sp,#16]
+    40000ddc:	9400000d 	bl	40000e10 <_ZN4core3ptr4null17h684b448ab7f0859bE>
+    40000de0:	f90007e0 	str	x0, [sp,#8]
+    40000de4:	f9400be8 	ldr	x8, [sp,#16]
+    40000de8:	f94007e9 	ldr	x9, [sp,#8]
+    40000dec:	eb09011f 	cmp	x8, x9
+    40000df0:	1a9f17ea 	cset	w10, eq
+    40000df4:	320003eb 	orr	w11, wzr, #0x1
+    40000df8:	0a0b014a 	and	w10, w10, w11
+    40000dfc:	32001feb 	orr	w11, wzr, #0xff
+    40000e00:	0a0b0140 	and	w0, w10, w11
+    }
+    40000e04:	f94013fe 	ldr	x30, [sp,#32]
+    40000e08:	9100c3ff 	add	sp, sp, #0x30
+    40000e0c:	d65f03c0 	ret
+
+Disassembly of section .text._ZN4core3ptr4null17h684b448ab7f0859bE:
+
+0000000040000e10 <_ZN4core3ptr4null17h684b448ab7f0859bE>:
+/// let p: *const i32 = ptr::null();
+/// assert!(p.is_null());
+/// ```
+#[inline]
+#[stable(feature = "rust1", since = "1.0.0")]
+pub const fn null<T>() -> *const T { 0 as *const T }
+    40000e10:	d2800008 	mov	x8, #0x0                   	// #0
+    40000e14:	aa0803e0 	mov	x0, x8
+    40000e18:	d65f03c0 	ret
+
+Disassembly of section .text._ZN4core3ptr4read17h76ed0d04d31b29d9E:
+
+0000000040000e1c <_ZN4core3ptr4read17h76ed0d04d31b29d9E>:
+///     assert_eq!(std::ptr::read(y), 12);
+/// }
+/// ```
+#[inline]
+#[stable(feature = "rust1", since = "1.0.0")]
+pub unsafe fn read<T>(src: *const T) -> T {
+    40000e1c:	d10083ff 	sub	sp, sp, #0x20
+    40000e20:	f9000bfe 	str	x30, [sp,#16]
+    40000e24:	f90003e0 	str	x0, [sp]
+    let mut tmp: T = mem::uninitialized();
+    40000e28:	94000013 	bl	40000e74 <_ZN4core3mem13uninitialized17h506a2677145a0dadE>
+    40000e2c:	b9000fe0 	str	w0, [sp,#12]
+    40000e30:	910033e0 	add	x0, sp, #0xc
+    40000e34:	b27e03e2 	orr	x2, xzr, #0x4
+    copy_nonoverlapping(src, &mut tmp, 1);
+    40000e38:	f94003e1 	ldr	x1, [sp]
+    40000e3c:	94000108 	bl	4000125c <memcpy>
+    tmp
+    40000e40:	b9400fe0 	ldr	w0, [sp,#12]
+}
+    40000e44:	f9400bfe 	ldr	x30, [sp,#16]
+    40000e48:	910083ff 	add	sp, sp, #0x20
+    40000e4c:	d65f03c0 	ret
+
+Disassembly of section .text._ZN4core3ptr5write17hba6cf8f98636b740E:
+
+0000000040000e50 <_ZN4core3ptr5write17hba6cf8f98636b740E>:
+///     assert_eq!(std::ptr::read(y), 12);
+/// }
+/// ```
+#[inline]
+#[stable(feature = "rust1", since = "1.0.0")]
+pub unsafe fn write<T>(dst: *mut T, src: T) {
+    40000e50:	d10043ff 	sub	sp, sp, #0x10
+    40000e54:	f90003e0 	str	x0, [sp]
+    40000e58:	b9000fe1 	str	w1, [sp,#12]
+    intrinsics::move_val_init(&mut *dst, src)
+    40000e5c:	f94003e0 	ldr	x0, [sp]
+    40000e60:	b9400fe1 	ldr	w1, [sp,#12]
+    40000e64:	b9000001 	str	w1, [x0]
+}
+    40000e68:	910043ff 	add	sp, sp, #0x10
+    40000e6c:	d65f03c0 	ret
+
+Disassembly of section .text._ZN4core3mem13uninitialized17h3fee094eac0144c7E:
+
+0000000040000e70 <_ZN4core3mem13uninitialized17h3fee094eac0144c7E>:
 /// [`Drop`]: ../ops/trait.Drop.html
 #[inline]
 #[stable(feature = "rust1", since = "1.0.0")]
 pub unsafe fn uninitialized<T>() -> T {
     intrinsics::uninit()
 }
-    40001038:	d65f03c0 	ret
+    40000e70:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core3mem13uninitialized17hd8a055c86c2c3f37E:
+Disassembly of section .text._ZN4core3mem13uninitialized17h506a2677145a0dadE:
 
-000000004000103c <_ZN4core3mem13uninitialized17hd8a055c86c2c3f37E>:
-    4000103c:	d65f03c0 	ret
-
-Disassembly of section .text._ZN4core3mem13uninitialized17hea63fcaabfaf9b7aE:
-
-0000000040001040 <_ZN4core3mem13uninitialized17hea63fcaabfaf9b7aE>:
+0000000040000e74 <_ZN4core3mem13uninitialized17h506a2677145a0dadE>:
 /// [copy]: ../intrinsics/fn.copy.html
 /// [copy_no]: ../intrinsics/fn.copy_nonoverlapping.html
 /// [`Drop`]: ../ops/trait.Drop.html
 #[inline]
 #[stable(feature = "rust1", since = "1.0.0")]
 pub unsafe fn uninitialized<T>() -> T {
-    40001040:	d10043ff 	sub	sp, sp, #0x10
+    40000e74:	d10043ff 	sub	sp, sp, #0x10
     intrinsics::uninit()
-    40001044:	b9400fe0 	ldr	w0, [sp,#12]
-    40001048:	b9000be0 	str	w0, [sp,#8]
+    40000e78:	b9400fe0 	ldr	w0, [sp,#12]
+    40000e7c:	b9000be0 	str	w0, [sp,#8]
 }
-    4000104c:	b9400be0 	ldr	w0, [sp,#8]
-    40001050:	910043ff 	add	sp, sp, #0x10
-    40001054:	d65f03c0 	ret
+    40000e80:	b9400be0 	ldr	w0, [sp,#8]
+    40000e84:	910043ff 	add	sp, sp, #0x10
+    40000e88:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core3mem4swap17h0a2db027bd5abda8E:
+Disassembly of section .text._ZN4core3mem13uninitialized17h615cfde1885e25a4E:
 
-0000000040001058 <_ZN4core3mem4swap17h0a2db027bd5abda8E>:
+0000000040000e8c <_ZN4core3mem13uninitialized17h615cfde1885e25a4E>:
+    40000e8c:	d65f03c0 	ret
+
+Disassembly of section .text._ZN4core3mem4swap17h9185316bfbf50707E:
+
+0000000040000e90 <_ZN4core3mem4swap17h9185316bfbf50707E>:
 /// assert_eq!(42, x);
 /// assert_eq!(5, y);
 /// ```
 #[inline]
 #[stable(feature = "rust1", since = "1.0.0")]
 pub fn swap<T>(x: &mut T, y: &mut T) {
-    40001058:	d10083ff 	sub	sp, sp, #0x20
-    4000105c:	f9000bfe 	str	x30, [sp,#16]
-    40001060:	f90003e0 	str	x0, [sp]
-    40001064:	f90007e1 	str	x1, [sp,#8]
+    40000e90:	d10083ff 	sub	sp, sp, #0x20
+    40000e94:	f9000bfe 	str	x30, [sp,#16]
+    40000e98:	f90003e0 	str	x0, [sp]
+    40000e9c:	f90007e1 	str	x1, [sp,#8]
     unsafe {
         ptr::swap_nonoverlapping_one(x, y);
-    40001068:	f94003e0 	ldr	x0, [sp]
-    4000106c:	f94007e1 	ldr	x1, [sp,#8]
-    40001070:	97fffecc 	bl	40000ba0 <_ZN4core3ptr23swap_nonoverlapping_one17hde17586a14fea257E>
+    40000ea0:	f94003e0 	ldr	x0, [sp]
+    40000ea4:	f94007e1 	ldr	x1, [sp,#8]
+    40000ea8:	97ffff78 	bl	40000c88 <_ZN4core3ptr23swap_nonoverlapping_one17hce78bb912f5466f3E>
     }
 }
-    40001074:	f9400bfe 	ldr	x30, [sp,#16]
-    40001078:	910083ff 	add	sp, sp, #0x20
-    4000107c:	d65f03c0 	ret
+    40000eac:	f9400bfe 	ldr	x30, [sp,#16]
+    40000eb0:	910083ff 	add	sp, sp, #0x20
+    40000eb4:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core3mem7size_of17h335dfdcc5cf22db4E:
+Disassembly of section .text._ZN4core3mem7size_of17h2b93d951b49e55a1E:
 
-0000000040001080 <_ZN4core3mem7size_of17h335dfdcc5cf22db4E>:
-/// ```
+0000000040000eb8 <_ZN4core3mem7size_of17h2b93d951b49e55a1E>:
 ///
 /// [alignment]: ./fn.align_of.html
 #[inline]
 #[stable(feature = "rust1", since = "1.0.0")]
+#[cfg(not(stage0))]
 pub const fn size_of<T>() -> usize {
-    40001080:	d10043ff 	sub	sp, sp, #0x10
-    40001084:	b27b03e8 	orr	x8, xzr, #0x20
-    unsafe { intrinsics::size_of::<T>() }
-    40001088:	f90007e8 	str	x8, [sp,#8]
-    4000108c:	f94007e0 	ldr	x0, [sp,#8]
-    40001090:	f90003e0 	str	x0, [sp]
+    40000eb8:	d10043ff 	sub	sp, sp, #0x10
+    40000ebc:	b27e03e8 	orr	x8, xzr, #0x4
+    intrinsics::size_of::<T>()
+    40000ec0:	f90007e8 	str	x8, [sp,#8]
+    40000ec4:	f94007e0 	ldr	x0, [sp,#8]
+    40000ec8:	f90003e0 	str	x0, [sp]
 }
-    40001094:	f94003e0 	ldr	x0, [sp]
-    40001098:	910043ff 	add	sp, sp, #0x10
-    4000109c:	d65f03c0 	ret
+    40000ecc:	f94003e0 	ldr	x0, [sp]
+    40000ed0:	910043ff 	add	sp, sp, #0x10
+    40000ed4:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core3mem7size_of17h590906785a03b009E:
+Disassembly of section .text._ZN4core3mem7size_of17ha24e2133dee5bbc4E:
 
-00000000400010a0 <_ZN4core3mem7size_of17h590906785a03b009E>:
-/// ```
+0000000040000ed8 <_ZN4core3mem7size_of17ha24e2133dee5bbc4E>:
 ///
 /// [alignment]: ./fn.align_of.html
 #[inline]
 #[stable(feature = "rust1", since = "1.0.0")]
+#[cfg(not(stage0))]
 pub const fn size_of<T>() -> usize {
-    400010a0:	d10043ff 	sub	sp, sp, #0x10
-    400010a4:	b27e03e8 	orr	x8, xzr, #0x4
-    unsafe { intrinsics::size_of::<T>() }
-    400010a8:	f90007e8 	str	x8, [sp,#8]
-    400010ac:	f94007e0 	ldr	x0, [sp,#8]
-    400010b0:	f90003e0 	str	x0, [sp]
+    40000ed8:	d10043ff 	sub	sp, sp, #0x10
+    40000edc:	b24003e8 	orr	x8, xzr, #0x1
+    intrinsics::size_of::<T>()
+    40000ee0:	f90007e8 	str	x8, [sp,#8]
+    40000ee4:	f94007e0 	ldr	x0, [sp,#8]
+    40000ee8:	f90003e0 	str	x0, [sp]
 }
-    400010b4:	f94003e0 	ldr	x0, [sp]
-    400010b8:	910043ff 	add	sp, sp, #0x10
-    400010bc:	d65f03c0 	ret
+    40000eec:	f94003e0 	ldr	x0, [sp]
+    40000ef0:	910043ff 	add	sp, sp, #0x10
+    40000ef4:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core3mem7size_of17hd2f02b67c09d74c8E:
+Disassembly of section .text._ZN4core3mem7size_of17hdeba25542fdf6c1eE:
 
-00000000400010c0 <_ZN4core3mem7size_of17hd2f02b67c09d74c8E>:
-/// ```
+0000000040000ef8 <_ZN4core3mem7size_of17hdeba25542fdf6c1eE>:
 ///
 /// [alignment]: ./fn.align_of.html
 #[inline]
 #[stable(feature = "rust1", since = "1.0.0")]
+#[cfg(not(stage0))]
 pub const fn size_of<T>() -> usize {
-    400010c0:	d10043ff 	sub	sp, sp, #0x10
-    400010c4:	b24003e8 	orr	x8, xzr, #0x1
-    unsafe { intrinsics::size_of::<T>() }
-    400010c8:	f90007e8 	str	x8, [sp,#8]
-    400010cc:	f94007e0 	ldr	x0, [sp,#8]
-    400010d0:	f90003e0 	str	x0, [sp]
+    40000ef8:	d10043ff 	sub	sp, sp, #0x10
+    40000efc:	b27b03e8 	orr	x8, xzr, #0x20
+    intrinsics::size_of::<T>()
+    40000f00:	f90007e8 	str	x8, [sp,#8]
+    40000f04:	f94007e0 	ldr	x0, [sp,#8]
+    40000f08:	f90003e0 	str	x0, [sp]
 }
-    400010d4:	f94003e0 	ldr	x0, [sp]
-    400010d8:	910043ff 	add	sp, sp, #0x10
-    400010dc:	d65f03c0 	ret
+    40000f0c:	f94003e0 	ldr	x0, [sp]
+    40000f10:	910043ff 	add	sp, sp, #0x10
+    40000f14:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core3cmp5impls55_$LT$impl$u20$core..cmp..PartialOrd$u20$for$u20$i32$GT$2lt17h09ddb00ca9aa21adE:
+Disassembly of section .text._ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE:
 
-00000000400010e0 <_ZN4core3cmp5impls55_$LT$impl$u20$core..cmp..PartialOrd$u20$for$u20$i32$GT$2lt17h09ddb00ca9aa21adE>:
-                #[inline]
-                fn partial_cmp(&self, other: &$t) -> Option<Ordering> {
-                    Some(self.cmp(other))
-                }
-                #[inline]
-                fn lt(&self, other: &$t) -> bool { (*self) < (*other) }
-    400010e0:	d10043ff 	sub	sp, sp, #0x10
-    400010e4:	f90003e0 	str	x0, [sp]
-    400010e8:	f90007e1 	str	x1, [sp,#8]
-    400010ec:	f94003e0 	ldr	x0, [sp]
-    400010f0:	b9400008 	ldr	w8, [x0]
-    400010f4:	f94007e0 	ldr	x0, [sp,#8]
-    400010f8:	b9400009 	ldr	w9, [x0]
-    400010fc:	6b09011f 	cmp	w8, w9
-    40001100:	1a9fa7e8 	cset	w8, lt
-    40001104:	320003e9 	orr	w9, wzr, #0x1
-    40001108:	0a090108 	and	w8, w8, w9
-    4000110c:	32001fe9 	orr	w9, wzr, #0xff
-    40001110:	0a090100 	and	w0, w8, w9
-    40001114:	910043ff 	add	sp, sp, #0x10
-    40001118:	d65f03c0 	ret
-
-Disassembly of section .text._ZN4core3num21_$LT$impl$u20$u32$GT$12wrapping_add17h107285191464429cE:
-
-000000004000111c <_ZN4core3num21_$LT$impl$u20$u32$GT$12wrapping_add17h107285191464429cE>:
-assert_eq!(200", stringify!($SelfT), ".wrapping_add(", stringify!($SelfT), "::max_value()), 199);",
-$EndFeature, "
-```"),
-            #[stable(feature = "rust1", since = "1.0.0")]
-            #[inline]
-            pub fn wrapping_add(self, rhs: Self) -> Self {
-    4000111c:	d10043ff 	sub	sp, sp, #0x10
-    40001120:	b90007e0 	str	w0, [sp,#4]
-    40001124:	b9000be1 	str	w1, [sp,#8]
-                unsafe {
-                    intrinsics::overflowing_add(self, rhs)
-    40001128:	b94007e0 	ldr	w0, [sp,#4]
-    4000112c:	b9400be1 	ldr	w1, [sp,#8]
-    40001130:	0b010000 	add	w0, w0, w1
-    40001134:	b9000fe0 	str	w0, [sp,#12]
-    40001138:	b9400fe0 	ldr	w0, [sp,#12]
-    4000113c:	b90003e0 	str	w0, [sp]
+0000000040000f18 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE>:
                 }
             }
-    40001140:	b94003e0 	ldr	w0, [sp]
-    40001144:	910043ff 	add	sp, sp, #0x10
-    40001148:	d65f03c0 	ret
 
-Disassembly of section .text._ZN4core3num21_$LT$impl$u20$u32$GT$9max_value17h10ca6b2085f6d31bE:
-
-000000004000114c <_ZN4core3num21_$LT$impl$u20$u32$GT$9max_value17h10ca6b2085f6d31bE>:
-", $Feature, "assert_eq!(", stringify!($SelfT), "::max_value(), ",
-stringify!($MaxV), ");", $EndFeature, "
-```"),
-            #[stable(feature = "rust1", since = "1.0.0")]
             #[inline]
-            pub const fn max_value() -> Self { !0 }
-    4000114c:	12800000 	mov	w0, #0xffffffff            	// #-1
-    40001150:	d65f03c0 	ret
+            #[allow(unreachable_patterns)]
+            fn add_usize(&self, n: usize) -> Option<Self> {
+    40000f18:	d10183ff 	sub	sp, sp, #0x60
+    40000f1c:	f9002bfe 	str	x30, [sp,#80]
+    40000f20:	f90013e0 	str	x0, [sp,#32]
+    40000f24:	f90017e1 	str	x1, [sp,#40]
+                match <$unsigned>::try_from(n) {
+    40000f28:	f94017e0 	ldr	x0, [sp,#40]
+    40000f2c:	94000034 	bl	40000ffc <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E>
+    40000f30:	b9003fe1 	str	w1, [sp,#60]
+    40000f34:	b9003be0 	str	w0, [sp,#56]
+    40000f38:	14000001 	b	40000f3c <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE+0x24>
+    40000f3c:	9100e3e8 	add	x8, sp, #0x38
+    40000f40:	f90023e8 	str	x8, [sp,#64]
+                    Ok(n_as_unsigned) => {
+    40000f44:	b9403be9 	ldr	w9, [sp,#56]
+    40000f48:	2a0903e8 	mov	w8, w9
+    40000f4c:	2a0803e9 	mov	w9, w8
+    40000f50:	f9000fe8 	str	x8, [sp,#24]
+    40000f54:	340000e9 	cbz	w9, 40000f70 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE+0x58>
+    40000f58:	14000001 	b	40000f5c <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE+0x44>
+    40000f5c:	f9400fe8 	ldr	x8, [sp,#24]
+    40000f60:	f1000509 	subs	x9, x8, #0x1
+    40000f64:	f9000be9 	str	x9, [sp,#16]
+    40000f68:	54000140 	b.eq	40000f90 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE+0x78>
+    40000f6c:	1400000c 	b	40000f9c <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE+0x84>
+    40000f70:	b9403fe8 	ldr	w8, [sp,#60]
+    40000f74:	b9004be8 	str	w8, [sp,#72]
+                        // Wrapping in unsigned space handles cases like
+                        // `-120_i8.add_usize(200) == Some(80_i8)`,
+                        // even though 200_usize is out of range for i8.
+                        let wrapped = (*self as $unsigned).wrapping_add(n_as_unsigned) as $t;
+    40000f78:	f94013e9 	ldr	x9, [sp,#32]
+    40000f7c:	b9400120 	ldr	w0, [x9]
+    40000f80:	b9404be1 	ldr	w1, [sp,#72]
+    40000f84:	940000a8 	bl	40001224 <_ZN4core3num21_$LT$impl$u20$u32$GT$12wrapping_add17h0e36deed2f3e3a4bE>
+    40000f88:	b9000fe0 	str	w0, [sp,#12]
+    40000f8c:	1400000a 	b	40000fb4 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE+0x9c>
+    40000f90:	2a1f03e8 	mov	w8, wzr
+                            Some(wrapped)
+                        } else {
+                            None  // Addition overflowed
+                        }
+                    }
+                    Err(_) => None,
+    40000f94:	b90033e8 	str	w8, [sp,#48]
+            }
 
-Disassembly of section .text._ZN4core3ptr25swap_nonoverlapping_bytes17hbc495eadf31e03fbE:
+            #[inline]
+            #[allow(unreachable_patterns)]
+            fn add_usize(&self, n: usize) -> Option<Self> {
+                match <$unsigned>::try_from(n) {
+    40000f98:	14000002 	b	40000fa0 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE+0x88>
+                            None  // Addition overflowed
+                        }
+                    }
+                    Err(_) => None,
+                }
+            }
+    40000f9c:	d4200020 	brk	#0x1
+    40000fa0:	b94033e0 	ldr	w0, [sp,#48]
+    40000fa4:	b94037e1 	ldr	w1, [sp,#52]
+    40000fa8:	f9402bfe 	ldr	x30, [sp,#80]
+    40000fac:	910183ff 	add	sp, sp, #0x60
+    40000fb0:	d65f03c0 	ret
+                match <$unsigned>::try_from(n) {
+                    Ok(n_as_unsigned) => {
+                        // Wrapping in unsigned space handles cases like
+                        // `-120_i8.add_usize(200) == Some(80_i8)`,
+                        // even though 200_usize is out of range for i8.
+                        let wrapped = (*self as $unsigned).wrapping_add(n_as_unsigned) as $t;
+    40000fb4:	b9400fe8 	ldr	w8, [sp,#12]
+    40000fb8:	b9004fe8 	str	w8, [sp,#76]
+                        if wrapped >= *self {
+    40000fbc:	b9404fe9 	ldr	w9, [sp,#76]
+    40000fc0:	f94013ea 	ldr	x10, [sp,#32]
+    40000fc4:	b940014b 	ldr	w11, [x10]
+    40000fc8:	6b0b0129 	subs	w9, w9, w11
+    40000fcc:	b9000be9 	str	w9, [sp,#8]
+    40000fd0:	540000eb 	b.lt	40000fec <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE+0xd4>
+    40000fd4:	14000001 	b	40000fd8 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE+0xc0>
+                            Some(wrapped)
+    40000fd8:	b9404fe8 	ldr	w8, [sp,#76]
+    40000fdc:	b90037e8 	str	w8, [sp,#52]
+    40000fe0:	320003e8 	orr	w8, wzr, #0x1
+    40000fe4:	b90033e8 	str	w8, [sp,#48]
+                    Ok(n_as_unsigned) => {
+                        // Wrapping in unsigned space handles cases like
+                        // `-120_i8.add_usize(200) == Some(80_i8)`,
+                        // even though 200_usize is out of range for i8.
+                        let wrapped = (*self as $unsigned).wrapping_add(n_as_unsigned) as $t;
+                        if wrapped >= *self {
+    40000fe8:	14000004 	b	40000ff8 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE+0xe0>
+    40000fec:	2a1f03e8 	mov	w8, wzr
+                            Some(wrapped)
+                        } else {
+                            None  // Addition overflowed
+    40000ff0:	b90033e8 	str	w8, [sp,#48]
+                    Ok(n_as_unsigned) => {
+                        // Wrapping in unsigned space handles cases like
+                        // `-120_i8.add_usize(200) == Some(80_i8)`,
+                        // even though 200_usize is out of range for i8.
+                        let wrapped = (*self as $unsigned).wrapping_add(n_as_unsigned) as $t;
+                        if wrapped >= *self {
+    40000ff4:	14000001 	b	40000ff8 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE+0xe0>
+            }
 
-0000000040001154 <_ZN4core3ptr25swap_nonoverlapping_bytes17hbc495eadf31e03fbE>:
-        swap_nonoverlapping(x, y, 1);
-    }
-}
+            #[inline]
+            #[allow(unreachable_patterns)]
+            fn add_usize(&self, n: usize) -> Option<Self> {
+                match <$unsigned>::try_from(n) {
+    40000ff8:	17ffffea 	b	40000fa0 <_ZN47_$LT$i32$u20$as$u20$core..iter..range..Step$GT$9add_usize17h8da5c9cdaa1b3d8aE+0x88>
 
-#[inline]
-unsafe fn swap_nonoverlapping_bytes(x: *mut u8, y: *mut u8, len: usize) {
-    40001154:	a9bf7bfd 	stp	x29, x30, [sp,#-16]!
-    40001158:	910003fd 	mov	x29, sp
-    4000115c:	d10343e9 	sub	x9, sp, #0xd0
-    40001160:	927be93f 	and	sp, x9, #0xffffffffffffffe0
-    40001164:	f9000fe0 	str	x0, [sp,#24]
-    40001168:	f90013e1 	str	x1, [sp,#32]
-    4000116c:	f90017e2 	str	x2, [sp,#40]
-                       target_endian = "big")),
-               repr(simd))]
-    struct Block(u64, u64, u64, u64);
-    struct UnalignedBlock(u64, u64, u64, u64);
+Disassembly of section .text._ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E:
 
-    let block_size = mem::size_of::<Block>();
-    40001170:	97ffffc4 	bl	40001080 <_ZN4core3mem7size_of17h335dfdcc5cf22db4E>
-    40001174:	f9001be0 	str	x0, [sp,#48]
-
-    // Loop through x & y, copying them `Block` at a time
-    // The optimizer should unroll the loop fully for most types
-    // N.B. We can't use a for loop as the `range` impl calls `mem::swap` recursively
-    let mut i = 0;
-    40001178:	f9001fff 	str	xzr, [sp,#56]
-    while i + block_size <= len {
-    4000117c:	f9401fe8 	ldr	x8, [sp,#56]
-    40001180:	f9401be9 	ldr	x9, [sp,#48]
-    40001184:	8b090108 	add	x8, x8, x9
-    40001188:	f94017e9 	ldr	x9, [sp,#40]
-    4000118c:	eb09011f 	cmp	x8, x9
-    40001190:	1a9f87ea 	cset	w10, ls
-    40001194:	370000ea 	tbnz	w10, #0, 400011b0 <_ZN4core3ptr25swap_nonoverlapping_bytes17hbc495eadf31e03fbE+0x5c>
-        copy_nonoverlapping(y, x, block_size);
-        copy_nonoverlapping(t, y, block_size);
-        i += block_size;
-    }
-
-    if i < len {
-    40001198:	f9401fe8 	ldr	x8, [sp,#56]
-    4000119c:	f94017e9 	ldr	x9, [sp,#40]
-    400011a0:	eb09011f 	cmp	x8, x9
-    400011a4:	1a9f27ea 	cset	w10, cc
-    400011a8:	370004aa 	tbnz	w10, #0, 4000123c <_ZN4core3ptr25swap_nonoverlapping_bytes17hbc495eadf31e03fbE+0xe8>
-    400011ac:	14000046 	b	400012c4 <_ZN4core3ptr25swap_nonoverlapping_bytes17hbc495eadf31e03fbE+0x170>
-    400011b0:	910103e8 	add	x8, sp, #0x40
-    // N.B. We can't use a for loop as the `range` impl calls `mem::swap` recursively
-    let mut i = 0;
-    while i + block_size <= len {
-        // Create some uninitialized memory as scratch space
-        // Declaring `t` here avoids aligning the stack when this loop is unused
-        let mut t: Block = mem::uninitialized();
-    400011b4:	97ffffa2 	bl	4000103c <_ZN4core3mem13uninitialized17hd8a055c86c2c3f37E>
-    400011b8:	910103e8 	add	x8, sp, #0x40
-        let t = &mut t as *mut _ as *mut u8;
-    400011bc:	f9003fe8 	str	x8, [sp,#120]
-        let x = x.add(i);
-    400011c0:	f9400fe0 	ldr	x0, [sp,#24]
-    400011c4:	f9401fe1 	ldr	x1, [sp,#56]
-    400011c8:	97fffe96 	bl	40000c20 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$3add17h86fa43dd889b519bE>
-    400011cc:	f90043e0 	str	x0, [sp,#128]
-        let y = y.add(i);
-    400011d0:	f94013e0 	ldr	x0, [sp,#32]
-    400011d4:	f9401fe1 	ldr	x1, [sp,#56]
-    400011d8:	97fffe92 	bl	40000c20 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$3add17h86fa43dd889b519bE>
-    400011dc:	f90047e0 	str	x0, [sp,#136]
-    400011e0:	b24003e8 	orr	x8, xzr, #0x1
-
-        // Swap a block of bytes of x & y, using t as a temporary buffer
-        // This should be optimized into efficient SIMD operations where available
-        copy_nonoverlapping(x, t, block_size);
-    400011e4:	f94043e1 	ldr	x1, [sp,#128]
-    400011e8:	f9403fe0 	ldr	x0, [sp,#120]
-    400011ec:	f9401be9 	ldr	x9, [sp,#48]
-    400011f0:	9b097d02 	mul	x2, x8, x9
-    400011f4:	97fffee5 	bl	40000d88 <memcpy>
-    400011f8:	b24003e8 	orr	x8, xzr, #0x1
-        copy_nonoverlapping(y, x, block_size);
-    400011fc:	f94047e1 	ldr	x1, [sp,#136]
-    40001200:	f94043e0 	ldr	x0, [sp,#128]
-    40001204:	f9401be9 	ldr	x9, [sp,#48]
-    40001208:	9b097d02 	mul	x2, x8, x9
-    4000120c:	97fffedf 	bl	40000d88 <memcpy>
-    40001210:	b24003e8 	orr	x8, xzr, #0x1
-        copy_nonoverlapping(t, y, block_size);
-    40001214:	f9403fe1 	ldr	x1, [sp,#120]
-    40001218:	f94047e0 	ldr	x0, [sp,#136]
-    4000121c:	f9401be9 	ldr	x9, [sp,#48]
-    40001220:	9b097d02 	mul	x2, x8, x9
-    40001224:	97fffed9 	bl	40000d88 <memcpy>
-        i += block_size;
-    40001228:	f9401be8 	ldr	x8, [sp,#48]
-    4000122c:	f9401fe9 	ldr	x9, [sp,#56]
-    40001230:	8b080128 	add	x8, x9, x8
-    40001234:	f9001fe8 	str	x8, [sp,#56]
-
-    // Loop through x & y, copying them `Block` at a time
-    // The optimizer should unroll the loop fully for most types
-    // N.B. We can't use a for loop as the `range` impl calls `mem::swap` recursively
-    let mut i = 0;
-    while i + block_size <= len {
-    40001238:	17ffffd1 	b	4000117c <_ZN4core3ptr25swap_nonoverlapping_bytes17hbc495eadf31e03fbE+0x28>
-    4000123c:	910243e8 	add	x8, sp, #0x90
-        i += block_size;
-    }
-
-    if i < len {
-        // Swap any remaining bytes
-        let mut t: UnalignedBlock = mem::uninitialized();
-    40001240:	97ffff7e 	bl	40001038 <_ZN4core3mem13uninitialized17h84b1ed56322b8e6aE>
-    40001244:	910243e8 	add	x8, sp, #0x90
-        let rem = len - i;
-    40001248:	f94017e9 	ldr	x9, [sp,#40]
-    4000124c:	f9401fea 	ldr	x10, [sp,#56]
-    40001250:	eb0a0129 	subs	x9, x9, x10
-    40001254:	f9005be9 	str	x9, [sp,#176]
-
-        let t = &mut t as *mut _ as *mut u8;
-    40001258:	f9005fe8 	str	x8, [sp,#184]
-        let x = x.add(i);
-    4000125c:	f9400fe0 	ldr	x0, [sp,#24]
-    40001260:	f9401fe1 	ldr	x1, [sp,#56]
-    40001264:	97fffe6f 	bl	40000c20 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$3add17h86fa43dd889b519bE>
-    40001268:	f90063e0 	str	x0, [sp,#192]
-        let y = y.add(i);
-    4000126c:	f94013e0 	ldr	x0, [sp,#32]
-    40001270:	f9401fe1 	ldr	x1, [sp,#56]
-    40001274:	97fffe6b 	bl	40000c20 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$3add17h86fa43dd889b519bE>
-    40001278:	f90067e0 	str	x0, [sp,#200]
-    4000127c:	b24003e8 	orr	x8, xzr, #0x1
-
-        copy_nonoverlapping(x, t, rem);
-    40001280:	f94063e1 	ldr	x1, [sp,#192]
-    40001284:	f9405fe0 	ldr	x0, [sp,#184]
-    40001288:	f9405be9 	ldr	x9, [sp,#176]
-    4000128c:	9b097d02 	mul	x2, x8, x9
-    40001290:	97fffebe 	bl	40000d88 <memcpy>
-    40001294:	b24003e8 	orr	x8, xzr, #0x1
-        copy_nonoverlapping(y, x, rem);
-    40001298:	f94067e1 	ldr	x1, [sp,#200]
-    4000129c:	f94063e0 	ldr	x0, [sp,#192]
-    400012a0:	f9405be9 	ldr	x9, [sp,#176]
-    400012a4:	9b097d02 	mul	x2, x8, x9
-    400012a8:	97fffeb8 	bl	40000d88 <memcpy>
-    400012ac:	b24003e8 	orr	x8, xzr, #0x1
-        copy_nonoverlapping(t, y, rem);
-    400012b0:	f9405fe1 	ldr	x1, [sp,#184]
-    400012b4:	f94067e0 	ldr	x0, [sp,#200]
-    400012b8:	f9405be9 	ldr	x9, [sp,#176]
-    400012bc:	9b097d02 	mul	x2, x8, x9
-    400012c0:	97fffeb2 	bl	40000d88 <memcpy>
-    }
-}
-    400012c4:	910003bf 	mov	sp, x29
-    400012c8:	a8c17bfd 	ldp	x29, x30, [sp],#16
-    400012cc:	d65f03c0 	ret
-
-Disassembly of section .text._ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h0649dca47dd7138dE:
-
-00000000400012d0 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h0649dca47dd7138dE>:
+0000000040000ffc <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E>:
         #[unstable(feature = "try_from", issue = "33417")]
         impl TryFrom<$source> for $target {
             type Error = TryFromIntError;
 
             #[inline]
             fn try_from(u: $source) -> Result<$target, TryFromIntError> {
-    400012d0:	d10103ff 	sub	sp, sp, #0x40
-    400012d4:	f9001bfe 	str	x30, [sp,#48]
-    400012d8:	f9000fe0 	str	x0, [sp,#24]
+    40000ffc:	d10103ff 	sub	sp, sp, #0x40
+    40001000:	f9001bfe 	str	x30, [sp,#48]
+    40001004:	f9000fe0 	str	x0, [sp,#24]
                 if u > (<$target>::max_value() as $source) {
-    400012dc:	f9400fe0 	ldr	x0, [sp,#24]
-    400012e0:	f9000be0 	str	x0, [sp,#16]
-    400012e4:	97ffff9a 	bl	4000114c <_ZN4core3num21_$LT$impl$u20$u32$GT$9max_value17h10ca6b2085f6d31bE>
-    400012e8:	b9000fe0 	str	w0, [sp,#12]
-    400012ec:	b9400fe8 	ldr	w8, [sp,#12]
-    400012f0:	2a0803e9 	mov	w9, w8
-    400012f4:	d3407d29 	ubfx	x9, x9, #0, #32
-    400012f8:	f9400bea 	ldr	x10, [sp,#16]
-    400012fc:	eb09015f 	cmp	x10, x9
-    40001300:	1a9f97eb 	cset	w11, hi
-    40001304:	3700004b 	tbnz	w11, #0, 4000130c <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h0649dca47dd7138dE+0x3c>
-    40001308:	14000004 	b	40001318 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h0649dca47dd7138dE+0x48>
-    4000130c:	320003e8 	orr	w8, wzr, #0x1
+    40001008:	f9400fe0 	ldr	x0, [sp,#24]
+    4000100c:	f9000be0 	str	x0, [sp,#16]
+    40001010:	94000091 	bl	40001254 <_ZN4core3num21_$LT$impl$u20$u32$GT$9max_value17hac3993d3c824a402E>
+    40001014:	b9000fe0 	str	w0, [sp,#12]
+    40001018:	b9400fe8 	ldr	w8, [sp,#12]
+    4000101c:	2a0803e9 	mov	w9, w8
+    40001020:	d3407d29 	ubfx	x9, x9, #0, #32
+    40001024:	f9400bea 	ldr	x10, [sp,#16]
+    40001028:	eb09015f 	cmp	x10, x9
+    4000102c:	1a9f97eb 	cset	w11, hi
+    40001030:	3700004b 	tbnz	w11, #0, 40001038 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x3c>
+    40001034:	14000004 	b	40001044 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x48>
+    40001038:	320003e8 	orr	w8, wzr, #0x1
                     Err(TryFromIntError(()))
-    40001310:	b90027e8 	str	w8, [sp,#36]
+    4000103c:	b90027e8 	str	w8, [sp,#36]
         impl TryFrom<$source> for $target {
             type Error = TryFromIntError;
 
             #[inline]
             fn try_from(u: $source) -> Result<$target, TryFromIntError> {
                 if u > (<$target>::max_value() as $source) {
-    40001314:	14000005 	b	40001328 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h0649dca47dd7138dE+0x58>
+    40001040:	14000005 	b	40001054 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x58>
                     Err(TryFromIntError(()))
                 } else {
                     Ok(u as $target)
-    40001318:	f9400fe8 	ldr	x8, [sp,#24]
-    4000131c:	2a0803e9 	mov	w9, w8
-    40001320:	b9002be9 	str	w9, [sp,#40]
-    40001324:	b90027ff 	str	wzr, [sp,#36]
-    40001328:	910093e8 	add	x8, sp, #0x24
+    40001044:	f9400fe8 	ldr	x8, [sp,#24]
+    40001048:	2a0803e9 	mov	w9, w8
+    4000104c:	b9002be9 	str	w9, [sp,#40]
+    40001050:	b90027ff 	str	wzr, [sp,#36]
+    40001054:	910093e8 	add	x8, sp, #0x24
                 }
             }
-    4000132c:	b9400109 	ldr	w9, [x8]
-    40001330:	b9402bea 	ldr	w10, [sp,#40]
-    40001334:	2a0903eb 	mov	w11, w9
-    40001338:	b3407d68 	bfxil	x8, x11, #0, #32
-    4000133c:	2a0a03eb 	mov	w11, w10
-    40001340:	b3607d68 	bfi	x8, x11, #32, #32
-    40001344:	d3407d0b 	ubfx	x11, x8, #0, #32
-    40001348:	2a0b03e9 	mov	w9, w11
-    4000134c:	d360fd08 	lsr	x8, x8, #32
-    40001350:	2a0803ea 	mov	w10, w8
-    40001354:	2a0903e0 	mov	w0, w9
-    40001358:	2a0a03e1 	mov	w1, w10
-    4000135c:	f9401bfe 	ldr	x30, [sp,#48]
-    40001360:	910103ff 	add	sp, sp, #0x40
-    40001364:	d65f03c0 	ret
+    40001058:	b9400100 	ldr	w0, [x8]
+    4000105c:	b9402be1 	ldr	w1, [sp,#40]
+    40001060:	f9401bfe 	ldr	x30, [sp,#48]
+    40001064:	910103ff 	add	sp, sp, #0x40
+    40001068:	d65f03c0 	ret
+
+Disassembly of section .text._ZN4core3cmp5impls55_$LT$impl$u20$core..cmp..PartialOrd$u20$for$u20$i32$GT$2lt17h7cd74ab96cf72f77E:
+
+000000004000106c <_ZN4core3cmp5impls55_$LT$impl$u20$core..cmp..PartialOrd$u20$for$u20$i32$GT$2lt17h7cd74ab96cf72f77E>:
+                #[inline]
+                fn partial_cmp(&self, other: &$t) -> Option<Ordering> {
+                    Some(self.cmp(other))
+                }
+                #[inline]
+                fn lt(&self, other: &$t) -> bool { (*self) < (*other) }
+    4000106c:	d10043ff 	sub	sp, sp, #0x10
+    40001070:	f90003e0 	str	x0, [sp]
+    40001074:	f90007e1 	str	x1, [sp,#8]
+    40001078:	f94003e0 	ldr	x0, [sp]
+    4000107c:	b9400008 	ldr	w8, [x0]
+    40001080:	f94007e0 	ldr	x0, [sp,#8]
+    40001084:	b9400009 	ldr	w9, [x0]
+    40001088:	6b09011f 	cmp	w8, w9
+    4000108c:	1a9fa7e8 	cset	w8, lt
+    40001090:	320003e9 	orr	w9, wzr, #0x1
+    40001094:	0a090108 	and	w8, w8, w9
+    40001098:	32001fe9 	orr	w9, wzr, #0xff
+    4000109c:	0a090100 	and	w0, w8, w9
+    400010a0:	910043ff 	add	sp, sp, #0x10
+    400010a4:	d65f03c0 	ret
+
+Disassembly of section .text._ZN4core3ptr25swap_nonoverlapping_bytes17h64386b7282bda614E:
+
+00000000400010a8 <_ZN4core3ptr25swap_nonoverlapping_bytes17h64386b7282bda614E>:
+        swap_nonoverlapping(x, y, 1);
+    }
+}
+
+#[inline]
+unsafe fn swap_nonoverlapping_bytes(x: *mut u8, y: *mut u8, len: usize) {
+    400010a8:	a9bf7bfd 	stp	x29, x30, [sp,#-16]!
+    400010ac:	910003fd 	mov	x29, sp
+    400010b0:	d10343e9 	sub	x9, sp, #0xd0
+    400010b4:	927be93f 	and	sp, x9, #0xffffffffffffffe0
+    400010b8:	f9000fe0 	str	x0, [sp,#24]
+    400010bc:	f90013e1 	str	x1, [sp,#32]
+    400010c0:	f90017e2 	str	x2, [sp,#40]
+                       target_endian = "big")),
+               repr(simd))]
+    struct Block(u64, u64, u64, u64);
+    struct UnalignedBlock(u64, u64, u64, u64);
+
+    let block_size = mem::size_of::<Block>();
+    400010c4:	97ffff8d 	bl	40000ef8 <_ZN4core3mem7size_of17hdeba25542fdf6c1eE>
+    400010c8:	f9001be0 	str	x0, [sp,#48]
+
+    // Loop through x & y, copying them `Block` at a time
+    // The optimizer should unroll the loop fully for most types
+    // N.B. We can't use a for loop as the `range` impl calls `mem::swap` recursively
+    let mut i = 0;
+    400010cc:	f9001fff 	str	xzr, [sp,#56]
+    while i + block_size <= len {
+    400010d0:	f9401fe8 	ldr	x8, [sp,#56]
+    400010d4:	f9401be9 	ldr	x9, [sp,#48]
+    400010d8:	8b090108 	add	x8, x8, x9
+    400010dc:	f94017e9 	ldr	x9, [sp,#40]
+    400010e0:	eb09011f 	cmp	x8, x9
+    400010e4:	1a9f87ea 	cset	w10, ls
+    400010e8:	370000ea 	tbnz	w10, #0, 40001104 <_ZN4core3ptr25swap_nonoverlapping_bytes17h64386b7282bda614E+0x5c>
+        copy_nonoverlapping(y, x, block_size);
+        copy_nonoverlapping(t, y, block_size);
+        i += block_size;
+    }
+
+    if i < len {
+    400010ec:	f9401fe8 	ldr	x8, [sp,#56]
+    400010f0:	f94017e9 	ldr	x9, [sp,#40]
+    400010f4:	eb09011f 	cmp	x8, x9
+    400010f8:	1a9f27ea 	cset	w10, cc
+    400010fc:	370004aa 	tbnz	w10, #0, 40001190 <_ZN4core3ptr25swap_nonoverlapping_bytes17h64386b7282bda614E+0xe8>
+    40001100:	14000046 	b	40001218 <_ZN4core3ptr25swap_nonoverlapping_bytes17h64386b7282bda614E+0x170>
+    40001104:	910103e8 	add	x8, sp, #0x40
+    // N.B. We can't use a for loop as the `range` impl calls `mem::swap` recursively
+    let mut i = 0;
+    while i + block_size <= len {
+        // Create some uninitialized memory as scratch space
+        // Declaring `t` here avoids aligning the stack when this loop is unused
+        let mut t: Block = mem::uninitialized();
+    40001108:	97ffff5a 	bl	40000e70 <_ZN4core3mem13uninitialized17h3fee094eac0144c7E>
+    4000110c:	910103e8 	add	x8, sp, #0x40
+        let t = &mut t as *mut _ as *mut u8;
+    40001110:	f9003fe8 	str	x8, [sp,#120]
+        let x = x.add(i);
+    40001114:	f9400fe0 	ldr	x0, [sp,#24]
+    40001118:	f9401fe1 	ldr	x1, [sp,#56]
+    4000111c:	97fffefb 	bl	40000d08 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$3add17h110a2c24ab862f04E>
+    40001120:	f90043e0 	str	x0, [sp,#128]
+        let y = y.add(i);
+    40001124:	f94013e0 	ldr	x0, [sp,#32]
+    40001128:	f9401fe1 	ldr	x1, [sp,#56]
+    4000112c:	97fffef7 	bl	40000d08 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$3add17h110a2c24ab862f04E>
+    40001130:	f90047e0 	str	x0, [sp,#136]
+    40001134:	b24003e8 	orr	x8, xzr, #0x1
+
+        // Swap a block of bytes of x & y, using t as a temporary buffer
+        // This should be optimized into efficient SIMD operations where available
+        copy_nonoverlapping(x, t, block_size);
+    40001138:	f94043e1 	ldr	x1, [sp,#128]
+    4000113c:	f9403fe0 	ldr	x0, [sp,#120]
+    40001140:	f9401be9 	ldr	x9, [sp,#48]
+    40001144:	9b097d02 	mul	x2, x8, x9
+    40001148:	94000045 	bl	4000125c <memcpy>
+    4000114c:	b24003e8 	orr	x8, xzr, #0x1
+        copy_nonoverlapping(y, x, block_size);
+    40001150:	f94047e1 	ldr	x1, [sp,#136]
+    40001154:	f94043e0 	ldr	x0, [sp,#128]
+    40001158:	f9401be9 	ldr	x9, [sp,#48]
+    4000115c:	9b097d02 	mul	x2, x8, x9
+    40001160:	9400003f 	bl	4000125c <memcpy>
+    40001164:	b24003e8 	orr	x8, xzr, #0x1
+        copy_nonoverlapping(t, y, block_size);
+    40001168:	f9403fe1 	ldr	x1, [sp,#120]
+    4000116c:	f94047e0 	ldr	x0, [sp,#136]
+    40001170:	f9401be9 	ldr	x9, [sp,#48]
+    40001174:	9b097d02 	mul	x2, x8, x9
+    40001178:	94000039 	bl	4000125c <memcpy>
+        i += block_size;
+    4000117c:	f9401be8 	ldr	x8, [sp,#48]
+    40001180:	f9401fe9 	ldr	x9, [sp,#56]
+    40001184:	8b080128 	add	x8, x9, x8
+    40001188:	f9001fe8 	str	x8, [sp,#56]
+
+    // Loop through x & y, copying them `Block` at a time
+    // The optimizer should unroll the loop fully for most types
+    // N.B. We can't use a for loop as the `range` impl calls `mem::swap` recursively
+    let mut i = 0;
+    while i + block_size <= len {
+    4000118c:	17ffffd1 	b	400010d0 <_ZN4core3ptr25swap_nonoverlapping_bytes17h64386b7282bda614E+0x28>
+    40001190:	910243e8 	add	x8, sp, #0x90
+        i += block_size;
+    }
+
+    if i < len {
+        // Swap any remaining bytes
+        let mut t: UnalignedBlock = mem::uninitialized();
+    40001194:	97ffff3e 	bl	40000e8c <_ZN4core3mem13uninitialized17h615cfde1885e25a4E>
+    40001198:	910243e8 	add	x8, sp, #0x90
+        let rem = len - i;
+    4000119c:	f94017e9 	ldr	x9, [sp,#40]
+    400011a0:	f9401fea 	ldr	x10, [sp,#56]
+    400011a4:	eb0a0129 	subs	x9, x9, x10
+    400011a8:	f9005be9 	str	x9, [sp,#176]
+
+        let t = &mut t as *mut _ as *mut u8;
+    400011ac:	f9005fe8 	str	x8, [sp,#184]
+        let x = x.add(i);
+    400011b0:	f9400fe0 	ldr	x0, [sp,#24]
+    400011b4:	f9401fe1 	ldr	x1, [sp,#56]
+    400011b8:	97fffed4 	bl	40000d08 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$3add17h110a2c24ab862f04E>
+    400011bc:	f90063e0 	str	x0, [sp,#192]
+        let y = y.add(i);
+    400011c0:	f94013e0 	ldr	x0, [sp,#32]
+    400011c4:	f9401fe1 	ldr	x1, [sp,#56]
+    400011c8:	97fffed0 	bl	40000d08 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$3add17h110a2c24ab862f04E>
+    400011cc:	f90067e0 	str	x0, [sp,#200]
+    400011d0:	b24003e8 	orr	x8, xzr, #0x1
+
+        copy_nonoverlapping(x, t, rem);
+    400011d4:	f94063e1 	ldr	x1, [sp,#192]
+    400011d8:	f9405fe0 	ldr	x0, [sp,#184]
+    400011dc:	f9405be9 	ldr	x9, [sp,#176]
+    400011e0:	9b097d02 	mul	x2, x8, x9
+    400011e4:	9400001e 	bl	4000125c <memcpy>
+    400011e8:	b24003e8 	orr	x8, xzr, #0x1
+        copy_nonoverlapping(y, x, rem);
+    400011ec:	f94067e1 	ldr	x1, [sp,#200]
+    400011f0:	f94063e0 	ldr	x0, [sp,#192]
+    400011f4:	f9405be9 	ldr	x9, [sp,#176]
+    400011f8:	9b097d02 	mul	x2, x8, x9
+    400011fc:	94000018 	bl	4000125c <memcpy>
+    40001200:	b24003e8 	orr	x8, xzr, #0x1
+        copy_nonoverlapping(t, y, rem);
+    40001204:	f9405fe1 	ldr	x1, [sp,#184]
+    40001208:	f94067e0 	ldr	x0, [sp,#200]
+    4000120c:	f9405be9 	ldr	x9, [sp,#176]
+    40001210:	9b097d02 	mul	x2, x8, x9
+    40001214:	94000012 	bl	4000125c <memcpy>
+    }
+}
+    40001218:	910003bf 	mov	sp, x29
+    4000121c:	a8c17bfd 	ldp	x29, x30, [sp],#16
+    40001220:	d65f03c0 	ret
+
+Disassembly of section .text._ZN4core3num21_$LT$impl$u20$u32$GT$12wrapping_add17h0e36deed2f3e3a4bE:
+
+0000000040001224 <_ZN4core3num21_$LT$impl$u20$u32$GT$12wrapping_add17h0e36deed2f3e3a4bE>:
+```"),
+            #[stable(feature = "rust1", since = "1.0.0")]
+            #[rustc_const_unstable(feature = "const_int_wrapping")]
+            #[inline]
+            #[cfg(not(stage0))]
+            pub const fn wrapping_add(self, rhs: Self) -> Self {
+    40001224:	d10043ff 	sub	sp, sp, #0x10
+    40001228:	b90007e0 	str	w0, [sp,#4]
+    4000122c:	b9000be1 	str	w1, [sp,#8]
+                unsafe {
+                    intrinsics::overflowing_add(self, rhs)
+    40001230:	b94007e0 	ldr	w0, [sp,#4]
+    40001234:	b9400be1 	ldr	w1, [sp,#8]
+    40001238:	0b010000 	add	w0, w0, w1
+    4000123c:	b9000fe0 	str	w0, [sp,#12]
+    40001240:	b9400fe0 	ldr	w0, [sp,#12]
+    40001244:	b90003e0 	str	w0, [sp]
+                }
+            }
+    40001248:	b94003e0 	ldr	w0, [sp]
+    4000124c:	910043ff 	add	sp, sp, #0x10
+    40001250:	d65f03c0 	ret
+
+Disassembly of section .text._ZN4core3num21_$LT$impl$u20$u32$GT$9max_value17hac3993d3c824a402E:
+
+0000000040001254 <_ZN4core3num21_$LT$impl$u20$u32$GT$9max_value17hac3993d3c824a402E>:
+", $Feature, "assert_eq!(", stringify!($SelfT), "::max_value(), ",
+stringify!($MaxV), ");", $EndFeature, "
+```"),
+            #[stable(feature = "rust1", since = "1.0.0")]
+            #[inline]
+            pub const fn max_value() -> Self { !0 }
+    40001254:	12800000 	mov	w0, #0xffffffff            	// #-1
+    40001258:	d65f03c0 	ret
+
+Disassembly of section .text.memcpy:
+
+000000004000125c <memcpy>:
+// This library defines the builtin functions, so it would be a shame for
+// LLVM to optimize these function calls to themselves!
+#![no_builtins]
+
+#[no_mangle]
+pub unsafe extern fn memcpy(dest: *mut u8, src: *const u8,
+    4000125c:	d10183ff 	sub	sp, sp, #0x60
+    40001260:	f9002bfe 	str	x30, [sp,#80]
+    40001264:	f9001be0 	str	x0, [sp,#48]
+    40001268:	f9001fe1 	str	x1, [sp,#56]
+    4000126c:	f90023e2 	str	x2, [sp,#64]
+    40001270:	aa1f03e0 	mov	x0, xzr
+                            n: usize) -> *mut u8 {
+    let mut i = 0;
+    40001274:	f90027e0 	str	x0, [sp,#72]
+    while i < n {
+    40001278:	14000001 	b	4000127c <memcpy+0x20>
+    4000127c:	f94027e8 	ldr	x8, [sp,#72]
+    40001280:	f94023e9 	ldr	x9, [sp,#64]
+    40001284:	eb090108 	subs	x8, x8, x9
+    40001288:	f90017e8 	str	x8, [sp,#40]
+    4000128c:	540000c3 	b.cc	400012a4 <memcpy+0x48>
+    40001290:	14000001 	b	40001294 <memcpy+0x38>
+        *dest.offset(i as isize) = *src.offset(i as isize);
+        i += 1;
+    }
+    return dest;
+    40001294:	f9401be0 	ldr	x0, [sp,#48]
+}
+    40001298:	f9402bfe 	ldr	x30, [sp,#80]
+    4000129c:	910183ff 	add	sp, sp, #0x60
+    400012a0:	d65f03c0 	ret
+#[no_mangle]
+pub unsafe extern fn memcpy(dest: *mut u8, src: *const u8,
+                            n: usize) -> *mut u8 {
+    let mut i = 0;
+    while i < n {
+        *dest.offset(i as isize) = *src.offset(i as isize);
+    400012a4:	f9401fe0 	ldr	x0, [sp,#56]
+    400012a8:	f94027e1 	ldr	x1, [sp,#72]
+    400012ac:	97fffe29 	bl	40000b50 <_ZN4core3ptr33_$LT$impl$u20$$BP$const$u20$T$GT$6offset17h113072f61500e1faE>
+    400012b0:	f90013e0 	str	x0, [sp,#32]
+    400012b4:	14000001 	b	400012b8 <memcpy+0x5c>
+    400012b8:	f94013e8 	ldr	x8, [sp,#32]
+    400012bc:	39400109 	ldrb	w9, [x8]
+    400012c0:	f9401be0 	ldr	x0, [sp,#48]
+    400012c4:	f94027e1 	ldr	x1, [sp,#72]
+    400012c8:	b9001fe9 	str	w9, [sp,#28]
+    400012cc:	97fffe15 	bl	40000b20 <_ZN4core3ptr31_$LT$impl$u20$$BP$mut$u20$T$GT$6offset17h1a39274a9817b9abE>
+    400012d0:	f9000be0 	str	x0, [sp,#16]
+    400012d4:	14000001 	b	400012d8 <memcpy+0x7c>
+    400012d8:	b9401fe8 	ldr	w8, [sp,#28]
+    400012dc:	f9400be9 	ldr	x9, [sp,#16]
+    400012e0:	39000128 	strb	w8, [x9]
+        i += 1;
+    400012e4:	f94027ea 	ldr	x10, [sp,#72]
+    400012e8:	b100054a 	adds	x10, x10, #0x1
+    400012ec:	1a9f37eb 	cset	w11, cs
+    400012f0:	f90007ea 	str	x10, [sp,#8]
+    400012f4:	370000ab 	tbnz	w11, #0, 40001308 <memcpy+0xac>
+    400012f8:	14000001 	b	400012fc <memcpy+0xa0>
+    400012fc:	f94007e8 	ldr	x8, [sp,#8]
+    40001300:	f90027e8 	str	x8, [sp,#72]
+
+#[no_mangle]
+pub unsafe extern fn memcpy(dest: *mut u8, src: *const u8,
+                            n: usize) -> *mut u8 {
+    let mut i = 0;
+    while i < n {
+    40001304:	17ffffde 	b	4000127c <memcpy+0x20>
+        *dest.offset(i as isize) = *src.offset(i as isize);
+        i += 1;
+    40001308:	90000000 	adrp	x0, 40001000 <_ZN4core3num18ptr_try_from_impls69_$LT$impl$u20$core..convert..TryFrom$LT$usize$GT$$u20$for$u20$u32$GT$8try_from17h03be8b83fa416a25E+0x4>
+    4000130c:	9114c000 	add	x0, x0, #0x530
+    40001310:	97fffe29 	bl	40000bb4 <_ZN4core9panicking5panic17he9fd3190c8a8f402E>
+    40001314:	d4200020 	brk	#0x1

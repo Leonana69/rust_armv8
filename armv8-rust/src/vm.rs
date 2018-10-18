@@ -70,7 +70,7 @@
 //         }
 //     }
 
-//     fn deallocate_frame(&mut self, frame: Frame) {
+ //     fn deallocate_frame(&mut self, frame: Frame) {
 //         // TODO (see below)
 //     }
 // }

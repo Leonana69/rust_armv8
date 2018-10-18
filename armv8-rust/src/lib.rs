@@ -9,7 +9,6 @@ extern crate rlibc;
 
 #[macro_use]
 mod print;
-
 mod reg;
 
 // system main
